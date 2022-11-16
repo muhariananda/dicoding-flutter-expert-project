@@ -34,39 +34,39 @@ class TvSeriesModel extends Equatable {
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
-      'backdropPath': backdropPath,
-      'firstAirDate': firstAirDate,
-      'genreIds': genreIds,
+      'backdrop_path': backdropPath,
+      'first_air_date': firstAirDate,
+      'genre_ids': genreIds,
       'id': id,
       'name': name,
-      'originCountry': originCountry,
-      'originalLanguage': originalLanguage,
-      'originalName': originalName,
+      'origin_country': originCountry,
+      'original_language': originalLanguage,
+      'original_name': originalName,
       'overview': overview,
       'popularity': popularity,
-      'posterPath': posterPath,
-      'voteAverage': voteAverage,
-      'voteCount': voteCount,
+      'poster_path': posterPath,
+      'vote_average': voteAverage,
+      'vote_count': voteCount,
     };
   }
 
   factory TvSeriesModel.fromJson(Map<String, dynamic> json) {
     return TvSeriesModel(
-      backdropPath: json['backdropPath'] as String,
-      firstAirDate: json['firstAirDate'] as String,
-      genreIds: List<int>.from((json['genreIds'] as List<int>)),
+      backdropPath: json['backdrop_path'] as String,
+      firstAirDate: json['first_air_date'] as String,
+      genreIds: List<int>.from((json['genre_ids'] as List<dynamic>)),
       id: json['id'] as int,
       name: json['name'] as String,
-      originCountry: json['originCountry'] != null
-          ? List<String>.from((json['originCountry'] as List<String>))
+      originCountry: json['origin_country'] != null
+          ? List<String>.from((json['origin_country'] as List<dynamic>))
           : null,
-      originalLanguage: json['originalLanguage'] as String,
-      originalName: json['originalName'] as String,
+      originalLanguage: json['original_language'] as String,
+      originalName: json['original_name'] as String,
       overview: json['overview'] as String,
       popularity: json['popularity'] as double,
-      posterPath: json['posterPath'] as String,
-      voteAverage: json['voteAverage'] as double,
-      voteCount: json['voteCount'] as int,
+      posterPath: json['poster_path'] as String,
+      voteAverage: json['vote_average'] as double,
+      voteCount: json['vote_count'] as int,
     );
   }
 
