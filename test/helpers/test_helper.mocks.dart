@@ -9,26 +9,33 @@ import 'dart:typed_data' as _i25;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:ditonton/common/failure.dart' as _i8;
-import 'package:ditonton/data/datasources/db/database_helper.dart' as _i22;
-import 'package:ditonton/data/datasources/movie_local_data_source.dart' as _i13;
-import 'package:ditonton/data/datasources/movie_remote_data_source.dart'
+import 'package:ditonton/core/db/database_helper.dart' as _i22;
+import 'package:ditonton/core/movie/data/datasource/movie_local_data_source.dart'
+    as _i13;
+import 'package:ditonton/core/movie/data/datasource/movie_remote_data_source.dart'
     as _i11;
-import 'package:ditonton/data/datasources/tv_series_local_data_source.dart'
+import 'package:ditonton/core/movie/data/models/movie_detail_model.dart' as _i3;
+import 'package:ditonton/core/movie/data/models/movie_model.dart' as _i12;
+import 'package:ditonton/core/movie/data/models/movie_table.dart' as _i14;
+import 'package:ditonton/core/movie/domain/entities/movie.dart' as _i9;
+import 'package:ditonton/core/movie/domain/entities/movie_detail.dart' as _i10;
+import 'package:ditonton/core/movie/domain/repositories/movie_repository.dart'
+    as _i6;
+import 'package:ditonton/core/tv_series/data/datasource/tv_series_local_data_source.dart'
     as _i20;
-import 'package:ditonton/data/datasources/tv_series_remote_data_source.dart'
+import 'package:ditonton/core/tv_series/data/datasource/tv_series_remote_data_source.dart'
     as _i18;
-import 'package:ditonton/data/models/movie_detail_model.dart' as _i3;
-import 'package:ditonton/data/models/movie_model.dart' as _i12;
-import 'package:ditonton/data/models/movie_table.dart' as _i14;
-import 'package:ditonton/data/models/tv_series_detail_model.dart' as _i4;
-import 'package:ditonton/data/models/tv_series_model.dart' as _i19;
-import 'package:ditonton/data/models/tv_series_table.dart' as _i21;
-import 'package:ditonton/domain/entities/movie.dart' as _i9;
-import 'package:ditonton/domain/entities/movie_detail.dart' as _i10;
-import 'package:ditonton/domain/entities/tv_series.dart' as _i16;
-import 'package:ditonton/domain/entities/tv_series_detail.dart' as _i17;
-import 'package:ditonton/domain/repositories/movie_repository.dart' as _i6;
-import 'package:ditonton/domain/repositories/tv_series_repository.dart' as _i15;
+import 'package:ditonton/core/tv_series/data/models/tv_series_detail_model.dart'
+    as _i4;
+import 'package:ditonton/core/tv_series/data/models/tv_series_model.dart'
+    as _i19;
+import 'package:ditonton/core/tv_series/data/models/tv_series_table.dart'
+    as _i21;
+import 'package:ditonton/core/tv_series/domain/entities/tv_series.dart' as _i16;
+import 'package:ditonton/core/tv_series/domain/entities/tv_series_detail.dart'
+    as _i17;
+import 'package:ditonton/core/tv_series/domain/repositories/tv_series_repository.dart'
+    as _i15;
 import 'package:http/http.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:sqflite/sqflite.dart' as _i23;
@@ -250,30 +257,30 @@ class MockTvSeriesRepository extends _i1.Mock
 
   @override
   _i7.Future<_i2.Either<_i8.Failure, List<_i16.TvSeries>>>
-      getNowPlayingTvSeriess() => (super.noSuchMethod(
-          Invocation.method(#getNowPlayingTvSeriess, []),
+      getNowPlayingTvSeries() => (super.noSuchMethod(
+          Invocation.method(#getNowPlayingTvSeries, []),
           returnValue:
               _i7.Future<_i2.Either<_i8.Failure, List<_i16.TvSeries>>>.value(
                   _FakeEither_0<_i8.Failure, List<_i16.TvSeries>>(this,
-                      Invocation.method(#getNowPlayingTvSeriess, [])))) as _i7
+                      Invocation.method(#getNowPlayingTvSeries, [])))) as _i7
           .Future<_i2.Either<_i8.Failure, List<_i16.TvSeries>>>);
   @override
   _i7.Future<_i2.Either<_i8.Failure, List<_i16.TvSeries>>>
-      getPopularTvSeriess() => (super.noSuchMethod(
-          Invocation.method(#getPopularTvSeriess, []),
+      getPopularTvSeries() => (super.noSuchMethod(
+          Invocation.method(#getPopularTvSeries, []),
           returnValue:
               _i7.Future<_i2.Either<_i8.Failure, List<_i16.TvSeries>>>.value(
-                  _FakeEither_0<_i8.Failure, List<_i16.TvSeries>>(this,
-                      Invocation.method(#getPopularTvSeriess, [])))) as _i7
+                  _FakeEither_0<_i8.Failure, List<_i16.TvSeries>>(
+                      this, Invocation.method(#getPopularTvSeries, [])))) as _i7
           .Future<_i2.Either<_i8.Failure, List<_i16.TvSeries>>>);
   @override
   _i7.Future<_i2.Either<_i8.Failure, List<_i16.TvSeries>>>
-      getTopRatedTvSeriess() => (super.noSuchMethod(
-          Invocation.method(#getTopRatedTvSeriess, []),
+      getTopRatedTvSeries() => (super.noSuchMethod(
+          Invocation.method(#getTopRatedTvSeries, []),
           returnValue:
               _i7.Future<_i2.Either<_i8.Failure, List<_i16.TvSeries>>>.value(
                   _FakeEither_0<_i8.Failure, List<_i16.TvSeries>>(this,
-                      Invocation.method(#getTopRatedTvSeriess, [])))) as _i7
+                      Invocation.method(#getTopRatedTvSeries, [])))) as _i7
           .Future<_i2.Either<_i8.Failure, List<_i16.TvSeries>>>);
   @override
   _i7.Future<_i2.Either<_i8.Failure, _i17.TvSeriesDetail>> getTvSeriesDetail(
@@ -324,12 +331,12 @@ class MockTvSeriesRepository extends _i1.Mock
           returnValue: _i7.Future<bool>.value(false)) as _i7.Future<bool>);
   @override
   _i7.Future<_i2.Either<_i8.Failure, List<_i16.TvSeries>>>
-      getWatchlistTvSeriess() => (super.noSuchMethod(
-          Invocation.method(#getWatchlistTvSeriess, []),
+      getWatchlistTvSeries() => (super.noSuchMethod(
+          Invocation.method(#getWatchlistTvSeries, []),
           returnValue:
               _i7.Future<_i2.Either<_i8.Failure, List<_i16.TvSeries>>>.value(
                   _FakeEither_0<_i8.Failure, List<_i16.TvSeries>>(this,
-                      Invocation.method(#getWatchlistTvSeriess, [])))) as _i7
+                      Invocation.method(#getWatchlistTvSeries, [])))) as _i7
           .Future<_i2.Either<_i8.Failure, List<_i16.TvSeries>>>);
 }
 
