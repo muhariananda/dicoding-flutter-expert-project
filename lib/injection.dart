@@ -14,12 +14,12 @@ import 'package:ditonton/core/movie/domain/usecase/get_watchlist_status.dart';
 import 'package:ditonton/core/movie/domain/usecase/remove_watchlist.dart';
 import 'package:ditonton/core/movie/domain/usecase/save_watchlist.dart';
 import 'package:ditonton/core/movie/domain/usecase/search_movies.dart';
-import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
-import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
-import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
-import 'package:ditonton/presentation/provider/popular_movies_notifier.dart';
-import 'package:ditonton/presentation/provider/top_rated_movies_notifier.dart';
-import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
+import 'package:ditonton/feature/movie/provider/movie_detail_notifier.dart';
+import 'package:ditonton/feature/movie/provider/movie_list_notifier.dart';
+import 'package:ditonton/feature/movie/provider/movie_search_notifier.dart';
+import 'package:ditonton/feature/movie/provider/popular_movies_notifier.dart';
+import 'package:ditonton/feature/movie/provider/top_rated_movies_notifier.dart';
+import 'package:ditonton/feature/movie/provider/watchlist_movie_notifier.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
 
