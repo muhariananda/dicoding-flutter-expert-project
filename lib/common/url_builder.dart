@@ -8,6 +8,30 @@ class UrlBuilder {
   final String _baseUrl;
   final String _apiKey;
 
+  Uri buildGetNowPlayingMoviesUrl() {
+    return Uri.parse('$_baseUrl/movie/now_playing?api_key=$_apiKey');
+  }
+
+  Uri buildGetPopularMoviesUrl() {
+    return Uri.parse('$_baseUrl/movie/popular?api_key=$_apiKey');
+  }
+
+  Uri buildGetTopRatedMoviesUrl() {
+    return Uri.parse('$_baseUrl/movie/top_rated?api_key=$_apiKey');
+  }
+
+  Uri buildGetMovieDetailUrl(int id) {
+    return Uri.parse('$_baseUrl/movie/$id?api_key=$_apiKey');
+  }
+
+  Uri buildGetRecommendationsMovieUrl(int id) {
+    return Uri.parse('$_baseUrl/tv/$id/recommendations?api_key=$_apiKey');
+  }
+
+  Uri buildSearchMoviesUrl(String query) {
+    return Uri.parse('$_baseUrl/search/movie?api_key=$_apiKey&query=$query');
+  }
+
   Uri buildGetNowPlayingTvSeriesUrl() {
     return Uri.parse('$_baseUrl/tv/on_the_air?api_key=$_apiKey');
   }

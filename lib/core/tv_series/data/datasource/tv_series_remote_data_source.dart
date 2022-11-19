@@ -42,6 +42,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
   @override
   Future<List<TvSeriesModel>> getPopularTvSeries() async {
     final response = await client.get(_urlBuilder.buildGetPopularTvSeriesUrl());
+
     if (response.statusCode == 200) {
       return TvSeriesResponse.fromJson(json.decode(response.body)).tvSeriesList;
     } else {
@@ -53,6 +54,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
   Future<List<TvSeriesModel>> getTopRatedTvSeries() async {
     final response =
         await client.get(_urlBuilder.buildGetTopRatedTvSeriesUrl());
+
     if (response.statusCode == 200) {
       return TvSeriesResponse.fromJson(json.decode(response.body)).tvSeriesList;
     } else {
@@ -64,6 +66,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
   Future<TvSeriesDetailResponse> getTvSeriesDetail(int id) async {
     final response =
         await client.get(_urlBuilder.buildGetDetailTvSeriesUrl(id));
+
     if (response.statusCode == 200) {
       return TvSeriesDetailResponse.fromJson(json.decode(response.body));
     } else {
@@ -75,6 +78,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
   Future<List<TvSeriesModel>> getRecommendationsTvSeries(int id) async {
     final response =
         await client.get(_urlBuilder.buildGetRecommendationsTvSeriesUrl(id));
+
     if (response.statusCode == 200) {
       return TvSeriesResponse.fromJson(json.decode(response.body)).tvSeriesList;
     } else {
@@ -86,6 +90,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
   Future<List<TvSeriesModel>> searchTvSeries(String query) async {
     final response =
         await client.get(_urlBuilder.buildSearchTvSeriesUrl(query));
+        
     if (response.statusCode == 200) {
       return TvSeriesResponse.fromJson(json.decode(response.body)).tvSeriesList;
     } else {
