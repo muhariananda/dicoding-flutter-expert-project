@@ -6,6 +6,16 @@ import 'package:ditonton/core/tv_series/domain/usecase/get_top_rated_tv_series.d
 import 'package:flutter/cupertino.dart';
 
 class TvSeriesListNotifier extends ChangeNotifier {
+  final GetNowPlayingTvSeries getNowPlayingTvSeries;
+  final GetPopularTvSeries getPopularTvSeries;
+  final GetTopRatedTvSeries getTopRatedTvSeries;
+
+  TvSeriesListNotifier({
+    required this.getNowPlayingTvSeries,
+    required this.getPopularTvSeries,
+    required this.getTopRatedTvSeries,
+  });
+
   var _nowPlayingTvSeries = <TvSeries>[];
   List<TvSeries> get nowPlayingTvSeries => _nowPlayingTvSeries;
 
@@ -26,16 +36,6 @@ class TvSeriesListNotifier extends ChangeNotifier {
 
   String _message = '';
   String get message => _message;
-
-  TvSeriesListNotifier({
-    required this.getNowPlayingTvSeries,
-    required this.getPopularTvSeries,
-    required this.getTopRatedTvSeries,
-  });
-
-  final GetNowPlayingTvSeries getNowPlayingTvSeries;
-  final GetPopularTvSeries getPopularTvSeries;
-  final GetTopRatedTvSeries getTopRatedTvSeries;
 
   Future<void> fetchNowPlayingTvSeries() async {
     _nowPlayingState = RequestState.Loading;

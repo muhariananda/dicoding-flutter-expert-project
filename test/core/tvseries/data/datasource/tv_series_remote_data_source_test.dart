@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:ditonton/common/exception.dart';
+import 'package:ditonton/common/url_builder.dart';
 import 'package:ditonton/core/tv_series/data/datasource/tv_series_remote_data_source.dart';
 import 'package:ditonton/core/tv_series/data/models/tv_series_detail_model.dart';
 import 'package:ditonton/core/tv_series/data/models/tv_series_response.dart';
@@ -12,15 +13,13 @@ import 'package:http/http.dart' as http;
 import '../../../../helpers/test_helper.mocks.dart';
 import '../../../../json_reader.dart';
 
-
 void main() {
-  const API_KEY = 'api_key=2174d146bb9c0eab47529b2e77d6b526';
-  const BASE_URL = 'https://api.themoviedb.org/3';
-
-  late MockHttpClient mockHttpClient;
   late TvSeriesRemoteDataSourceImpl datasource;
+  late MockHttpClient mockHttpClient;
+  late UrlBuilder urlBuilder;
 
   setUp(() {
+    urlBuilder = UrlBuilder();
     mockHttpClient = MockHttpClient();
     datasource = TvSeriesRemoteDataSourceImpl(client: mockHttpClient);
   });
@@ -36,7 +35,7 @@ void main() {
       'should return list of TvSeriesModel when the response code 200',
       () async {
         //arrange
-        when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/on_the_air?$API_KEY')))
+        when(mockHttpClient.get(urlBuilder.buildGetNowPlayingTvSeriesUrl()))
             .thenAnswer(
           (_) async => http.Response(
               readJson('dummy_data/tv_series/on_the_air.json'), 200),
@@ -54,7 +53,7 @@ void main() {
       'should return ServerException when status code is 404 or other',
       () {
         //arrange
-        when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/on_the_air?$API_KEY')))
+        when(mockHttpClient.get(urlBuilder.buildGetNowPlayingTvSeriesUrl()))
             .thenAnswer((_) async => http.Response('Not Found', 404));
 
         //act
@@ -77,7 +76,7 @@ void main() {
       'shoudl return list of TvSeriesModel when response code is 200',
       () async {
         //arrange
-        when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/popular?$API_KEY')))
+        when(mockHttpClient.get(urlBuilder.buildGetPopularTvSeriesUrl()))
             .thenAnswer(
           (_) async => http.Response(
               readJson('dummy_data/tv_series/popular_tv_series.json'), 200),
@@ -95,7 +94,7 @@ void main() {
       'should return ServerException when response code is 404 or other',
       () {
         //arrange
-        when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/popular?$API_KEY')))
+        when(mockHttpClient.get(urlBuilder.buildGetPopularTvSeriesUrl()))
             .thenAnswer((_) async => http.Response('Not Found', 404));
 
         //act
@@ -116,7 +115,7 @@ void main() {
       'shoudl return list of TvSeriesModel when response code is 200',
       () async {
         //arrange
-        when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/top_rated?$API_KEY')))
+        when(mockHttpClient.get(urlBuilder.buildGetTopRatedTvSeriesUrl()))
             .thenAnswer(
           (_) async => http.Response(
               readJson('dummy_data/tv_series/top_rated_tv_series.json'), 200),
@@ -134,7 +133,7 @@ void main() {
       'should return ServerException when response code is 404 or other',
       () {
         //arrange
-        when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/top_rated?$API_KEY')))
+        when(mockHttpClient.get(urlBuilder.buildGetTopRatedTvSeriesUrl()))
             .thenAnswer((_) async => http.Response('Not Found', 404));
 
         //act
@@ -156,7 +155,7 @@ void main() {
       'should return Tv Series Detail Response when response code is 200',
       () async {
         //arrange
-        when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/$tId?$API_KEY')))
+        when(mockHttpClient.get(urlBuilder.buildGetDetailTvSeriesUrl(tId)))
             .thenAnswer(
           (_) async => http.Response(
             readJson('dummy_data/tv_series/tv_series_detail.json'),
@@ -179,7 +178,7 @@ void main() {
       'should return ServerException when response code is 404 or other',
       () {
         //arrange
-        when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/$tId?$API_KEY')))
+        when(mockHttpClient.get(urlBuilder.buildGetDetailTvSeriesUrl(tId)))
             .thenAnswer((_) async => http.Response('Not Found', 404));
 
         //act
@@ -203,7 +202,7 @@ void main() {
       () async {
         //arrange
         when(mockHttpClient
-                .get(Uri.parse('$BASE_URL/tv/$tId/recommendations?$API_KEY')))
+                .get(urlBuilder.buildGetRecommendationsTvSeriesUrl(tId)))
             .thenAnswer(
           (_) async => http.Response(
               readJson('dummy_data/tv_series/recommendations_tv_series.json'),
@@ -218,10 +217,11 @@ void main() {
       },
     );
 
-    test('should return ServerException when response code is 404 or other', () {
+    test('should return ServerException when response code is 404 or other',
+        () {
       //arrange
       when(mockHttpClient
-              .get(Uri.parse('$BASE_URL/tv/$tId/recommendations?$API_KEY')))
+              .get(urlBuilder.buildGetRecommendationsTvSeriesUrl(tId)))
           .thenAnswer(
         (_) async => http.Response('Not Found', 404),
       );
@@ -244,8 +244,7 @@ void main() {
       'should return list of Tv Series Model when response code is 200',
       () async {
         //arrange
-        when(mockHttpClient
-                .get(Uri.parse('$BASE_URL/search/tv?$API_KEY&query=$tQuery')))
+        when(mockHttpClient.get(urlBuilder.buildSearchTvSeriesUrl(tQuery)))
             .thenAnswer(
           (_) async => http.Response(
             readJson('dummy_data/tv_series/search_chainsaw_man_tv_series.json'),
@@ -268,8 +267,7 @@ void main() {
       'should return ServerException when response code is other than 200',
       () {
         //arrange
-        when(mockHttpClient
-                .get(Uri.parse('$BASE_URL/search/tv?$API_KEY&query=$tQuery')))
+        when(mockHttpClient.get(urlBuilder.buildSearchTvSeriesUrl(tQuery)))
             .thenAnswer((_) async => http.Response('Not Found', 404));
 
         //act

@@ -32,7 +32,7 @@ void main() {
     });
 
     test('should change state to Loading when data is called', () {
-      //assert
+      //arrange
       when(mockGetTopRatedTvSeries.execute())
           .thenAnswer((_) async => Right(testTvSeriesList));
 
@@ -47,7 +47,7 @@ void main() {
     test(
         'should return list of tv series data when data is gotten successfully',
         () async {
-      //assert
+      //arrange
       when(mockGetTopRatedTvSeries.execute())
           .thenAnswer((_) async => Right(testTvSeriesList));
 
@@ -62,7 +62,7 @@ void main() {
     });
 
     test('should return error when data is gotten unsuccessful', () async {
-      //assert
+      //arrange
       when(mockGetTopRatedTvSeries.execute())
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
 
