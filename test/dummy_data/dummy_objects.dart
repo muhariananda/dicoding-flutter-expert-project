@@ -76,6 +76,24 @@ final testTvSeriesWatchlist = TvSeries.watchList(
   overview: 'overview',
 );
 
+final testTvSeries = TvSeries(
+    backdropPath: 'backdropPath',
+    firstAirDate: 'firstAirDate',
+    genreIds: [1, 2, 3, 4],
+    id: 1,
+    name: 'name',
+    originCountry: ["EN"],
+    originalLanguage: 'en',
+    originalName: 'originalName',
+    overview: 'overview',
+    popularity: 1.0,
+    posterPath: 'posterPath',
+    voteAverage: 1.0,
+    voteCount: 1,
+  );
+
+  final testTvSeriesList = <TvSeries>[testTvSeries];
+
 final testTvSeriesMap = {
   'id': 1,
   'name': 'name',

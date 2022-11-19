@@ -21,7 +21,7 @@ void main() {
         .thenAnswer((_) async => Right('Removed from the watchlist'));
 
     //act
-    final result = await usecase.exceute(testTvSeriesDetail);
+    final result = await usecase.execute(testTvSeriesDetail);
 
     //assert
     expect(result, Right('Removed from the watchlist'));
