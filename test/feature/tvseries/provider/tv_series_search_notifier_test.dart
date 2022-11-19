@@ -19,7 +19,7 @@ void main() {
   setUp(() {
     listenerCallCount = 0;
     mockSearchTvSeries = MockSearchTvSeries();
-    provider = TvSeriesSearchNotifier(mockSearchTvSeries)
+    provider = TvSeriesSearchNotifier(searchTvSeries: mockSearchTvSeries)
       ..addListener(() {
         listenerCallCount += 1;
       });

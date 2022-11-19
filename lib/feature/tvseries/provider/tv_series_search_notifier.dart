@@ -6,7 +6,9 @@ import 'package:flutter/cupertino.dart';
 class TvSeriesSearchNotifier extends ChangeNotifier {
   final SearchTvSeries searchTvSeries;
 
-  TvSeriesSearchNotifier(this.searchTvSeries);
+  TvSeriesSearchNotifier({
+    required this.searchTvSeries,
+  });
 
   var _searchResults = <TvSeries>[];
   List<TvSeries> get searchResults => _searchResults;
