@@ -29,14 +29,14 @@ import 'package:ditonton/core/tv_series/domain/usecase/remove_watchlist_tv_serie
 import 'package:ditonton/core/tv_series/domain/usecase/save_watchlist_tv_series.dart';
 import 'package:ditonton/core/tv_series/domain/usecase/search_tv_series.dart';
 import 'package:ditonton/feature/movie/provider/movie_detail_notifier.dart';
-import 'package:ditonton/feature/movie/provider/movie_list_notifier.dart';
+import 'package:ditonton/feature/home/provider/movie_list_notifier.dart';
 import 'package:ditonton/feature/movie/provider/movie_search_notifier.dart';
 import 'package:ditonton/feature/movie/provider/popular_movies_notifier.dart';
 import 'package:ditonton/feature/movie/provider/top_rated_movies_notifier.dart';
 import 'package:ditonton/feature/movie/provider/watchlist_movie_notifier.dart';
 import 'package:ditonton/feature/tvseries/provider/popular_tv_series_notifier.dart';
 import 'package:ditonton/feature/tvseries/provider/tv_series_detail_notifier.dart';
-import 'package:ditonton/feature/tvseries/provider/tv_series_list_notifier.dart';
+import 'package:ditonton/feature/home/provider/tv_series_list_notifier.dart';
 import 'package:ditonton/feature/tvseries/provider/tv_series_search_notifier.dart';
 import 'package:ditonton/feature/tvseries/provider/watchlist_tv_series_notifier.dart';
 import 'package:http/http.dart' as http;

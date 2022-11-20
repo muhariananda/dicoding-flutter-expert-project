@@ -1,15 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/feature/components/components.dart';
+import 'package:ditonton/components/components.dart';
 import 'package:ditonton/feature/movie/pages/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:ditonton/core/tv_series/domain/entities/tv_series.dart';
-import 'package:ditonton/feature/tvseries/provider/tv_series_list_notifier.dart';
+import 'package:ditonton/feature/home/provider/tv_series_list_notifier.dart';
 
 class HomeTvSeriesPage extends StatefulWidget {
+  static const ROUTE_NAME = 'home_tv_series';
+
   @override
   State<HomeTvSeriesPage> createState() => _HomeTvSeriesPageState();
 }

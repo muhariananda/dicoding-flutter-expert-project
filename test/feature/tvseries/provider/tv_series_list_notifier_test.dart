@@ -5,7 +5,7 @@ import 'package:ditonton/core/tv_series/domain/entities/tv_series.dart';
 import 'package:ditonton/core/tv_series/domain/usecase/get_now_playing_tv_series.dart';
 import 'package:ditonton/core/tv_series/domain/usecase/get_popular_tv_series.dart';
 import 'package:ditonton/core/tv_series/domain/usecase/get_top_rated_tv_series.dart';
-import 'package:ditonton/feature/tvseries/provider/tv_series_list_notifier.dart';
+import 'package:ditonton/feature/home/provider/tv_series_list_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
