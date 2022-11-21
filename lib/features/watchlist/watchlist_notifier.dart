@@ -4,60 +4,60 @@ import 'package:flutter/foundation.dart';
 
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/core/movie/domain/entities/movie.dart';
-import 'package:ditonton/core/movie/domain/usecase/search_movies.dart';
-import 'package:ditonton/core/tv_series/domain/usecase/search_tv_series.dart';
+import 'package:ditonton/core/movie/domain/usecase/get_watchlist_movies.dart';
+import 'package:ditonton/core/tv_series/domain/usecase/get_watchlist_tv_series.dart';
 
-class SearchNotifier extends ChangeNotifier {
-  final SearchMovies searchMovies;
-  final SearchTvSeries searchTvSeries;
+class WatchlistNotifier extends ChangeNotifier {
+  final GetWatchlistMovies getWatchlistMovies;
+  final GetWatchListTvSeries getWatchListTvSeries;
 
-  SearchNotifier({
-    required this.searchMovies,
-    required this.searchTvSeries,
+  WatchlistNotifier({
+    required this.getWatchlistMovies,
+    required this.getWatchListTvSeries,
   });
 
-  var _selectedContent = ContentSelection.movie;
-  ContentSelection get selectedContent => _selectedContent;
+  var _contentSelection = ContentSelection.movie;
+  ContentSelection get contentSelection => _contentSelection;
+
+  var _watchlistMovies = <Movie>[];
+  List<Movie> get watchlistMovies => _watchlistMovies;
 
   var _movieState = RequestState.Empty;
   RequestState get movieState => _movieState;
 
-  var _movieSearchResult = <Movie>[];
-  List<Movie> get movieSearchResult => _movieSearchResult;
+  var _watchlistTvSeries = <TvSeries>[];
+  List<TvSeries> get watchlistTvSeries => _watchlistTvSeries;
 
   var _tvSeriesState = RequestState.Empty;
   RequestState get tvSeriesState => _tvSeriesState;
 
-  var _tvSeriesSearchResult = <TvSeries>[];
-  List<TvSeries> get tvSeriesSearchResult => _tvSeriesSearchResult;
-
   String _message = '';
   String get message => _message;
 
-  Future<void> fetchMovieSearch(String query) async {
+  Future<void> fetchWatchlistMovies() async {
     _movieState = RequestState.Loading;
     notifyListeners();
 
-    final result = await searchMovies.execute(query);
+    final result = await getWatchlistMovies.execute();
     result.fold(
       (failure) {
-        _message = failure.message;
         _movieState = RequestState.Error;
+        _message = failure.message;
         notifyListeners();
       },
-      (data) {
-        _movieSearchResult = data;
+      (moviesData) {
         _movieState = RequestState.Loaded;
+        _watchlistMovies = moviesData;
         notifyListeners();
       },
     );
   }
 
-  Future<void> fetchTvSeriesSearch(String query) async {
+  Future<void> fetchWatchlistTvSeries() async {
     _tvSeriesState = RequestState.Loading;
     notifyListeners();
 
-    final result = await searchTvSeries.execute(query);
+    final result = await getWatchListTvSeries.execute();
     result.fold(
       (failure) {
         _tvSeriesState = RequestState.Error;
@@ -66,14 +66,14 @@ class SearchNotifier extends ChangeNotifier {
       },
       (data) {
         _tvSeriesState = RequestState.Loaded;
-        _tvSeriesSearchResult = data;
+        _watchlistTvSeries = data;
         notifyListeners();
       },
     );
   }
 
-  void updateSearchContent(ContentSelection content) {
-    _selectedContent = content;
+  void setSelectedContent(ContentSelection content) {
+    _contentSelection = content;
     notifyListeners();
   }
 }

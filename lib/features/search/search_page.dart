@@ -1,3 +1,4 @@
+import 'package:ditonton/common/content_selection.dart';
 import 'package:ditonton/components/components.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -40,23 +41,23 @@ class SearchPage extends StatelessWidget {
                 FilterChip(
                   label: Text('Movies'),
                   selected:
-                      Provider.of<SearchNotifier>(context).searchContent ==
-                          SearchContent.Movie,
+                      Provider.of<SearchNotifier>(context).selectedContent ==
+                          ContentSelection.movie,
                   onSelected: (_) {
                     context
                         .read<SearchNotifier>()
-                        .updateSearchContent(SearchContent.Movie);
+                        .updateSearchContent(ContentSelection.movie);
                   },
                 ),
                 FilterChip(
                   label: Text('Tv Series'),
                   selected:
-                      Provider.of<SearchNotifier>(context).searchContent ==
-                          SearchContent.Tv,
+                      Provider.of<SearchNotifier>(context).selectedContent ==
+                          ContentSelection.tv,
                   onSelected: (_) {
                     context
                         .read<SearchNotifier>()
-                        .updateSearchContent(SearchContent.Tv);
+                        .updateSearchContent(ContentSelection.tv);
                   },
                 ),
               ],
@@ -74,7 +75,7 @@ class SearchPage extends StatelessWidget {
                   final movies = data.movieSearchResult;
                   final tvSeries = data.tvSeriesSearchResult;
                   return Expanded(
-                    child: (data.searchContent == SearchContent.Movie)
+                    child: (data.selectedContent == ContentSelection.movie)
                         ? SearchMovieList(movies: movies)
                         : SearchTvSeriesList(tvSeriesList: tvSeries),
                   );

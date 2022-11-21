@@ -1,0 +1,4 @@
+enum ContentSelection {
+  movie,
+  tv,
+}

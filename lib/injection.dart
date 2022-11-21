@@ -33,12 +33,11 @@ import 'package:ditonton/features/home/provider/movie_list_notifier.dart';
 import 'package:ditonton/features/search/search_notifier.dart';
 import 'package:ditonton/features/popular_movie/popular_movies_notifier.dart';
 import 'package:ditonton/features/top_rated_movie/top_rated_movies_notifier.dart';
-import 'package:ditonton/features/watchlist/watchlist_movie_notifier.dart';
+import 'package:ditonton/features/watchlist/watchlist_notifier.dart';
 import 'package:ditonton/features/popular_tv_series/popular_tv_series_notifier.dart';
 import 'package:ditonton/features/top_rated_tv_series/top_rated_tv_series_notifier.dart';
 import 'package:ditonton/features/detail_tv_series/tv_series_detail_notifier.dart';
 import 'package:ditonton/features/home/provider/tv_series_list_notifier.dart';
-import 'package:ditonton/features/watchlist/watchlist_tv_series_notifier.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
 
@@ -79,8 +78,9 @@ void init() {
     ),
   );
   locator.registerFactory(
-    () => WatchlistMovieNotifier(
+    () => WatchlistNotifier(
       getWatchlistMovies: locator(),
+      getWatchListTvSeries: locator(),
     ),
   );
 
@@ -108,11 +108,6 @@ void init() {
       getWatchlistStatus: locator(),
       saveWatchlistTvSeries: locator(),
       removeWatchlistTvSeries: locator(),
-    ),
-  );
-  locator.registerFactory(
-    () => WatchlistTvSeriesNotifier(
-      getWatchListTvSeries: locator(),
     ),
   );
 
@@ -155,17 +150,23 @@ void init() {
 
   // data sources
   locator.registerLazySingleton<MovieRemoteDataSource>(
-      () => MovieRemoteDataSourceImpl(client: locator()));
+    () => MovieRemoteDataSourceImpl(client: locator()),
+  );
   locator.registerLazySingleton<MovieLocalDataSource>(
-      () => MovieLocalDataSourceImpl(databaseHelper: locator()));
+    () => MovieLocalDataSourceImpl(databaseHelper: locator()),
+  );
 
   locator.registerLazySingleton<TvSeriesRemoteDataSource>(
-      () => TvSeriesRemoteDataSourceImpl(client: locator()));
+    () => TvSeriesRemoteDataSourceImpl(client: locator()),
+  );
   locator.registerLazySingleton<TvSeriesLocalDataSource>(
-      () => TvSeriesLocalDataSourceImpl(databaseHelper: locator()));
+    () => TvSeriesLocalDataSourceImpl(databaseHelper: locator()),
+  );
 
   // helper
-  locator.registerLazySingleton<DatabaseHelper>(() => DatabaseHelper());
+  locator.registerLazySingleton<DatabaseHelper>(
+    () => DatabaseHelper(),
+  );
 
   // external
   locator.registerLazySingleton(() => http.Client());

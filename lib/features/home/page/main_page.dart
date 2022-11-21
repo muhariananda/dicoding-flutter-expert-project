@@ -2,7 +2,7 @@ import 'package:ditonton/features/home/page/home_movie_page.dart';
 import 'package:ditonton/features/home/page/home_tv_series_page.dart';
 import 'package:ditonton/features/about/about_page.dart';
 import 'package:ditonton/features/search/search_page.dart';
-import 'package:ditonton/features/watchlist/watchlist_movies_page.dart';
+import 'package:ditonton/features/watchlist/watchlist_page.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatefulWidget {
