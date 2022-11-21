@@ -47,14 +47,9 @@ class SearchNotifier extends ChangeNotifier {
         notifyListeners();
       },
       (data) {
-        if (data.isNotEmpty) {
-          _movieSearchResult = data;
-          _movieState = RequestState.Loaded;
-          notifyListeners();
-        } else {
-          _movieState = RequestState.Empty;
-          notifyListeners();
-        }
+        _movieSearchResult = data;
+        _movieState = RequestState.Loaded;
+        notifyListeners();
       },
     );
   }
@@ -71,14 +66,9 @@ class SearchNotifier extends ChangeNotifier {
         notifyListeners();
       },
       (data) {
-        if (data.isNotEmpty) {
-          _tvSeriesState = RequestState.Loaded;
-          _tvSeriesSearchResult = data;
-          notifyListeners();
-        } else {
-          _tvSeriesState = RequestState.Empty;
-          notifyListeners();
-        }
+        _tvSeriesState = RequestState.Loaded;
+        _tvSeriesSearchResult = data;
+        notifyListeners();
       },
     );
   }
