@@ -4,14 +4,17 @@ import 'package:ditonton/features/home/page/main_page.dart';
 import 'package:ditonton/features/home/provider/tv_series_list_notifier.dart';
 import 'package:ditonton/features/about/about_page.dart';
 import 'package:ditonton/features/detail_movie/movie_detail_page.dart';
-import 'package:ditonton/features/home/page/home_movie_page.dart';
 import 'package:ditonton/features/popular_movie/popular_movies_page.dart';
+import 'package:ditonton/features/popular_tv_series/popular_tv_series_notifier.dart';
+import 'package:ditonton/features/popular_tv_series/popular_tv_series_page.dart';
 import 'package:ditonton/features/search/search_page.dart';
 import 'package:ditonton/features/top_rated_movie/top_rated_movies_page.dart';
+import 'package:ditonton/features/top_rated_tv_series/top_rated_tv_series_notifier.dart';
+import 'package:ditonton/features/top_rated_tv_series/top_reated_tv_series_page.dart';
 import 'package:ditonton/features/watchlist/watchlist_movies_page.dart';
 import 'package:ditonton/features/detail_movie/movie_detail_notifier.dart';
 import 'package:ditonton/features/home/provider/movie_list_notifier.dart';
-import 'package:ditonton/features/search/movie_search_notifier.dart';
+import 'package:ditonton/features/search/search_notifier.dart';
 import 'package:ditonton/features/popular_movie/popular_movies_notifier.dart';
 import 'package:ditonton/features/top_rated_movie/top_rated_movies_notifier.dart';
 import 'package:ditonton/features/watchlist/watchlist_movie_notifier.dart';
@@ -37,7 +40,7 @@ class MyApp extends StatelessWidget {
           create: (_) => di.locator<MovieDetailNotifier>(),
         ),
         ChangeNotifierProvider(
-          create: (_) => di.locator<MovieSearchNotifier>(),
+          create: (_) => di.locator<SearchNotifier>(),
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<TopRatedMoviesNotifier>(),
@@ -50,6 +53,12 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<TvSeriesListNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<PopularTvSeriesNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<TopRatedTvSeriesNotifier>(),
         )
       ],
       child: MaterialApp(
@@ -76,6 +85,10 @@ class MyApp extends StatelessWidget {
                 builder: (_) => MovieDetailPage(id: id),
                 settings: settings,
               );
+            case PopularTvSeriesPage.ROUTE_NAME:
+              return CupertinoPageRoute(builder: (_) => PopularTvSeriesPage());
+            case TopRatedTvSeriesPage.ROUTE_NAME:
+              return CupertinoPageRoute(builder: (_) => TopRatedTvSeriesPage());
             case SearchPage.ROUTE_NAME:
               return CupertinoPageRoute(builder: (_) => SearchPage());
             case WatchlistMoviesPage.ROUTE_NAME:
@@ -83,13 +96,15 @@ class MyApp extends StatelessWidget {
             case AboutPage.ROUTE_NAME:
               return MaterialPageRoute(builder: (_) => AboutPage());
             default:
-              return MaterialPageRoute(builder: (_) {
-                return Scaffold(
-                  body: Center(
-                    child: Text('Page not found :('),
-                  ),
-                );
-              });
+              return MaterialPageRoute(
+                builder: (_) {
+                  return Scaffold(
+                    body: Center(
+                      child: Text('Page not found :('),
+                    ),
+                  );
+                },
+              );
           }
         },
       ),

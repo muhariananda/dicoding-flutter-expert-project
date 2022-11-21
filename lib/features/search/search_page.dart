@@ -1,9 +1,12 @@
-import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/features/search/movie_search_notifier.dart';
-import 'package:ditonton/components/movie_card_list.dart';
+import 'package:ditonton/components/components.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'package:ditonton/common/constants.dart';
+import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/core/movie/domain/entities/movie.dart';
+import 'package:ditonton/core/tv_series/domain/entities/tv_series.dart';
+import 'package:ditonton/features/search/search_notifier.dart';
 
 class SearchPage extends StatelessWidget {
   static const ROUTE_NAME = '/search';
@@ -21,8 +24,9 @@ class SearchPage extends StatelessWidget {
           children: [
             TextField(
               onSubmitted: (query) {
-                Provider.of<MovieSearchNotifier>(context, listen: false)
-                    .fetchMovieSearch(query);
+                context.read<SearchNotifier>()
+                  ..fetchMovieSearch(query)
+                  ..fetchTvSeriesSearch(query);
               },
               decoration: InputDecoration(
                 hintText: 'Search title',
@@ -31,28 +35,48 @@ class SearchPage extends StatelessWidget {
               ),
               textInputAction: TextInputAction.search,
             ),
+            Wrap(
+              children: [
+                FilterChip(
+                  label: Text('Movies'),
+                  selected:
+                      Provider.of<SearchNotifier>(context).searchContent ==
+                          SearchContent.Movie,
+                  onSelected: (_) {
+                    context
+                        .read<SearchNotifier>()
+                        .updateSearchContent(SearchContent.Movie);
+                  },
+                ),
+                FilterChip(
+                  label: Text('Tv Series'),
+                  selected:
+                      Provider.of<SearchNotifier>(context).searchContent ==
+                          SearchContent.Tv,
+                  onSelected: (_) {
+                    context
+                        .read<SearchNotifier>()
+                        .updateSearchContent(SearchContent.Tv);
+                  },
+                ),
+              ],
+            ),
             SizedBox(height: 16),
             Text(
               'Search Result',
               style: kHeading6,
             ),
-            Consumer<MovieSearchNotifier>(
+            Consumer<SearchNotifier>(
               builder: (context, data, child) {
-                if (data.state == RequestState.Loading) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (data.state == RequestState.Loaded) {
-                  final result = data.searchResult;
+                if (data.movieState == RequestState.Loading) {
+                  return CenteredProgressCircularIndicator();
+                } else if (data.movieState == RequestState.Loaded) {
+                  final movies = data.movieSearchResult;
+                  final tvSeries = data.tvSeriesSearchResult;
                   return Expanded(
-                    child: ListView.builder(
-                      padding: const EdgeInsets.all(8),
-                      itemBuilder: (context, index) {
-                        final movie = data.searchResult[index];
-                        return MovieCard(movie);
-                      },
-                      itemCount: result.length,
-                    ),
+                    child: (data.searchContent == SearchContent.Movie)
+                        ? SearchMovieList(movies: movies)
+                        : SearchTvSeriesList(tvSeriesList: tvSeries),
                   );
                 } else {
                   return Expanded(
@@ -64,6 +88,46 @@ class SearchPage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class SearchMovieList extends StatelessWidget {
+  final List<Movie> movies;
+
+  const SearchMovieList({
+    Key? key,
+    required this.movies,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: movies.length,
+      itemBuilder: (BuildContext context, int index) {
+        final movie = movies[index];
+        return MovieCard(movie);
+      },
+    );
+  }
+}
+
+class SearchTvSeriesList extends StatelessWidget {
+  final List<TvSeries> tvSeriesList;
+
+  const SearchTvSeriesList({
+    Key? key,
+    required this.tvSeriesList,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: tvSeriesList.length,
+      itemBuilder: (BuildContext context, int index) {
+        final tvSeries = tvSeriesList[index];
+        return TvSeriesCard(tvSeries);
+      },
     );
   }
 }
