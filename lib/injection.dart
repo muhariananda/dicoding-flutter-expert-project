@@ -28,17 +28,18 @@ import 'package:ditonton/core/tv_series/domain/usecase/get_watchlist_tv_series.d
 import 'package:ditonton/core/tv_series/domain/usecase/remove_watchlist_tv_series.dart';
 import 'package:ditonton/core/tv_series/domain/usecase/save_watchlist_tv_series.dart';
 import 'package:ditonton/core/tv_series/domain/usecase/search_tv_series.dart';
-import 'package:ditonton/feature/movie/provider/movie_detail_notifier.dart';
-import 'package:ditonton/feature/home/provider/movie_list_notifier.dart';
-import 'package:ditonton/feature/movie/provider/movie_search_notifier.dart';
-import 'package:ditonton/feature/movie/provider/popular_movies_notifier.dart';
-import 'package:ditonton/feature/movie/provider/top_rated_movies_notifier.dart';
-import 'package:ditonton/feature/movie/provider/watchlist_movie_notifier.dart';
-import 'package:ditonton/feature/tvseries/provider/popular_tv_series_notifier.dart';
-import 'package:ditonton/feature/tvseries/provider/tv_series_detail_notifier.dart';
-import 'package:ditonton/feature/home/provider/tv_series_list_notifier.dart';
-import 'package:ditonton/feature/tvseries/provider/tv_series_search_notifier.dart';
-import 'package:ditonton/feature/tvseries/provider/watchlist_tv_series_notifier.dart';
+import 'package:ditonton/features/detail_movie/movie_detail_notifier.dart';
+import 'package:ditonton/features/home/provider/movie_list_notifier.dart';
+import 'package:ditonton/features/search/movie_search_notifier.dart';
+import 'package:ditonton/features/popular_movie/popular_movies_notifier.dart';
+import 'package:ditonton/features/top_rated_movie/top_rated_movies_notifier.dart';
+import 'package:ditonton/features/watchlist/watchlist_movie_notifier.dart';
+import 'package:ditonton/features/popular_tv_series/popular_tv_series_notifier.dart';
+import 'package:ditonton/features/top_rated_tv_series/top_rated_tv_series_notifier.dart';
+import 'package:ditonton/features/detail_tv_series/tv_series_detail_notifier.dart';
+import 'package:ditonton/features/home/provider/tv_series_list_notifier.dart';
+import 'package:ditonton/features/search/tv_series_search_notifier.dart';
+import 'package:ditonton/features/watchlist/watchlist_tv_series_notifier.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
 
@@ -96,8 +97,8 @@ void init() {
     ),
   );
   locator.registerFactory(
-    () => TopRatedMoviesNotifier(
-      getTopRatedMovies: locator(),
+    () => TopRatedTvSeriesNotifier(
+      getTopRatedTvSeries: locator(),
     ),
   );
   locator.registerFactory(

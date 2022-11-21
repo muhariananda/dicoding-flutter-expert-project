@@ -2,15 +2,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/components/components.dart';
-import 'package:ditonton/feature/movie/pages/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:ditonton/core/tv_series/domain/entities/tv_series.dart';
-import 'package:ditonton/feature/home/provider/tv_series_list_notifier.dart';
+import 'package:ditonton/features/home/provider/tv_series_list_notifier.dart';
 
 class HomeTvSeriesPage extends StatefulWidget {
-  static const ROUTE_NAME = 'home_tv_series';
+  const HomeTvSeriesPage({Key? key}) : super(key: key);
 
   @override
   State<HomeTvSeriesPage> createState() => _HomeTvSeriesPageState();
@@ -31,17 +30,6 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('tv show'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, SearchPage.ROUTE_NAME);
-            },
-            icon: Icon(Icons.search),
-          )
-        ],
-      ),
       body: Padding(
         padding: EdgeInsets.all(8),
         child: SingleChildScrollView(
@@ -123,6 +111,7 @@ class TvSeriesList extends StatelessWidget {
     return SizedBox(
       height: 200,
       child: ListView.builder(
+        scrollDirection: Axis.horizontal,
         itemCount: tvSeriesList.length,
         itemBuilder: (BuildContext context, int index) {
           final tvSeries = tvSeriesList[index];

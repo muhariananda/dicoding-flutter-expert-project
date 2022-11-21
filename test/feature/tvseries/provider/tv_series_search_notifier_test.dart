@@ -3,7 +3,7 @@ import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/core/tv_series/domain/entities/tv_series.dart';
 import 'package:ditonton/core/tv_series/domain/usecase/search_tv_series.dart';
-import 'package:ditonton/feature/tvseries/provider/tv_series_search_notifier.dart';
+import 'package:ditonton/features/search/tv_series_search_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';

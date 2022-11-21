@@ -2,17 +2,17 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/components/components.dart';
 import 'package:ditonton/core/movie/domain/entities/movie.dart';
-import 'package:ditonton/feature/movie/pages/movie_detail_page.dart';
-import 'package:ditonton/feature/movie/pages/popular_movies_page.dart';
-import 'package:ditonton/feature/movie/pages/top_rated_movies_page.dart';
-import 'package:ditonton/feature/home/provider/movie_list_notifier.dart';
+import 'package:ditonton/features/detail_movie/movie_detail_page.dart';
+import 'package:ditonton/features/popular_movie/popular_movies_page.dart';
+import 'package:ditonton/features/top_rated_movie/top_rated_movies_page.dart';
+import 'package:ditonton/features/home/provider/movie_list_notifier.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class HomeMoviePage extends StatefulWidget {
-  static const ROUTE_NAME = 'movie_home_page';
-  
+  const HomeMoviePage({Key? key}) : super(key: key);
+
   @override
   _HomeMoviePageState createState() => _HomeMoviePageState();
 }

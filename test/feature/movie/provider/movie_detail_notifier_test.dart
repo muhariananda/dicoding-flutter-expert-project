@@ -6,7 +6,7 @@ import 'package:ditonton/core/movie/domain/usecase/get_movie_recommendations.dar
 import 'package:ditonton/core/movie/domain/usecase/get_watchlist_status.dart';
 import 'package:ditonton/core/movie/domain/usecase/remove_watchlist.dart';
 import 'package:ditonton/core/movie/domain/usecase/save_watchlist.dart';
-import 'package:ditonton/feature/movie/provider/movie_detail_notifier.dart';
+import 'package:ditonton/features/detail_movie/movie_detail_notifier.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';

@@ -25,7 +25,7 @@ class UrlBuilder {
   }
 
   Uri buildGetRecommendationsMovieUrl(int id) {
-    return Uri.parse('$_baseUrl/tv/$id/recommendations?api_key=$_apiKey');
+    return Uri.parse('$_baseUrl/movie/$id/recommendations?api_key=$_apiKey');
   }
 
   Uri buildSearchMoviesUrl(String query) {

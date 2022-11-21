@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/core/movie/domain/entities/movie.dart';
-import 'package:ditonton/feature/movie/pages/movie_detail_page.dart';
+import 'package:ditonton/features/detail_movie/movie_detail_page.dart';
 import 'package:flutter/material.dart';
 
 class MovieCard extends StatelessWidget {

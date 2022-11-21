@@ -29,7 +29,7 @@ class TvSeriesModel extends Equatable {
   final String overview;
   final double popularity;
   final String? posterPath;
-  final double voteAverage;
+  final num voteAverage;
   final int voteCount;
 
   Map<String, dynamic> toJson() {
@@ -52,7 +52,7 @@ class TvSeriesModel extends Equatable {
 
   factory TvSeriesModel.fromJson(Map<String, dynamic> json) {
     return TvSeriesModel(
-      backdropPath: json['backdrop_path'] as String,
+      backdropPath: json['backdrop_path'] != null ? json['backdrop_path'] as String : null,
       firstAirDate: json['first_air_date'] as String,
       genreIds: List<int>.from((json['genre_ids'] as List<dynamic>)),
       id: json['id'] as int,
@@ -65,7 +65,7 @@ class TvSeriesModel extends Equatable {
       overview: json['overview'] as String,
       popularity: json['popularity'] as double,
       posterPath: json['poster_path'] as String,
-      voteAverage: json['vote_average'] as double,
+      voteAverage: json['vote_average'] as num,
       voteCount: json['vote_count'] as int,
     );
   }
@@ -82,7 +82,7 @@ class TvSeriesModel extends Equatable {
         overview: this.overview,
         popularity: this.popularity,
         posterPath: this.posterPath,
-        voteAverage: this.voteAverage,
+        voteAverage: this.voteAverage.toDouble(),
         voteCount: this.voteCount,
       );
 
