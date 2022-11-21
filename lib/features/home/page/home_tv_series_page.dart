@@ -3,6 +3,7 @@ import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/components/components.dart';
 import 'package:ditonton/features/popular_tv_series/popular_tv_series_page.dart';
+import 'package:ditonton/features/top_rated_movie/top_rated_movies_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -74,8 +75,7 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
               SubHeading(
                 title: 'Top Rated',
                 onTap: () {
-                  //TODO: Add tv series top rated routeName
-                  Navigator.pushNamed(context, 'routeName');
+                  Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME);
                 },
               ),
               Consumer<TvSeriesListNotifier>(
