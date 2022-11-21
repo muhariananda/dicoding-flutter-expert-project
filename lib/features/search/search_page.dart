@@ -5,8 +5,6 @@ import 'package:provider/provider.dart';
 
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/core/movie/domain/entities/movie.dart';
-import 'package:ditonton/core/tv_series/domain/entities/tv_series.dart';
 import 'package:ditonton/features/search/search_notifier.dart';
 
 class SearchPage extends StatelessWidget {
@@ -76,8 +74,8 @@ class SearchPage extends StatelessWidget {
                   final tvSeries = data.tvSeriesSearchResult;
                   return Expanded(
                     child: (data.selectedContent == ContentSelection.movie)
-                        ? SearchMovieList(movies: movies)
-                        : SearchTvSeriesList(tvSeriesList: tvSeries),
+                        ? VerticaledMovieList(movies: movies)
+                        : VerticaledTvSeriesList(tvSeriesList: tvSeries),
                   );
                 } else {
                   return Expanded(
@@ -89,46 +87,6 @@ class SearchPage extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class SearchMovieList extends StatelessWidget {
-  final List<Movie> movies;
-
-  const SearchMovieList({
-    Key? key,
-    required this.movies,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: movies.length,
-      itemBuilder: (BuildContext context, int index) {
-        final movie = movies[index];
-        return MovieCard(movie);
-      },
-    );
-  }
-}
-
-class SearchTvSeriesList extends StatelessWidget {
-  final List<TvSeries> tvSeriesList;
-
-  const SearchTvSeriesList({
-    Key? key,
-    required this.tvSeriesList,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: tvSeriesList.length,
-      itemBuilder: (BuildContext context, int index) {
-        final tvSeries = tvSeriesList[index];
-        return TvSeriesCard(tvSeries);
-      },
     );
   }
 }
