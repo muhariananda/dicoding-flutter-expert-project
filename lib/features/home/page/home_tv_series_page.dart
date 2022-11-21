@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/components/components.dart';
+import 'package:ditonton/features/popular_tv_series/popular_tv_series_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -55,8 +56,7 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
               SubHeading(
                 title: 'Popular',
                 onTap: () {
-                  //TODO: Add popular tv seires routeName
-                  Navigator.pushNamed(context, 'routeName');
+                  Navigator.pushNamed(context, PopularTvSeriesPage.ROUTE_NAME);
                 },
               ),
               Consumer<TvSeriesListNotifier>(
