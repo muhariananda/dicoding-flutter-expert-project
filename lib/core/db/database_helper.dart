@@ -29,6 +29,10 @@ class DatabaseHelper {
     final path = await getDatabasesPath();
     final databasePath = '$path/ditonton.db';
 
+    return await openDatabase(databasePath, version: 1, onCreate: _onCreate);
+  }
+
+  void _onCreate(Database db, int version) {
     final initialScripts = [
       '''
       CREATE TABLE $_tblMovieWatchlist (
@@ -48,18 +52,9 @@ class DatabaseHelper {
     ''',
     ];
 
-    final migrationScripts = [
-      '''
-      ALTER TABLE watchlist RENAME TO $_tblMovieWatchlist
-    ''',
-    ];
-
-    final config = MigrationConfig(
-      initializationScript: initialScripts,
-      migrationScripts: migrationScripts,
-    );
-
-    return await openDatabaseWithMigration(databasePath, config);
+    initialScripts.forEach((sql) async {
+      await db.execute(sql);
+    });
   }
 
   Future<int> insertMovieWatchlist(MovieTable movie) async {
