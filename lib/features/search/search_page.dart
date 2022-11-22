@@ -34,7 +34,13 @@ class SearchPage extends StatelessWidget {
               ),
               textInputAction: TextInputAction.search,
             ),
+            SizedBox(height: 16),
+            Text(
+              'Search Result',
+              style: kHeading6,
+            ),
             Wrap(
+              spacing: 10,
               children: [
                 FilterChip(
                   label: Text('Movies'),
@@ -59,11 +65,6 @@ class SearchPage extends StatelessWidget {
                   },
                 ),
               ],
-            ),
-            SizedBox(height: 16),
-            Text(
-              'Search Result',
-              style: kHeading6,
             ),
             Consumer<SearchNotifier>(
               builder: (context, data, child) {

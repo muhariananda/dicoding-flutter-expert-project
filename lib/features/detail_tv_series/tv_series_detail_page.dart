@@ -1,12 +1,15 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/components/components.dart';
-import 'package:ditonton/core/movie/domain/entities/genre.dart';
-import 'package:ditonton/core/tv_series/domain/entities/tv_series_detail.dart';
-import 'package:ditonton/features/detail_tv_series/tv_series_detail_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
+
+import 'package:ditonton/common/constants.dart';
+import 'package:ditonton/components/components.dart';
+import 'package:ditonton/core/movie/domain/entities/genre.dart';
+import 'package:ditonton/core/tv_series/domain/entities/season.dart';
+import 'package:ditonton/core/tv_series/domain/entities/tv_series_detail.dart';
+import 'package:ditonton/features/detail_tv_series/tv_series_detail_notifier.dart';
 
 import '../../common/state_enum.dart';
 
@@ -175,6 +178,14 @@ class DetailContent extends StatelessWidget {
                             Text(
                               tvSeries.overview!,
                             ),
+                            const SizedBox(
+                              height: 16,
+                            ),
+                            Text(
+                              'Seasons',
+                              style: kHeading6,
+                            ),
+                            SeasonList(seasons: tvSeries.seasons!),
                             SizedBox(height: 16),
                             Text(
                               'Recommendations',
@@ -287,6 +298,57 @@ class TvSeriesRecommendationsList extends StatelessWidget {
           return Container();
         }
       },
+    );
+  }
+}
+
+class SeasonList extends StatelessWidget {
+  final List<Season> seasons;
+
+  const SeasonList({
+    Key? key,
+    required this.seasons,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 150,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: seasons.length,
+        itemBuilder: (BuildContext context, int index) {
+          final season = seasons[index];
+          return Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: 150,
+                  height: 100,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                    child: CachedNetworkImage(
+                      imageUrl:
+                          'https://image.tmdb.org/t/p/w500${season.posterPath}',
+                      placeholder: (context, url) => Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                Text(
+                  season.name!,
+                ),
+                Text('${season.episodeCount} episodes')
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }

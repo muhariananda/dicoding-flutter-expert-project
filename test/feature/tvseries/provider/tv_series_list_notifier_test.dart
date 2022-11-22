@@ -168,7 +168,7 @@ void main() {
 
       //assert
       expect(provider.popularState, RequestState.Error);
-      expect(provider.popularTvSeries, tTvSeriesList);
+      expect(provider.message, 'Server Failure');
       expect(listenerCallCount, 2);
     });
   });

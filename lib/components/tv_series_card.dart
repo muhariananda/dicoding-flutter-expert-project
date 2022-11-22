@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/core/tv_series/domain/entities/tv_series.dart';
+import 'package:ditonton/features/detail_tv_series/tv_series_detail_page.dart';
 import 'package:flutter/material.dart';
 
 class TvSeriesCard extends StatelessWidget {
@@ -16,8 +17,7 @@ class TvSeriesCard extends StatelessWidget {
         onTap: () {
           Navigator.pushNamed(
             context,
-            //TODO: Add detail route
-            '',
+            TvSeriesDetailPage.ROUTE_NAME,
             arguments: tvSeries.id,
           );
         },

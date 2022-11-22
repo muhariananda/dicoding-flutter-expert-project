@@ -82,9 +82,11 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
                 } else if (data.movieState == RequestState.Loaded) {
                   final movies = data.watchlistMovies;
                   final tvSeries = data.watchlistTvSeries;
-                  return (data.contentSelection == ContentSelection.movie)
-                      ? VerticaledMovieList(movies: movies)
-                      : VerticaledTvSeriesList(tvSeriesList: tvSeries);
+                  return Expanded(
+                    child: (data.contentSelection == ContentSelection.movie)
+                        ? VerticaledMovieList(movies: movies)
+                        : VerticaledTvSeriesList(tvSeriesList: tvSeries),
+                  );
                 } else {
                   return CenteredText(
                     data.message,

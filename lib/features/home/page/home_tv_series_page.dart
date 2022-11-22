@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/components/components.dart';
+import 'package:ditonton/features/detail_tv_series/tv_series_detail_page.dart';
 import 'package:ditonton/features/popular_tv_series/popular_tv_series_page.dart';
 import 'package:ditonton/features/top_rated_tv_series/top_reated_tv_series_page.dart';
 import 'package:flutter/material.dart';
@@ -119,10 +120,9 @@ class TvSeriesList extends StatelessWidget {
             padding: EdgeInsets.all(8),
             child: InkWell(
               onTap: () {
-                //TODO: Add detail tv series routeName
                 Navigator.pushNamed(
                   context,
-                  'routeName',
+                  TvSeriesDetailPage.ROUTE_NAME,
                   arguments: tvSeries.id,
                 );
               },
