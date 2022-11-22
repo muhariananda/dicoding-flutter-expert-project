@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ditonton/common/content_selection.dart';
 import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/core/movie/domain/usecase/search_movies.dart';
@@ -8,7 +9,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../dummy_data/dummy_objects.dart';
+import '../../dummy_data/movie/dummy_movie.dart';
+import '../../dummy_data/tv_series/dummy_tv_series.dart';
 import 'search_notifier_test.mocks.dart';
 
 @GenerateMocks([SearchMovies, SearchTvSeries])
@@ -128,5 +130,10 @@ void main() {
       expect(provider.message, 'Server Failure');
       expect(listenerCallCount, 2);
     });
+  });
+
+  test('selected content should change', () {
+    provider.setSelectedContent(ContentSelection.tv);
+    expect(provider.selectedContent, ContentSelection.tv);
   });
 }

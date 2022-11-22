@@ -3,7 +3,7 @@ import 'package:ditonton/core/movie/domain/usecase/get_movie_detail.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../../../dummy_data/dummy_objects.dart';
+import '../../../../dummy_data/movie/dummy_movie.dart';
 import '../../../../helpers/test_helper.mocks.dart';
 
 void main() {

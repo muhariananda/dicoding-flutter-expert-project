@@ -3,7 +3,7 @@ import 'package:ditonton/core/tv_series/domain/usecase/save_watchlist_tv_series.
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../../../dummy_data/dummy_objects.dart';
+import '../../../../dummy_data/tv_series/dummy_tv_series.dart';
 import '../../../../helpers/test_helper.mocks.dart';
 
 void main() {

@@ -50,7 +50,7 @@ class SearchPage extends StatelessWidget {
                   onSelected: (_) {
                     context
                         .read<SearchNotifier>()
-                        .updateSearchContent(ContentSelection.movie);
+                        .setSelectedContent(ContentSelection.movie);
                   },
                 ),
                 FilterChip(
@@ -61,7 +61,7 @@ class SearchPage extends StatelessWidget {
                   onSelected: (_) {
                     context
                         .read<SearchNotifier>()
-                        .updateSearchContent(ContentSelection.tv);
+                        .setSelectedContent(ContentSelection.tv);
                   },
                 ),
               ],

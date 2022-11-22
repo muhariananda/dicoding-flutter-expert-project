@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/common/failure.dart';
-import 'package:ditonton/core/movie/data/models/genre_model.dart';
 import 'package:ditonton/core/tv_series/data/datasource/tv_series_local_data_source.dart';
 import 'package:ditonton/core/tv_series/data/datasource/tv_series_remote_data_source.dart';
+import 'package:ditonton/core/tv_series/data/models/genre_model.dart';
 import 'package:ditonton/core/tv_series/data/models/season_model.dart';
 import 'package:ditonton/core/tv_series/data/models/tv_series_detail_model.dart';
 import 'package:ditonton/core/tv_series/data/models/tv_series_model.dart';
@@ -14,7 +14,7 @@ import 'package:ditonton/core/tv_series/data/repositories/tv_series_repository_i
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../../../dummy_data/dummy_objects.dart';
+import '../../../../dummy_data/tv_series/dummy_tv_series.dart';
 import '../../../../helpers/test_helper.mocks.dart';
 
 void main() {

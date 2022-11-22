@@ -1,12 +1,12 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ditonton/core/tv_series/domain/entities/genre.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/components/components.dart';
-import 'package:ditonton/core/movie/domain/entities/genre.dart';
+
 import 'package:ditonton/core/tv_series/domain/entities/season.dart';
 import 'package:ditonton/core/tv_series/domain/entities/tv_series_detail.dart';
 import 'package:ditonton/features/detail_tv_series/tv_series_detail_notifier.dart';

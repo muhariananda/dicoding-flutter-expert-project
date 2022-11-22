@@ -72,7 +72,7 @@ class SearchNotifier extends ChangeNotifier {
     );
   }
 
-  void updateSearchContent(ContentSelection content) {
+  void setSelectedContent(ContentSelection content) {
     _selectedContent = content;
     notifyListeners();
   }

@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:ditonton/core/movie/data/models/movie_table.dart';
 import 'package:ditonton/core/tv_series/data/models/tv_series_table.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:sqflite_migration/sqflite_migration.dart';
 
 class DatabaseHelper {
   static DatabaseHelper? _databaseHelper;
