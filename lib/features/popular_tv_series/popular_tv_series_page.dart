@@ -44,7 +44,7 @@ class _PopularTvSeriesPageState extends State<PopularTvSeriesPage> {
             } else {
               return CenteredText(
                 value.message,
-                key: Key('error-message'),
+                key: Key('error_message'),
               );
             }
           },

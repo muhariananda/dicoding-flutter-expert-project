@@ -34,17 +34,13 @@ class _TopRatedTvSeriesPageState extends State<TopRatedTvSeriesPage> {
             if (state == RequestState.Loading) {
               return CenteredProgressCircularIndicator();
             } else if (state == RequestState.Loaded) {
-              return ListView.builder(
-                itemCount: value.topRatedTvSeries.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final tvSeries = value.topRatedTvSeries[index];
-                  return TvSeriesCard(tvSeries);
-                },
+              return VerticaledTvSeriesList(
+                tvSeriesList: value.topRatedTvSeries,
               );
             } else {
               return CenteredText(
                 value.message,
-                key: Key('error-message'),
+                key: Key('error_message'),
               );
             }
           },

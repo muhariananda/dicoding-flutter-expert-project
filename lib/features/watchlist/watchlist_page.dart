@@ -6,15 +6,14 @@ import 'package:ditonton/features/watchlist/watchlist_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class WatchlistMoviesPage extends StatefulWidget {
+class WatchlistPage extends StatefulWidget {
   static const ROUTE_NAME = '/watchlist-movie';
 
   @override
-  _WatchlistMoviesPageState createState() => _WatchlistMoviesPageState();
+  _WatchlistPageState createState() => _WatchlistPageState();
 }
 
-class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
-    with RouteAware {
+class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
   @override
   void initState() {
     super.initState();
@@ -46,11 +45,13 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Wrap(
               spacing: 10,
               children: [
                 FilterChip(
+                  key: Key('movie_filter_chip'),
                   label: Text('Movie'),
                   selected: Provider.of<WatchlistNotifier>(context)
                           .contentSelection ==
@@ -62,6 +63,7 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
                   },
                 ),
                 FilterChip(
+                  key: Key('tv_series_filter_chip'),
                   label: Text('Tv Series'),
                   selected: Provider.of<WatchlistNotifier>(context)
                           .contentSelection ==
@@ -75,26 +77,13 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
               ],
             ),
             const SizedBox(height: 16),
-            Consumer<WatchlistNotifier>(
-              builder: (context, data, child) {
-                if (data.movieState == RequestState.Loading) {
-                  return CenteredProgressCircularIndicator();
-                } else if (data.movieState == RequestState.Loaded) {
-                  final movies = data.watchlistMovies;
-                  final tvSeries = data.watchlistTvSeries;
-                  return Expanded(
-                    child: (data.contentSelection == ContentSelection.movie)
-                        ? VerticaledMovieList(movies: movies)
-                        : VerticaledTvSeriesList(tvSeriesList: tvSeries),
-                  );
-                } else {
-                  return CenteredText(
-                    data.message,
-                    key: Key('error-message'),
-                  );
-                }
-              },
-            ),
+            Expanded(
+              child:
+                  (Provider.of<WatchlistNotifier>(context).contentSelection ==
+                          ContentSelection.movie)
+                      ? WatchlistMovieList()
+                      : WatchlistTvSeriesList(),
+            )
           ],
         ),
       ),
@@ -105,5 +94,55 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
   void dispose() {
     routeObserver.unsubscribe(this);
     super.dispose();
+  }
+}
+
+class WatchlistMovieList extends StatelessWidget {
+  const WatchlistMovieList({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<WatchlistNotifier>(
+      builder: (context, value, child) {
+        final state = value.movieState;
+        if (state == RequestState.Loading) {
+          return CircularProgressIndicator();
+        } else if (state == RequestState.Loaded) {
+          return VerticaledMovieList(
+              key: Key('movie_listview'), movies: value.watchlistMovies);
+        } else {
+          return Text(
+            value.message,
+            key: Key('error_message'),
+          );
+        }
+      },
+    );
+  }
+}
+
+class WatchlistTvSeriesList extends StatelessWidget {
+  const WatchlistTvSeriesList({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<WatchlistNotifier>(
+      builder: (context, value, child) {
+        final state = value.tvSeriesState;
+        if (state == RequestState.Loading) {
+          return CircularProgressIndicator();
+        } else if (state == RequestState.Loaded) {
+          return VerticaledTvSeriesList(
+            key: Key('tv_series_listview'),
+            tvSeriesList: value.watchlistTvSeries,
+          );
+        } else {
+          return Text(
+            value.message,
+            key: Key('error_message'),
+          );
+        }
+      },
+    );
   }
 }
