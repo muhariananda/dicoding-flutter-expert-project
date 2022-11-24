@@ -31,13 +31,13 @@
             <td class="headerValue">lcov.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">0</td>
             <td class="headerCovTableEntry">8</td>
-            <td class="headerCovTableEntryLo">0.0 %</td>
+            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2022-11-23 13:44:48</td>
+            <td class="headerValue">2022-11-24 11:13:46</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -67,18 +67,18 @@
 <a name="5"><span class="lineNum">       5 </span>            : class VerticaledTvSeriesList extends StatelessWidget {</a>
 <a name="6"><span class="lineNum">       6 </span>            :   final List&lt;TvSeries&gt; tvSeriesList;</a>
 <a name="7"><span class="lineNum">       7 </span>            : </a>
-<a name="8"><span class="lineNum">       8 </span><span class="lineNoCov">          0 :   const VerticaledTvSeriesList({</span></a>
+<a name="8"><span class="lineNum">       8 </span><span class="lineCov">          3 :   const VerticaledTvSeriesList({</span></a>
 <a name="9"><span class="lineNum">       9 </span>            :     Key? key,</a>
 <a name="10"><span class="lineNum">      10 </span>            :     required this.tvSeriesList,</a>
-<a name="11"><span class="lineNum">      11 </span><span class="lineNoCov">          0 :   }) : super(key: key);</span></a>
+<a name="11"><span class="lineNum">      11 </span><span class="lineCov">          3 :   }) : super(key: key);</span></a>
 <a name="12"><span class="lineNum">      12 </span>            : </a>
-<a name="13"><span class="lineNum">      13 </span><span class="lineNoCov">          0 :   @override</span></a>
+<a name="13"><span class="lineNum">      13 </span><span class="lineCov">          3 :   @override</span></a>
 <a name="14"><span class="lineNum">      14 </span>            :   Widget build(BuildContext context) {</a>
-<a name="15"><span class="lineNum">      15 </span><span class="lineNoCov">          0 :     return ListView.builder(</span></a>
-<a name="16"><span class="lineNum">      16 </span><span class="lineNoCov">          0 :       itemCount: tvSeriesList.length,</span></a>
-<a name="17"><span class="lineNum">      17 </span><span class="lineNoCov">          0 :       itemBuilder: (BuildContext context, int index) {</span></a>
-<a name="18"><span class="lineNum">      18 </span><span class="lineNoCov">          0 :         final tvSeries = tvSeriesList[index];</span></a>
-<a name="19"><span class="lineNum">      19 </span><span class="lineNoCov">          0 :         return TvSeriesCard(tvSeries);</span></a>
+<a name="15"><span class="lineNum">      15 </span><span class="lineCov">          3 :     return ListView.builder(</span></a>
+<a name="16"><span class="lineNum">      16 </span><span class="lineCov">          6 :       itemCount: tvSeriesList.length,</span></a>
+<a name="17"><span class="lineNum">      17 </span><span class="lineCov">          2 :       itemBuilder: (BuildContext context, int index) {</span></a>
+<a name="18"><span class="lineNum">      18 </span><span class="lineCov">          4 :         final tvSeries = tvSeriesList[index];</span></a>
+<a name="19"><span class="lineNum">      19 </span><span class="lineCov">          2 :         return TvSeriesCard(tvSeries);</span></a>
 <a name="20"><span class="lineNum">      20 </span>            :       },</a>
 <a name="21"><span class="lineNum">      21 </span>            :     );</a>
 <a name="22"><span class="lineNum">      22 </span>            :   }</a>

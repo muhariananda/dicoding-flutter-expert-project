@@ -43,6 +43,7 @@ class SearchPage extends StatelessWidget {
               spacing: 10,
               children: [
                 FilterChip(
+                  key: Key('movie_filter_chip'),
                   label: Text('Movies'),
                   selected:
                       Provider.of<SearchNotifier>(context).selectedContent ==
@@ -54,6 +55,7 @@ class SearchPage extends StatelessWidget {
                   },
                 ),
                 FilterChip(
+                  key: Key('tv_series_filter_chip'),
                   label: Text('Tv Series'),
                   selected:
                       Provider.of<SearchNotifier>(context).selectedContent ==
@@ -66,28 +68,67 @@ class SearchPage extends StatelessWidget {
                 ),
               ],
             ),
-            Consumer<SearchNotifier>(
-              builder: (context, data, child) {
-                if (data.movieState == RequestState.Loading) {
-                  return CenteredProgressCircularIndicator();
-                } else if (data.movieState == RequestState.Loaded) {
-                  final movies = data.movieSearchResult;
-                  final tvSeries = data.tvSeriesSearchResult;
-                  return Expanded(
-                    child: (data.selectedContent == ContentSelection.movie)
-                        ? VerticaledMovieList(movies: movies)
-                        : VerticaledTvSeriesList(tvSeriesList: tvSeries),
-                  );
-                } else {
-                  return Expanded(
-                    child: Container(),
-                  );
-                }
-              },
-            ),
+            Expanded(
+              child: (Provider.of<SearchNotifier>(context).selectedContent ==
+                      ContentSelection.movie)
+                  ? _MovieSearchList()
+                  : _TvSeriesSearchList(),
+            )
           ],
         ),
       ),
+    );
+  }
+}
+
+class _MovieSearchList extends StatelessWidget {
+  const _MovieSearchList({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<SearchNotifier>(
+      builder: (context, value, child) {
+        final state = value.movieState;
+        if (state == RequestState.Loading) {
+          return const CircularProgressIndicator();
+        } else if (state == RequestState.Loaded) {
+          return VerticaledMovieList(
+            key: Key('movie_listview'),
+            movies: value.movieSearchResult,
+          );
+        } else {
+          return Text(
+            value.message,
+            key: Key('error_message'),
+          );
+        }
+      },
+    );
+  }
+}
+
+class _TvSeriesSearchList extends StatelessWidget {
+  const _TvSeriesSearchList({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<SearchNotifier>(
+      builder: (context, value, child) {
+        final state = value.tvSeriesState;
+        if (state == RequestState.Loading) {
+          return const CircularProgressIndicator();
+        } else if (state == RequestState.Loaded) {
+          return VerticaledTvSeriesList(
+            key: Key('tv_series_listview'),
+            tvSeriesList: value.tvSeriesSearchResult,
+          );
+        } else {
+          return Text(
+            value.message,
+            key: Key('error_message'),
+          );
+        }
+      },
     );
   }
 }

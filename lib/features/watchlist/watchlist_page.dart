@@ -81,8 +81,8 @@ class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
               child:
                   (Provider.of<WatchlistNotifier>(context).contentSelection ==
                           ContentSelection.movie)
-                      ? WatchlistMovieList()
-                      : WatchlistTvSeriesList(),
+                      ? _WatchlistMovieList()
+                      : _WatchlistTvSeriesList(),
             )
           ],
         ),
@@ -97,8 +97,8 @@ class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
   }
 }
 
-class WatchlistMovieList extends StatelessWidget {
-  const WatchlistMovieList({Key? key}) : super(key: key);
+class _WatchlistMovieList extends StatelessWidget {
+  const _WatchlistMovieList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -121,8 +121,8 @@ class WatchlistMovieList extends StatelessWidget {
   }
 }
 
-class WatchlistTvSeriesList extends StatelessWidget {
-  const WatchlistTvSeriesList({Key? key}) : super(key: key);
+class _WatchlistTvSeriesList extends StatelessWidget {
+  const _WatchlistTvSeriesList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
