@@ -106,12 +106,12 @@ class _WatchlistMovieList extends StatelessWidget {
       builder: (context, value, child) {
         final state = value.movieState;
         if (state == RequestState.Loading) {
-          return CircularProgressIndicator();
+          return CenteredProgressCircularIndicator();
         } else if (state == RequestState.Loaded) {
           return VerticaledMovieList(
-              key: Key('movie_listview'), movies: value.watchlistMovies);
+              key: Key('movie_listview'), movies: value.watchlistMovies,);
         } else {
-          return Text(
+          return CenteredText(
             value.message,
             key: Key('error_message'),
           );
@@ -130,14 +130,14 @@ class _WatchlistTvSeriesList extends StatelessWidget {
       builder: (context, value, child) {
         final state = value.tvSeriesState;
         if (state == RequestState.Loading) {
-          return CircularProgressIndicator();
+          return CenteredProgressCircularIndicator();
         } else if (state == RequestState.Loaded) {
           return VerticaledTvSeriesList(
             key: Key('tv_series_listview'),
             tvSeriesList: value.watchlistTvSeries,
           );
         } else {
-          return Text(
+          return CenteredText(
             value.message,
             key: Key('error_message'),
           );

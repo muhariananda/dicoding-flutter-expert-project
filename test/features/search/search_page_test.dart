@@ -1,5 +1,6 @@
 import 'package:ditonton/common/content_selection.dart';
 import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/components/components.dart';
 import 'package:ditonton/features/search/search_notifier.dart';
 import 'package:ditonton/features/search/search_page.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,7 @@ void main() {
         when(mockNotifer.movieState).thenReturn(RequestState.Loading);
 
         final filterChipFinder = find.byKey(Key('movie_filter_chip'));
-        final progressBarFinder = find.byType(CircularProgressIndicator);
+        final progressBarFinder = find.byType(CenteredProgressCircularIndicator);
 
         await tester.pumpWidget(_makeTestableWidgte(SearchPage()));
 
@@ -92,7 +93,7 @@ void main() {
         when(mockNotifer.tvSeriesState).thenReturn(RequestState.Loading);
 
         final filterChipFinder = find.byKey(Key('tv_series_filter_chip'));
-        final progressBarFinder = find.byType(CircularProgressIndicator);
+        final progressBarFinder = find.byType(CenteredProgressCircularIndicator);
 
         await tester.pumpWidget(_makeTestableWidgte(SearchPage()));
 

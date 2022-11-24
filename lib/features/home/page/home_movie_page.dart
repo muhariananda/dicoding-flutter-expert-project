@@ -1,14 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'package:ditonton/common/constants.dart';
+import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/components/components.dart';
 import 'package:ditonton/core/movie/domain/entities/movie.dart';
 import 'package:ditonton/features/detail_movie/movie_detail_page.dart';
+import 'package:ditonton/features/home/provider/movie_list_notifier.dart';
 import 'package:ditonton/features/popular_movie/popular_movies_page.dart';
 import 'package:ditonton/features/top_rated_movie/top_rated_movies_page.dart';
-import 'package:ditonton/features/home/provider/movie_list_notifier.dart';
-import 'package:ditonton/common/state_enum.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class HomeMoviePage extends StatefulWidget {
   const HomeMoviePage({Key? key}) : super(key: key);
@@ -22,10 +23,11 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
   void initState() {
     super.initState();
     Future.microtask(
-        () => Provider.of<MovieListNotifier>(context, listen: false)
-          ..fetchNowPlayingMovies()
-          ..fetchPopularMovies()
-          ..fetchTopRatedMovies());
+      () => Provider.of<MovieListNotifier>(context, listen: false)
+        ..fetchNowPlayingMovies()
+        ..fetchPopularMovies()
+        ..fetchTopRatedMovies(),
+    );
   }
 
   @override
@@ -46,9 +48,12 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                 if (state == RequestState.Loading) {
                   return CenteredProgressCircularIndicator();
                 } else if (state == RequestState.Loaded) {
-                  return MovieList(data.nowPlayingMovies);
+                  return _MovieList(movies: data.nowPlayingMovies);
                 } else {
-                  return Text('Failed');
+                  return Text(
+                    'Failed',
+                    key: Key('error_message'),
+                  );
                 }
               }),
               SubHeading(
@@ -62,9 +67,12 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                 if (state == RequestState.Loading) {
                   return CenteredProgressCircularIndicator();
                 } else if (state == RequestState.Loaded) {
-                  return MovieList(data.popularMovies);
+                  return _MovieList(movies: data.popularMovies);
                 } else {
-                  return Text('Failed');
+                  return Text(
+                    'Failed',
+                    key: Key('error_message'),
+                  );
                 }
               }),
               SubHeading(
@@ -78,9 +86,12 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                 if (state == RequestState.Loading) {
                   return CenteredProgressCircularIndicator();
                 } else if (state == RequestState.Loaded) {
-                  return MovieList(data.topRatedMovies);
+                  return _MovieList(movies: data.topRatedMovies);
                 } else {
-                  return Text('Failed');
+                  return Text(
+                    'Failed',
+                    key: Key('error_message'),
+                  );
                 }
               }),
             ],
@@ -91,10 +102,13 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
   }
 }
 
-class MovieList extends StatelessWidget {
+class _MovieList extends StatelessWidget {
   final List<Movie> movies;
 
-  MovieList(this.movies);
+  const _MovieList({
+    Key? key,
+    required this.movies,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

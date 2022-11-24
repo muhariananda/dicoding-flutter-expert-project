@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2022-11-24 11:13:46</td>
+            <td class="headerValue">2022-11-24 14:46:16</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -168,12 +168,12 @@
 <a name="106"><span class="lineNum">     106 </span><span class="lineCov">          1 :       builder: (context, value, child) {</span></a>
 <a name="107"><span class="lineNum">     107 </span><span class="lineCov">          1 :         final state = value.movieState;</span></a>
 <a name="108"><span class="lineNum">     108 </span><span class="lineCov">          1 :         if (state == RequestState.Loading) {</span></a>
-<a name="109"><span class="lineNum">     109 </span><span class="lineCov">          1 :           return CircularProgressIndicator();</span></a>
+<a name="109"><span class="lineNum">     109 </span><span class="lineCov">          1 :           return CenteredProgressCircularIndicator();</span></a>
 <a name="110"><span class="lineNum">     110 </span><span class="lineCov">          1 :         } else if (state == RequestState.Loaded) {</span></a>
 <a name="111"><span class="lineNum">     111 </span><span class="lineCov">          1 :           return VerticaledMovieList(</span></a>
-<a name="112"><span class="lineNum">     112 </span><span class="lineCov">          2 :               key: Key('movie_listview'), movies: value.watchlistMovies);</span></a>
+<a name="112"><span class="lineNum">     112 </span><span class="lineCov">          2 :               key: Key('movie_listview'), movies: value.watchlistMovies,);</span></a>
 <a name="113"><span class="lineNum">     113 </span>            :         } else {</a>
-<a name="114"><span class="lineNum">     114 </span><span class="lineCov">          1 :           return Text(</span></a>
+<a name="114"><span class="lineNum">     114 </span><span class="lineCov">          1 :           return CenteredText(</span></a>
 <a name="115"><span class="lineNum">     115 </span><span class="lineCov">          1 :             value.message,</span></a>
 <a name="116"><span class="lineNum">     116 </span><span class="lineCov">          1 :             key: Key('error_message'),</span></a>
 <a name="117"><span class="lineNum">     117 </span>            :           );</a>
@@ -192,14 +192,14 @@
 <a name="130"><span class="lineNum">     130 </span><span class="lineCov">          1 :       builder: (context, value, child) {</span></a>
 <a name="131"><span class="lineNum">     131 </span><span class="lineCov">          1 :         final state = value.tvSeriesState;</span></a>
 <a name="132"><span class="lineNum">     132 </span><span class="lineCov">          1 :         if (state == RequestState.Loading) {</span></a>
-<a name="133"><span class="lineNum">     133 </span><span class="lineCov">          1 :           return CircularProgressIndicator();</span></a>
+<a name="133"><span class="lineNum">     133 </span><span class="lineCov">          1 :           return CenteredProgressCircularIndicator();</span></a>
 <a name="134"><span class="lineNum">     134 </span><span class="lineCov">          1 :         } else if (state == RequestState.Loaded) {</span></a>
 <a name="135"><span class="lineNum">     135 </span><span class="lineCov">          1 :           return VerticaledTvSeriesList(</span></a>
 <a name="136"><span class="lineNum">     136 </span><span class="lineCov">          1 :             key: Key('tv_series_listview'),</span></a>
 <a name="137"><span class="lineNum">     137 </span><span class="lineCov">          1 :             tvSeriesList: value.watchlistTvSeries,</span></a>
 <a name="138"><span class="lineNum">     138 </span>            :           );</a>
 <a name="139"><span class="lineNum">     139 </span>            :         } else {</a>
-<a name="140"><span class="lineNum">     140 </span><span class="lineCov">          1 :           return Text(</span></a>
+<a name="140"><span class="lineNum">     140 </span><span class="lineCov">          1 :           return CenteredText(</span></a>
 <a name="141"><span class="lineNum">     141 </span><span class="lineCov">          1 :             value.message,</span></a>
 <a name="142"><span class="lineNum">     142 </span><span class="lineCov">          1 :             key: Key('error_message'),</span></a>
 <a name="143"><span class="lineNum">     143 </span>            :           );</a>

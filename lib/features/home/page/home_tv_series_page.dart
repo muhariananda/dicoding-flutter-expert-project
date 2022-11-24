@@ -51,7 +51,10 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
                   } else if (state == RequestState.Loaded) {
                     return TvSeriesList(tvSeriesList: value.nowPlayingTvSeries);
                   } else {
-                    return const Text('Failed');
+                    return const Text(
+                      'Failed',
+                      key: Key('error_message'),
+                    );
                   }
                 },
               ),
@@ -69,7 +72,10 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
                   } else if (state == RequestState.Loaded) {
                     return TvSeriesList(tvSeriesList: value.popularTvSeries);
                   } else {
-                    return const Text('Failed');
+                    return const Text(
+                      'Failed',
+                      key: Key('error_message'),
+                    );
                   }
                 },
               ),
@@ -87,7 +93,10 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
                   } else if (state == RequestState.Loaded) {
                     return TvSeriesList(tvSeriesList: value.topRatedTvSeries);
                   } else {
-                    return const Text('Failed');
+                    return const Text(
+                      'Failed',
+                      key: Key('error_message'),
+                    );
                   }
                 },
               )

@@ -90,14 +90,14 @@ class _MovieSearchList extends StatelessWidget {
       builder: (context, value, child) {
         final state = value.movieState;
         if (state == RequestState.Loading) {
-          return const CircularProgressIndicator();
+          return const CenteredProgressCircularIndicator();
         } else if (state == RequestState.Loaded) {
           return VerticaledMovieList(
             key: Key('movie_listview'),
             movies: value.movieSearchResult,
           );
         } else {
-          return Text(
+          return CenteredText(
             value.message,
             key: Key('error_message'),
           );
@@ -116,14 +116,14 @@ class _TvSeriesSearchList extends StatelessWidget {
       builder: (context, value, child) {
         final state = value.tvSeriesState;
         if (state == RequestState.Loading) {
-          return const CircularProgressIndicator();
+          return const CenteredProgressCircularIndicator();
         } else if (state == RequestState.Loaded) {
           return VerticaledTvSeriesList(
             key: Key('tv_series_listview'),
             tvSeriesList: value.tvSeriesSearchResult,
           );
         } else {
-          return Text(
+          return CenteredText(
             value.message,
             key: Key('error_message'),
           );
