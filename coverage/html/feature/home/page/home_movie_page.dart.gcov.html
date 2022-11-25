@@ -31,13 +31,13 @@
             <td class="headerValue">lcov.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">60</td>
-            <td class="headerCovTableEntry">68</td>
-            <td class="headerCovTableEntryMed">88.2 %</td>
+            <td class="headerCovTableEntry">61</td>
+            <td class="headerCovTableEntry">69</td>
+            <td class="headerCovTableEntryMed">88.4 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2022-11-25 11:17:33</td>
+            <td class="headerValue">2022-11-25 22:28:12</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -119,95 +119,96 @@
 <a name="57"><span class="lineNum">      57 </span>            :                 }</a>
 <a name="58"><span class="lineNum">      58 </span>            :               }),</a>
 <a name="59"><span class="lineNum">      59 </span><span class="lineCov">          1 :               SubHeading(</span></a>
-<a name="60"><span class="lineNum">      60 </span>            :                 title: 'Popular',</a>
-<a name="61"><span class="lineNum">      61 </span><span class="lineNoCov">          0 :                 onTap: () {</span></a>
-<a name="62"><span class="lineNum">      62 </span><span class="lineNoCov">          0 :                   Navigator.pushNamed(context, PopularMoviesPage.ROUTE_NAME);</span></a>
-<a name="63"><span class="lineNum">      63 </span>            :                 },</a>
-<a name="64"><span class="lineNum">      64 </span>            :               ),</a>
-<a name="65"><span class="lineNum">      65 </span><span class="lineCov">          2 :               Consumer&lt;MovieListNotifier&gt;(builder: (context, data, child) {</span></a>
-<a name="66"><span class="lineNum">      66 </span><span class="lineCov">          1 :                 final state = data.popularMoviesState;</span></a>
-<a name="67"><span class="lineNum">      67 </span><span class="lineCov">          1 :                 if (state == RequestState.Loading) {</span></a>
-<a name="68"><span class="lineNum">      68 </span><span class="lineCov">          1 :                   return CenteredProgressCircularIndicator();</span></a>
-<a name="69"><span class="lineNum">      69 </span><span class="lineCov">          1 :                 } else if (state == RequestState.Loaded) {</span></a>
-<a name="70"><span class="lineNum">      70 </span><span class="lineCov">          2 :                   return _MovieList(movies: data.popularMovies);</span></a>
-<a name="71"><span class="lineNum">      71 </span>            :                 } else {</a>
-<a name="72"><span class="lineNum">      72 </span><span class="lineCov">          1 :                   return Text(</span></a>
-<a name="73"><span class="lineNum">      73 </span>            :                     'Failed',</a>
-<a name="74"><span class="lineNum">      74 </span><span class="lineCov">          1 :                     key: Key('error_message'),</span></a>
-<a name="75"><span class="lineNum">      75 </span>            :                   );</a>
-<a name="76"><span class="lineNum">      76 </span>            :                 }</a>
-<a name="77"><span class="lineNum">      77 </span>            :               }),</a>
-<a name="78"><span class="lineNum">      78 </span><span class="lineCov">          1 :               SubHeading(</span></a>
-<a name="79"><span class="lineNum">      79 </span>            :                 title: 'Top Rated',</a>
-<a name="80"><span class="lineNum">      80 </span><span class="lineNoCov">          0 :                 onTap: () {</span></a>
-<a name="81"><span class="lineNum">      81 </span><span class="lineNoCov">          0 :                   Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME);</span></a>
-<a name="82"><span class="lineNum">      82 </span>            :                 },</a>
-<a name="83"><span class="lineNum">      83 </span>            :               ),</a>
-<a name="84"><span class="lineNum">      84 </span><span class="lineCov">          2 :               Consumer&lt;MovieListNotifier&gt;(builder: (context, data, child) {</span></a>
-<a name="85"><span class="lineNum">      85 </span><span class="lineCov">          1 :                 final state = data.topRatedMoviesState;</span></a>
-<a name="86"><span class="lineNum">      86 </span><span class="lineCov">          1 :                 if (state == RequestState.Loading) {</span></a>
-<a name="87"><span class="lineNum">      87 </span><span class="lineCov">          1 :                   return CenteredProgressCircularIndicator();</span></a>
-<a name="88"><span class="lineNum">      88 </span><span class="lineCov">          1 :                 } else if (state == RequestState.Loaded) {</span></a>
-<a name="89"><span class="lineNum">      89 </span><span class="lineCov">          2 :                   return _MovieList(movies: data.topRatedMovies);</span></a>
-<a name="90"><span class="lineNum">      90 </span>            :                 } else {</a>
-<a name="91"><span class="lineNum">      91 </span><span class="lineCov">          1 :                   return Text(</span></a>
-<a name="92"><span class="lineNum">      92 </span>            :                     'Failed',</a>
-<a name="93"><span class="lineNum">      93 </span><span class="lineCov">          1 :                     key: Key('error_message'),</span></a>
-<a name="94"><span class="lineNum">      94 </span>            :                   );</a>
-<a name="95"><span class="lineNum">      95 </span>            :                 }</a>
-<a name="96"><span class="lineNum">      96 </span>            :               }),</a>
-<a name="97"><span class="lineNum">      97 </span>            :             ],</a>
-<a name="98"><span class="lineNum">      98 </span>            :           ),</a>
-<a name="99"><span class="lineNum">      99 </span>            :         ),</a>
-<a name="100"><span class="lineNum">     100 </span>            :       ),</a>
-<a name="101"><span class="lineNum">     101 </span>            :     );</a>
-<a name="102"><span class="lineNum">     102 </span>            :   }</a>
-<a name="103"><span class="lineNum">     103 </span>            : }</a>
-<a name="104"><span class="lineNum">     104 </span>            : </a>
-<a name="105"><span class="lineNum">     105 </span>            : class _MovieList extends StatelessWidget {</a>
-<a name="106"><span class="lineNum">     106 </span>            :   final List&lt;Movie&gt; movies;</a>
-<a name="107"><span class="lineNum">     107 </span>            : </a>
-<a name="108"><span class="lineNum">     108 </span><span class="lineCov">          1 :   const _MovieList({</span></a>
-<a name="109"><span class="lineNum">     109 </span>            :     Key? key,</a>
-<a name="110"><span class="lineNum">     110 </span>            :     required this.movies,</a>
-<a name="111"><span class="lineNum">     111 </span><span class="lineCov">          1 :   }) : super(key: key);</span></a>
-<a name="112"><span class="lineNum">     112 </span>            : </a>
-<a name="113"><span class="lineNum">     113 </span><span class="lineCov">          1 :   @override</span></a>
-<a name="114"><span class="lineNum">     114 </span>            :   Widget build(BuildContext context) {</a>
-<a name="115"><span class="lineNum">     115 </span><span class="lineCov">          1 :     return Container(</span></a>
-<a name="116"><span class="lineNum">     116 </span>            :       height: 200,</a>
-<a name="117"><span class="lineNum">     117 </span><span class="lineCov">          1 :       child: ListView.builder(</span></a>
-<a name="118"><span class="lineNum">     118 </span>            :         scrollDirection: Axis.horizontal,</a>
-<a name="119"><span class="lineNum">     119 </span><span class="lineCov">          1 :         itemBuilder: (context, index) {</span></a>
-<a name="120"><span class="lineNum">     120 </span><span class="lineCov">          2 :           final movie = movies[index];</span></a>
-<a name="121"><span class="lineNum">     121 </span><span class="lineCov">          1 :           return Container(</span></a>
-<a name="122"><span class="lineNum">     122 </span>            :             padding: const EdgeInsets.all(8),</a>
-<a name="123"><span class="lineNum">     123 </span><span class="lineCov">          1 :             child: InkWell(</span></a>
-<a name="124"><span class="lineNum">     124 </span><span class="lineNoCov">          0 :               onTap: () {</span></a>
-<a name="125"><span class="lineNum">     125 </span><span class="lineNoCov">          0 :                 Navigator.pushNamed(</span></a>
-<a name="126"><span class="lineNum">     126 </span>            :                   context,</a>
-<a name="127"><span class="lineNum">     127 </span>            :                   MovieDetailPage.ROUTE_NAME,</a>
-<a name="128"><span class="lineNum">     128 </span><span class="lineNoCov">          0 :                   arguments: movie.id,</span></a>
-<a name="129"><span class="lineNum">     129 </span>            :                 );</a>
-<a name="130"><span class="lineNum">     130 </span>            :               },</a>
-<a name="131"><span class="lineNum">     131 </span><span class="lineCov">          1 :               child: ClipRRect(</span></a>
-<a name="132"><span class="lineNum">     132 </span><span class="lineCov">          2 :                 borderRadius: BorderRadius.all(Radius.circular(16)),</span></a>
-<a name="133"><span class="lineNum">     133 </span><span class="lineCov">          1 :                 child: CachedNetworkImage(</span></a>
-<a name="134"><span class="lineNum">     134 </span><span class="lineCov">          2 :                   imageUrl: '$BASE_IMAGE_URL${movie.posterPath}',</span></a>
-<a name="135"><span class="lineNum">     135 </span><span class="lineCov">          2 :                   placeholder: (context, url) =&gt; Center(</span></a>
-<a name="136"><span class="lineNum">     136 </span><span class="lineCov">          1 :                     child: CircularProgressIndicator(),</span></a>
-<a name="137"><span class="lineNum">     137 </span>            :                   ),</a>
-<a name="138"><span class="lineNum">     138 </span><span class="lineNoCov">          0 :                   errorWidget: (context, url, error) =&gt; Icon(Icons.error),</span></a>
-<a name="139"><span class="lineNum">     139 </span>            :                 ),</a>
-<a name="140"><span class="lineNum">     140 </span>            :               ),</a>
-<a name="141"><span class="lineNum">     141 </span>            :             ),</a>
-<a name="142"><span class="lineNum">     142 </span>            :           );</a>
-<a name="143"><span class="lineNum">     143 </span>            :         },</a>
-<a name="144"><span class="lineNum">     144 </span><span class="lineCov">          2 :         itemCount: movies.length,</span></a>
-<a name="145"><span class="lineNum">     145 </span>            :       ),</a>
-<a name="146"><span class="lineNum">     146 </span>            :     );</a>
-<a name="147"><span class="lineNum">     147 </span>            :   }</a>
-<a name="148"><span class="lineNum">     148 </span>            : }</a>
+<a name="60"><span class="lineNum">      60 </span><span class="lineCov">          1 :                 key: Key('popular_movie_heading'),</span></a>
+<a name="61"><span class="lineNum">      61 </span>            :                 title: 'Popular',</a>
+<a name="62"><span class="lineNum">      62 </span><span class="lineNoCov">          0 :                 onTap: () {</span></a>
+<a name="63"><span class="lineNum">      63 </span><span class="lineNoCov">          0 :                   Navigator.pushNamed(context, PopularMoviesPage.ROUTE_NAME);</span></a>
+<a name="64"><span class="lineNum">      64 </span>            :                 },</a>
+<a name="65"><span class="lineNum">      65 </span>            :               ),</a>
+<a name="66"><span class="lineNum">      66 </span><span class="lineCov">          2 :               Consumer&lt;MovieListNotifier&gt;(builder: (context, data, child) {</span></a>
+<a name="67"><span class="lineNum">      67 </span><span class="lineCov">          1 :                 final state = data.popularMoviesState;</span></a>
+<a name="68"><span class="lineNum">      68 </span><span class="lineCov">          1 :                 if (state == RequestState.Loading) {</span></a>
+<a name="69"><span class="lineNum">      69 </span><span class="lineCov">          1 :                   return CenteredProgressCircularIndicator();</span></a>
+<a name="70"><span class="lineNum">      70 </span><span class="lineCov">          1 :                 } else if (state == RequestState.Loaded) {</span></a>
+<a name="71"><span class="lineNum">      71 </span><span class="lineCov">          2 :                   return _MovieList(movies: data.popularMovies);</span></a>
+<a name="72"><span class="lineNum">      72 </span>            :                 } else {</a>
+<a name="73"><span class="lineNum">      73 </span><span class="lineCov">          1 :                   return Text(</span></a>
+<a name="74"><span class="lineNum">      74 </span>            :                     'Failed',</a>
+<a name="75"><span class="lineNum">      75 </span><span class="lineCov">          1 :                     key: Key('error_message'),</span></a>
+<a name="76"><span class="lineNum">      76 </span>            :                   );</a>
+<a name="77"><span class="lineNum">      77 </span>            :                 }</a>
+<a name="78"><span class="lineNum">      78 </span>            :               }),</a>
+<a name="79"><span class="lineNum">      79 </span><span class="lineCov">          1 :               SubHeading(</span></a>
+<a name="80"><span class="lineNum">      80 </span>            :                 title: 'Top Rated',</a>
+<a name="81"><span class="lineNum">      81 </span><span class="lineNoCov">          0 :                 onTap: () {</span></a>
+<a name="82"><span class="lineNum">      82 </span><span class="lineNoCov">          0 :                   Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME);</span></a>
+<a name="83"><span class="lineNum">      83 </span>            :                 },</a>
+<a name="84"><span class="lineNum">      84 </span>            :               ),</a>
+<a name="85"><span class="lineNum">      85 </span><span class="lineCov">          2 :               Consumer&lt;MovieListNotifier&gt;(builder: (context, data, child) {</span></a>
+<a name="86"><span class="lineNum">      86 </span><span class="lineCov">          1 :                 final state = data.topRatedMoviesState;</span></a>
+<a name="87"><span class="lineNum">      87 </span><span class="lineCov">          1 :                 if (state == RequestState.Loading) {</span></a>
+<a name="88"><span class="lineNum">      88 </span><span class="lineCov">          1 :                   return CenteredProgressCircularIndicator();</span></a>
+<a name="89"><span class="lineNum">      89 </span><span class="lineCov">          1 :                 } else if (state == RequestState.Loaded) {</span></a>
+<a name="90"><span class="lineNum">      90 </span><span class="lineCov">          2 :                   return _MovieList(movies: data.topRatedMovies);</span></a>
+<a name="91"><span class="lineNum">      91 </span>            :                 } else {</a>
+<a name="92"><span class="lineNum">      92 </span><span class="lineCov">          1 :                   return Text(</span></a>
+<a name="93"><span class="lineNum">      93 </span>            :                     'Failed',</a>
+<a name="94"><span class="lineNum">      94 </span><span class="lineCov">          1 :                     key: Key('error_message'),</span></a>
+<a name="95"><span class="lineNum">      95 </span>            :                   );</a>
+<a name="96"><span class="lineNum">      96 </span>            :                 }</a>
+<a name="97"><span class="lineNum">      97 </span>            :               }),</a>
+<a name="98"><span class="lineNum">      98 </span>            :             ],</a>
+<a name="99"><span class="lineNum">      99 </span>            :           ),</a>
+<a name="100"><span class="lineNum">     100 </span>            :         ),</a>
+<a name="101"><span class="lineNum">     101 </span>            :       ),</a>
+<a name="102"><span class="lineNum">     102 </span>            :     );</a>
+<a name="103"><span class="lineNum">     103 </span>            :   }</a>
+<a name="104"><span class="lineNum">     104 </span>            : }</a>
+<a name="105"><span class="lineNum">     105 </span>            : </a>
+<a name="106"><span class="lineNum">     106 </span>            : class _MovieList extends StatelessWidget {</a>
+<a name="107"><span class="lineNum">     107 </span>            :   final List&lt;Movie&gt; movies;</a>
+<a name="108"><span class="lineNum">     108 </span>            : </a>
+<a name="109"><span class="lineNum">     109 </span><span class="lineCov">          1 :   const _MovieList({</span></a>
+<a name="110"><span class="lineNum">     110 </span>            :     Key? key,</a>
+<a name="111"><span class="lineNum">     111 </span>            :     required this.movies,</a>
+<a name="112"><span class="lineNum">     112 </span><span class="lineCov">          1 :   }) : super(key: key);</span></a>
+<a name="113"><span class="lineNum">     113 </span>            : </a>
+<a name="114"><span class="lineNum">     114 </span><span class="lineCov">          1 :   @override</span></a>
+<a name="115"><span class="lineNum">     115 </span>            :   Widget build(BuildContext context) {</a>
+<a name="116"><span class="lineNum">     116 </span><span class="lineCov">          1 :     return Container(</span></a>
+<a name="117"><span class="lineNum">     117 </span>            :       height: 200,</a>
+<a name="118"><span class="lineNum">     118 </span><span class="lineCov">          1 :       child: ListView.builder(</span></a>
+<a name="119"><span class="lineNum">     119 </span>            :         scrollDirection: Axis.horizontal,</a>
+<a name="120"><span class="lineNum">     120 </span><span class="lineCov">          1 :         itemBuilder: (context, index) {</span></a>
+<a name="121"><span class="lineNum">     121 </span><span class="lineCov">          2 :           final movie = movies[index];</span></a>
+<a name="122"><span class="lineNum">     122 </span><span class="lineCov">          1 :           return Container(</span></a>
+<a name="123"><span class="lineNum">     123 </span>            :             padding: const EdgeInsets.all(8),</a>
+<a name="124"><span class="lineNum">     124 </span><span class="lineCov">          1 :             child: InkWell(</span></a>
+<a name="125"><span class="lineNum">     125 </span><span class="lineNoCov">          0 :               onTap: () {</span></a>
+<a name="126"><span class="lineNum">     126 </span><span class="lineNoCov">          0 :                 Navigator.pushNamed(</span></a>
+<a name="127"><span class="lineNum">     127 </span>            :                   context,</a>
+<a name="128"><span class="lineNum">     128 </span>            :                   MovieDetailPage.ROUTE_NAME,</a>
+<a name="129"><span class="lineNum">     129 </span><span class="lineNoCov">          0 :                   arguments: movie.id,</span></a>
+<a name="130"><span class="lineNum">     130 </span>            :                 );</a>
+<a name="131"><span class="lineNum">     131 </span>            :               },</a>
+<a name="132"><span class="lineNum">     132 </span><span class="lineCov">          1 :               child: ClipRRect(</span></a>
+<a name="133"><span class="lineNum">     133 </span><span class="lineCov">          2 :                 borderRadius: BorderRadius.all(Radius.circular(16)),</span></a>
+<a name="134"><span class="lineNum">     134 </span><span class="lineCov">          1 :                 child: CachedNetworkImage(</span></a>
+<a name="135"><span class="lineNum">     135 </span><span class="lineCov">          2 :                   imageUrl: '$BASE_IMAGE_URL${movie.posterPath}',</span></a>
+<a name="136"><span class="lineNum">     136 </span><span class="lineCov">          2 :                   placeholder: (context, url) =&gt; Center(</span></a>
+<a name="137"><span class="lineNum">     137 </span><span class="lineCov">          1 :                     child: CircularProgressIndicator(),</span></a>
+<a name="138"><span class="lineNum">     138 </span>            :                   ),</a>
+<a name="139"><span class="lineNum">     139 </span><span class="lineNoCov">          0 :                   errorWidget: (context, url, error) =&gt; Icon(Icons.error),</span></a>
+<a name="140"><span class="lineNum">     140 </span>            :                 ),</a>
+<a name="141"><span class="lineNum">     141 </span>            :               ),</a>
+<a name="142"><span class="lineNum">     142 </span>            :             ),</a>
+<a name="143"><span class="lineNum">     143 </span>            :           );</a>
+<a name="144"><span class="lineNum">     144 </span>            :         },</a>
+<a name="145"><span class="lineNum">     145 </span><span class="lineCov">          2 :         itemCount: movies.length,</span></a>
+<a name="146"><span class="lineNum">     146 </span>            :       ),</a>
+<a name="147"><span class="lineNum">     147 </span>            :     );</a>
+<a name="148"><span class="lineNum">     148 </span>            :   }</a>
+<a name="149"><span class="lineNum">     149 </span>            : }</a>
 </pre>
       </td>
     </tr>

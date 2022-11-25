@@ -30,6 +30,24 @@ void main() {
     );
   }
 
+  testWidgets(
+    "Page should display search bar",
+    (WidgetTester tester) async {
+      when(mockNotifer.selectedContent).thenReturn(ContentSelection.movie);
+      when(mockNotifer.movieState).thenReturn(RequestState.Loading);
+
+      final searchBarFinder = find.byKey(Key('search_bar'));
+
+      await tester.pumpWidget(_makeTestableWidgte(SearchPage()));
+      await tester.enterText(searchBarFinder, 'text');
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pump();
+
+      expect(searchBarFinder, findsOneWidget);
+      expect(find.text('text'), findsOneWidget);
+    },
+  );
+
   group("Search Movie,", () {
     testWidgets(
       "Page should display Circular Progress when the data is Loading",
@@ -38,7 +56,8 @@ void main() {
         when(mockNotifer.movieState).thenReturn(RequestState.Loading);
 
         final filterChipFinder = find.byKey(Key('movie_filter_chip'));
-        final progressBarFinder = find.byType(CenteredProgressCircularIndicator);
+        final progressBarFinder =
+            find.byType(CenteredProgressCircularIndicator);
 
         await tester.pumpWidget(_makeTestableWidgte(SearchPage()));
 
@@ -96,7 +115,8 @@ void main() {
         when(mockNotifer.tvSeriesState).thenReturn(RequestState.Loading);
 
         final filterChipFinder = find.byKey(Key('tv_series_filter_chip'));
-        final progressBarFinder = find.byType(CenteredProgressCircularIndicator);
+        final progressBarFinder =
+            find.byType(CenteredProgressCircularIndicator);
 
         await tester.pumpWidget(_makeTestableWidgte(SearchPage()));
 

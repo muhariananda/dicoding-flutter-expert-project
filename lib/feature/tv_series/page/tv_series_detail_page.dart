@@ -342,8 +342,12 @@ class _SeasonList extends StatelessWidget {
                 ),
                 Text(
                   season.name!,
+                  style: kSubtitle,
                 ),
-                Text('${season.episodeCount} episodes')
+                Text(
+                  '${season.episodeCount} episodes',
+                  style: kBodyText,
+                )
               ],
             ),
           );

@@ -72,7 +72,6 @@ class MyApp extends StatelessWidget {
           colorScheme: kColorScheme,
           primaryColor: kRichBlack,
           scaffoldBackgroundColor: kRichBlack,
-          textTheme: kTextTheme,
         ),
         home: MainPage(),
         navigatorObservers: [routeObserver],

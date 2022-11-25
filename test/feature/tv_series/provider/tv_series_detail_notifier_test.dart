@@ -195,7 +195,7 @@ void main() {
       verify(mockRemoveWatchlistTvSeries.execute(testTvSeriesDetail));
     });
 
-    test('should change the status when update the watchlist is successfull',
+    test('should change the status when save the watchlist is successfull',
         () async {
       //assert
       when(mockSaveWatchlistTvSeries.execute(testTvSeriesDetail))
@@ -213,21 +213,59 @@ void main() {
       expect(listenerCallCount, 1);
     });
 
-    test('should change the message when update the watchlist is unsuccessful',
+    test('should change the message when save the watchlist is unsuccessful',
         () async {
       //arrange
-      when(mockSaveWatchlistTvSeries.execute(testTvSeriesDetail))
-          .thenAnswer((_) async => Left(DatabaseFailure('Failed')));
       when(mockGetWatchlistStatus.execute(testTvSeriesDetail.id))
           .thenAnswer((_) async => false);
+      when(mockSaveWatchlistTvSeries.execute(testTvSeriesDetail))
+          .thenAnswer((_) async => Left(DatabaseFailure('Failed')));
 
       //act
       await provider.addTvSeriesToWatchlist(testTvSeriesDetail);
 
       //assert
       verify(mockGetWatchlistStatus.execute(testTvSeriesDetail.id));
+      verify(mockSaveWatchlistTvSeries.execute(testTvSeriesDetail));
       expect(provider.watchlistMessage, 'Failed');
       expect(provider.isAddedToWatchlist, false);
+      expect(listenerCallCount, 1);
+    });
+
+    test('should change the status when remove the watchlist is successfull',
+        () async {
+      //assert
+      when(mockRemoveWatchlistTvSeries.execute(testTvSeriesDetail))
+          .thenAnswer((_) async => Right('Removed from watchlist'));
+      when(mockGetWatchlistStatus.execute(testTvSeriesDetail.id))
+          .thenAnswer((_) async => false);
+
+      //act
+      await provider.removeFromWatchlist(testTvSeriesDetail);
+
+      //assert
+      verify(mockGetWatchlistStatus.execute(testTvSeriesDetail.id));
+      expect(provider.watchlistMessage, 'Removed from watchlist');
+      expect(provider.isAddedToWatchlist, false);
+      expect(listenerCallCount, 1);
+    });
+
+    test('should change the message when remove the watchlist is unsuccessful',
+        () async {
+      //arrange
+      when(mockRemoveWatchlistTvSeries.execute(testTvSeriesDetail))
+          .thenAnswer((_) async => Left(DatabaseFailure('Failed')));
+      when(mockGetWatchlistStatus.execute(testTvSeriesDetail.id))
+          .thenAnswer((_) async => true);
+
+      //act
+      await provider.removeFromWatchlist(testTvSeriesDetail);
+
+      //assert
+      verify(mockGetWatchlistStatus.execute(testTvSeriesDetail.id));
+      verify(mockRemoveWatchlistTvSeries.execute(testTvSeriesDetail));
+      expect(provider.watchlistMessage, 'Failed');
+      expect(provider.isAddedToWatchlist, true);
       expect(listenerCallCount, 1);
     });
   });
