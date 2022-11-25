@@ -34,12 +34,8 @@ class _PopularTvSeriesPageState extends State<PopularTvSeriesPage> {
             if (state == RequestState.Loading) {
               return CenteredProgressCircularIndicator();
             } else if (state == RequestState.Loaded) {
-              return ListView.builder(
-                itemCount: value.popularTvSeries.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final tvSeries = value.popularTvSeries[index];
-                  return TvSeriesCard(tvSeries);
-                },
+              return VerticaledTvSeriesList(
+                tvSeriesList: value.popularTvSeries,
               );
             } else {
               return CenteredText(

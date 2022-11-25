@@ -16,7 +16,10 @@ class VerticaledTvSeriesList extends StatelessWidget {
       itemCount: tvSeriesList.length,
       itemBuilder: (BuildContext context, int index) {
         final tvSeries = tvSeriesList[index];
-        return TvSeriesCard(tvSeries);
+        return TvSeriesCard(
+          key: Key('tvSeries$index'),
+          tvSeries: tvSeries,
+        );
       },
     );
   }

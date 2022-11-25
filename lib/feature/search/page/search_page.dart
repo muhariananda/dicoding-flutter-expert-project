@@ -22,6 +22,7 @@ class SearchPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
+              key: Key('search_bar'),
               onSubmitted: (query) {
                 context.read<SearchNotifier>()
                   ..fetchMovieSearch(query)

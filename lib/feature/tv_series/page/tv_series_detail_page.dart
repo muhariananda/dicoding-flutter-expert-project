@@ -185,13 +185,13 @@ class DetailContent extends StatelessWidget {
                               'Seasons',
                               style: kHeading6,
                             ),
-                            SeasonList(seasons: tvSeries.seasons!),
+                            _SeasonList(seasons: tvSeries.seasons!),
                             SizedBox(height: 16),
                             Text(
                               'Recommendations',
                               style: kHeading6,
                             ),
-                            TvSeriesRecommendationsList(),
+                            _TvSeriesRecommendationsList(),
                           ],
                         ),
                       ),
@@ -244,8 +244,8 @@ class DetailContent extends StatelessWidget {
   }
 }
 
-class TvSeriesRecommendationsList extends StatelessWidget {
-  const TvSeriesRecommendationsList({
+class _TvSeriesRecommendationsList extends StatelessWidget {
+  const _TvSeriesRecommendationsList({
     Key? key,
   }) : super(key: key);
 
@@ -302,10 +302,10 @@ class TvSeriesRecommendationsList extends StatelessWidget {
   }
 }
 
-class SeasonList extends StatelessWidget {
+class _SeasonList extends StatelessWidget {
   final List<Season> seasons;
 
-  const SeasonList({
+  const _SeasonList({
     Key? key,
     required this.seasons,
   }) : super(key: key);

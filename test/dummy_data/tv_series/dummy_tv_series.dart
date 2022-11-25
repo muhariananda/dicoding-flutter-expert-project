@@ -43,21 +43,21 @@ final testTvSeriesMap = {
   'posterPath': 'posterPath',
 };
 
+final testSeason = Season(
+  airDate: 'airDate',
+  episodeCount: 1,
+  id: 1,
+  name: 'name',
+  overview: 'overview',
+  posterPath: 'posterPath',
+  seasonNumber: 1,
+);
+
 final testTvSeriesDetail = TvSeriesDetail(
   backdropPath: 'path.jpg',
   firstAirDate: 'firstAirDate',
   genres: [Genre(id: 1, name: 'name')],
-  seasons: [
-    Season(
-      airDate: 'airDate',
-      episodeCount: 1,
-      id: 1,
-      name: 'name',
-      overview: 'overview',
-      posterPath: 'posterPath',
-      seasonNumber: 1,
-    )
-  ],
+  seasons: [testSeason],
   id: 1,
   name: 'name',
   originCountry: ['en'],

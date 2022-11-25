@@ -17,7 +17,9 @@ class VerticaledMovieList extends StatelessWidget {
       itemCount: movies.length,
       itemBuilder: (BuildContext context, int index) {
         final movie = movies[index];
-        return MovieCard(movie);
+        return MovieCard(
+          Key('movie$index'),
+          movie);
       },
     );
   }

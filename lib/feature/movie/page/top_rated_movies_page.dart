@@ -1,6 +1,6 @@
 import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/components/verticaled_movie_list.dart';
 import 'package:ditonton/feature/movie/provider/top_rated_movies_notifier.dart';
-import 'package:ditonton/components/movie_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -35,13 +35,7 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
                 child: CircularProgressIndicator(),
               );
             } else if (data.state == RequestState.Loaded) {
-              return ListView.builder(
-                itemBuilder: (context, index) {
-                  final movie = data.movies[index];
-                  return MovieCard(movie);
-                },
-                itemCount: data.movies.length,
-              );
+              return VerticaledMovieList(movies: data.movies);
             } else {
               return Center(
                 key: Key('error_message'),

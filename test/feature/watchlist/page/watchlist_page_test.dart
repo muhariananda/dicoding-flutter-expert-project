@@ -44,6 +44,7 @@ void main() {
         await tester.pumpWidget(_makeTestableWidget(WatchlistPage()));
 
         await tester.tap(filterChipFinder);
+        await tester.pump();
 
         expect(progressBarFinder, findsOneWidget);
       },
@@ -62,6 +63,7 @@ void main() {
         await tester.pumpWidget(_makeTestableWidget(WatchlistPage()));
 
         await tester.tap(filterChipFinder);
+        await tester.pump();
 
         expect(listViewFinder, findsOneWidget);
       },
@@ -80,6 +82,7 @@ void main() {
         await tester.pumpWidget(_makeTestableWidget(WatchlistPage()));
 
         await tester.tap(filterChipFinder);
+        await tester.pump();
 
         expect(textFinder, findsOneWidget);
       },
@@ -100,6 +103,7 @@ void main() {
         await tester.pumpWidget(_makeTestableWidget(WatchlistPage()));
 
         await tester.tap(filterChipFinder);
+        await tester.pump();
 
         expect(progressBarFinder, findsOneWidget);
       },
@@ -118,6 +122,7 @@ void main() {
         await tester.pumpWidget(_makeTestableWidget(WatchlistPage()));
 
         await tester.tap(filterChipFinder);
+        await tester.pump();
 
         expect(listViewFinder, findsOneWidget);
       },
@@ -136,6 +141,7 @@ void main() {
         await tester.pumpWidget(_makeTestableWidget(WatchlistPage()));
 
         await tester.tap(filterChipFinder);
+        await tester.pump();
 
         expect(textFinder, findsOneWidget);
       },

@@ -1,7 +1,6 @@
 import 'package:ditonton/core/tv_series/data/models/tv_series_model.dart';
 import 'package:equatable/equatable.dart';
 
-
 class TvSeriesResponse extends Equatable {
   TvSeriesResponse({
     required this.tvSeriesList,
@@ -11,7 +10,7 @@ class TvSeriesResponse extends Equatable {
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
-      'tvSeriesList': tvSeriesList.map((x) => x.toJson()).toList(),
+      'results': tvSeriesList.map((x) => x.toJson()).toList(),
     };
   }
 

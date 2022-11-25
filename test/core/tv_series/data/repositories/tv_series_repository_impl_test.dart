@@ -388,6 +388,42 @@ void main() {
             expect(resultList, equals(tTvSeriesList));
           },
         );
+
+        test(
+          'should return server failure when the call to remote data source is unsuccessful',
+          () async {
+            //arrange
+            when(mockRemoteDataSource.searchTvSeries(tQuery))
+                .thenThrow(ServerException());
+
+            //act
+            final result = await repository.searchTvSeriess(tQuery);
+
+            //assert
+            verify(mockRemoteDataSource.searchTvSeries(tQuery));
+            expect(result, equals(Left(ServerFailure(''))));
+          },
+        );
+
+        test(
+          'should return connection failure when the device is connected to internet',
+          () async {
+            //arrage
+            when(mockRemoteDataSource.searchTvSeries(tQuery))
+                .thenThrow(SocketException('Failed to connect to the network'));
+
+            //act
+            final result = await repository.searchTvSeriess(tQuery);
+
+            //assert
+            verify(mockRemoteDataSource.searchTvSeries(tQuery));
+            expect(
+              result,
+              equals(
+                  Left(ConnectionFailure('Failed to connect to the network'))),
+            );
+          },
+        );
       },
     );
   });

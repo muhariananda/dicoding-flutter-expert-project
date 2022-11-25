@@ -27,7 +27,7 @@ class TvSeriesModel extends Equatable {
   final String originalLanguage;
   final String originalName;
   final String overview;
-  final double popularity;
+  final num popularity;
   final String? posterPath;
   final num voteAverage;
   final int voteCount;
@@ -67,7 +67,7 @@ class TvSeriesModel extends Equatable {
       originalLanguage: json['original_language'] as String,
       originalName: json['original_name'] as String,
       overview: json['overview'] as String,
-      popularity: json['popularity'] as double,
+      popularity: json['popularity'] as num,
       posterPath:
           json['poster_path'] != null ? json['poster_path'] as String : null,
       voteAverage: json['vote_average'] as num,
@@ -85,7 +85,7 @@ class TvSeriesModel extends Equatable {
         originalLanguage: this.originalLanguage,
         originalName: this.originalName,
         overview: this.overview,
-        popularity: this.popularity,
+        popularity: this.popularity.toDouble(),
         posterPath: this.posterPath,
         voteAverage: this.voteAverage.toDouble(),
         voteCount: this.voteCount,

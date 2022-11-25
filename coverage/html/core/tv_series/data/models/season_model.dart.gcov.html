@@ -31,13 +31,13 @@
             <td class="headerValue">lcov.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">27</td>
             <td class="headerCovTableEntry">36</td>
-            <td class="headerCovTableEntryMed">75.0 %</td>
+            <td class="headerCovTableEntry">36</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2022-11-24 14:46:16</td>
+            <td class="headerValue">2022-11-25 11:17:33</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -64,7 +64,7 @@
 <a name="2"><span class="lineNum">       2 </span>            : import 'package:equatable/equatable.dart';</a>
 <a name="3"><span class="lineNum">       3 </span>            : </a>
 <a name="4"><span class="lineNum">       4 </span>            : class SeasonModel extends Equatable {</a>
-<a name="5"><span class="lineNum">       5 </span><span class="lineCov">          2 :   SeasonModel({</span></a>
+<a name="5"><span class="lineNum">       5 </span><span class="lineCov">          4 :   SeasonModel({</span></a>
 <a name="6"><span class="lineNum">       6 </span>            :     required this.airDate,</a>
 <a name="7"><span class="lineNum">       7 </span>            :     required this.episodeCount,</a>
 <a name="8"><span class="lineNum">       8 </span>            :     required this.id,</a>
@@ -82,15 +82,15 @@
 <a name="20"><span class="lineNum">      20 </span>            :   final String? posterPath;</a>
 <a name="21"><span class="lineNum">      21 </span>            :   final int seasonNumber;</a>
 <a name="22"><span class="lineNum">      22 </span>            : </a>
-<a name="23"><span class="lineNum">      23 </span><span class="lineNoCov">          0 :   Map&lt;String, dynamic&gt; toJson() {</span></a>
-<a name="24"><span class="lineNum">      24 </span><span class="lineNoCov">          0 :     return &lt;String, dynamic&gt;{</span></a>
-<a name="25"><span class="lineNum">      25 </span><span class="lineNoCov">          0 :       'air_date': airDate,</span></a>
-<a name="26"><span class="lineNum">      26 </span><span class="lineNoCov">          0 :       'episode_count': episodeCount,</span></a>
-<a name="27"><span class="lineNum">      27 </span><span class="lineNoCov">          0 :       'id': id,</span></a>
-<a name="28"><span class="lineNum">      28 </span><span class="lineNoCov">          0 :       'name': name,</span></a>
-<a name="29"><span class="lineNum">      29 </span><span class="lineNoCov">          0 :       'overview': overview,</span></a>
-<a name="30"><span class="lineNum">      30 </span><span class="lineNoCov">          0 :       'poster_path': posterPath,</span></a>
-<a name="31"><span class="lineNum">      31 </span><span class="lineNoCov">          0 :       'season_number': seasonNumber,</span></a>
+<a name="23"><span class="lineNum">      23 </span><span class="lineCov">          2 :   Map&lt;String, dynamic&gt; toJson() {</span></a>
+<a name="24"><span class="lineNum">      24 </span><span class="lineCov">          2 :     return &lt;String, dynamic&gt;{</span></a>
+<a name="25"><span class="lineNum">      25 </span><span class="lineCov">          2 :       'air_date': airDate,</span></a>
+<a name="26"><span class="lineNum">      26 </span><span class="lineCov">          2 :       'episode_count': episodeCount,</span></a>
+<a name="27"><span class="lineNum">      27 </span><span class="lineCov">          2 :       'id': id,</span></a>
+<a name="28"><span class="lineNum">      28 </span><span class="lineCov">          2 :       'name': name,</span></a>
+<a name="29"><span class="lineNum">      29 </span><span class="lineCov">          2 :       'overview': overview,</span></a>
+<a name="30"><span class="lineNum">      30 </span><span class="lineCov">          2 :       'poster_path': posterPath,</span></a>
+<a name="31"><span class="lineNum">      31 </span><span class="lineCov">          2 :       'season_number': seasonNumber,</span></a>
 <a name="32"><span class="lineNum">      32 </span>            :     };</a>
 <a name="33"><span class="lineNum">      33 </span>            :   }</a>
 <a name="34"><span class="lineNum">      34 </span>            : </a>
@@ -106,14 +106,14 @@
 <a name="44"><span class="lineNum">      44 </span>            :     );</a>
 <a name="45"><span class="lineNum">      45 </span>            :   }</a>
 <a name="46"><span class="lineNum">      46 </span>            : </a>
-<a name="47"><span class="lineNum">      47 </span><span class="lineCov">          2 :   Season toEntity() =&gt; Season(</span></a>
-<a name="48"><span class="lineNum">      48 </span><span class="lineCov">          1 :         airDate: airDate,</span></a>
-<a name="49"><span class="lineNum">      49 </span><span class="lineCov">          1 :         episodeCount: episodeCount,</span></a>
-<a name="50"><span class="lineNum">      50 </span><span class="lineCov">          1 :         id: id,</span></a>
-<a name="51"><span class="lineNum">      51 </span><span class="lineCov">          1 :         name: name,</span></a>
-<a name="52"><span class="lineNum">      52 </span><span class="lineCov">          1 :         overview: overview,</span></a>
-<a name="53"><span class="lineNum">      53 </span><span class="lineCov">          1 :         posterPath: posterPath,</span></a>
-<a name="54"><span class="lineNum">      54 </span><span class="lineCov">          1 :         seasonNumber: seasonNumber,</span></a>
+<a name="47"><span class="lineNum">      47 </span><span class="lineCov">          4 :   Season toEntity() =&gt; Season(</span></a>
+<a name="48"><span class="lineNum">      48 </span><span class="lineCov">          2 :         airDate: airDate,</span></a>
+<a name="49"><span class="lineNum">      49 </span><span class="lineCov">          2 :         episodeCount: episodeCount,</span></a>
+<a name="50"><span class="lineNum">      50 </span><span class="lineCov">          2 :         id: id,</span></a>
+<a name="51"><span class="lineNum">      51 </span><span class="lineCov">          2 :         name: name,</span></a>
+<a name="52"><span class="lineNum">      52 </span><span class="lineCov">          2 :         overview: overview,</span></a>
+<a name="53"><span class="lineNum">      53 </span><span class="lineCov">          2 :         posterPath: posterPath,</span></a>
+<a name="54"><span class="lineNum">      54 </span><span class="lineCov">          2 :         seasonNumber: seasonNumber,</span></a>
 <a name="55"><span class="lineNum">      55 </span>            :       );</a>
 <a name="56"><span class="lineNum">      56 </span>            : </a>
 <a name="57"><span class="lineNum">      57 </span><span class="lineCov">          1 :   @override</span></a>
