@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -118,9 +117,10 @@ class _MovieList extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           final movie = movies[index];
-          return Container(
-            padding: const EdgeInsets.all(8),
-            child: InkWell(
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ContentTile(
+              imageUrl: movie.posterPath ?? '',
               onTap: () {
                 Navigator.pushNamed(
                   context,
@@ -128,16 +128,6 @@ class _MovieList extends StatelessWidget {
                   arguments: movie.id,
                 );
               },
-              child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(16)),
-                child: CachedNetworkImage(
-                  imageUrl: '$BASE_IMAGE_URL${movie.posterPath}',
-                  placeholder: (context, url) => Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
-                ),
-              ),
             ),
           );
         },

@@ -3,14 +3,15 @@ import 'package:flutter/material.dart';
 
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/core/tv_series/domain/entities/tv_series.dart';
-import 'package:ditonton/feature/tv_series/page/tv_series_detail_page.dart';
 
 class TvSeriesCard extends StatelessWidget {
   final TvSeries tvSeries;
+  final VoidCallback onTap;
 
   const TvSeriesCard({
     Key? key,
     required this.tvSeries,
+    required this.onTap,
   }) : super(key: key);
 
   @override
@@ -18,13 +19,7 @@ class TvSeriesCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 4),
       child: InkWell(
-        onTap: () {
-          Navigator.pushNamed(
-            context,
-            TvSeriesDetailPage.ROUTE_NAME,
-            arguments: tvSeries.id,
-          );
-        },
+        onTap: onTap,
         child: Stack(
           alignment: Alignment.bottomLeft,
           children: [

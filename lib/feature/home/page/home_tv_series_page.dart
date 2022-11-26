@@ -1,7 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/components/components.dart';
+import 'package:ditonton/feature/tv_series/page/now_playing_tv_series_page.dart';
 import 'package:ditonton/feature/tv_series/page/tv_series_detail_page.dart';
 import 'package:ditonton/feature/tv_series/page/popular_tv_series_page.dart';
 import 'package:ditonton/feature/tv_series/page/top_reated_tv_series_page.dart';
@@ -39,9 +38,12 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Now Playing',
-                style: kHeading6,
+              SubHeading(
+                title: 'Now Playing',
+                onTap: () {
+                  Navigator.pushNamed(
+                      context, NowPlayingTvSeriesPage.ROUTE_NAME);
+                },
               ),
               Consumer<TvSeriesListNotifier>(
                 builder: (context, value, child) {
@@ -126,8 +128,9 @@ class TvSeriesList extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           final tvSeries = tvSeriesList[index];
           return Container(
-            padding: EdgeInsets.all(8),
-            child: InkWell(
+            padding: EdgeInsets.all(8.0),
+            child: ContentTile(
+              imageUrl: tvSeries.posterPath ?? '',
               onTap: () {
                 Navigator.pushNamed(
                   context,
@@ -135,16 +138,6 @@ class TvSeriesList extends StatelessWidget {
                   arguments: tvSeries.id,
                 );
               },
-              child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(16)),
-                child: CachedNetworkImage(
-                  imageUrl: '$BASE_IMAGE_URL${tvSeries.posterPath}',
-                  placeholder: (context, url) => Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
-                ),
-              ),
             ),
           );
         },

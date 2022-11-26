@@ -1,15 +1,18 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/core/movie/domain/entities/movie.dart';
 import 'package:ditonton/feature/movie/page/movie_detail_page.dart';
-import 'package:flutter/material.dart';
 
 class MovieCard extends StatelessWidget {
   final Movie movie;
+  final VoidCallback onTap;
 
   MovieCard({
     Key? key,
     required this.movie,
+    required this.onTap,
   }) : super(key: key);
 
   @override
@@ -17,13 +20,7 @@ class MovieCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 4),
       child: GestureDetector(
-        onTap: () {
-          Navigator.pushNamed(
-            context,
-            MovieDetailPage.ROUTE_NAME,
-            arguments: movie.id,
-          );
-        },
+        onTap: onTap,
         child: Stack(
           alignment: Alignment.bottomLeft,
           children: [

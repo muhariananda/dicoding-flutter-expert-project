@@ -4,6 +4,7 @@ import 'package:ditonton/feature/movie/page/movie_detail_page.dart';
 import 'package:ditonton/feature/movie/page/popular_movies_page.dart';
 import 'package:ditonton/feature/movie/page/top_rated_movies_page.dart';
 import 'package:ditonton/feature/search/page/search_page.dart';
+import 'package:ditonton/feature/tv_series/page/now_playing_tv_series_page.dart';
 import 'package:ditonton/feature/tv_series/page/popular_tv_series_page.dart';
 import 'package:ditonton/feature/tv_series/page/top_reated_tv_series_page.dart';
 import 'package:ditonton/feature/tv_series/page/tv_series_detail_page.dart';
@@ -27,6 +28,8 @@ class Routes {
             builder: (_) => MovieDetailPage(id: id),
             settings: settings,
           );
+        case NowPlayingTvSeriesPage.ROUTE_NAME:
+          return CupertinoPageRoute(builder: (_) => NowPlayingTvSeriesPage());
         case PopularTvSeriesPage.ROUTE_NAME:
           return CupertinoPageRoute(builder: (_) => PopularTvSeriesPage());
         case TopRatedTvSeriesPage.ROUTE_NAME:

@@ -267,8 +267,9 @@ class _TvSeriesRecommendationsList extends StatelessWidget {
               itemBuilder: (context, index) {
                 final tvSeries = data.tvSeriesRecommendations[index];
                 return Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: InkWell(
+                  padding: const EdgeInsets.all(4),
+                  child: ContentTile(
+                    imageUrl: tvSeries.posterPath ?? '',
                     onTap: () {
                       Navigator.pushReplacementNamed(
                         context,
@@ -276,19 +277,6 @@ class _TvSeriesRecommendationsList extends StatelessWidget {
                         arguments: tvSeries.id,
                       );
                     },
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(8),
-                      ),
-                      child: CachedNetworkImage(
-                        imageUrl:
-                            'https://image.tmdb.org/t/p/w500${tvSeries.posterPath}',
-                        placeholder: (context, url) => Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
-                      ),
-                    ),
                   ),
                 );
               },
@@ -343,10 +331,14 @@ class _SeasonList extends StatelessWidget {
                 Text(
                   season.name!,
                   style: kSubtitle,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
                 Text(
                   '${season.episodeCount} episodes',
                   style: kBodyText,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 )
               ],
             ),

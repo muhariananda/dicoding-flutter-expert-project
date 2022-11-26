@@ -271,30 +271,17 @@ class _MovieRecommendationsList extends StatelessWidget {
               itemBuilder: (context, index) {
                 final movie = data.movieRecommendations[index];
                 return Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.pushReplacementNamed(
-                        context,
-                        MovieDetailPage.ROUTE_NAME,
-                        arguments: movie.id,
-                      );
-                    },
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(8),
-                      ),
-                      child: CachedNetworkImage(
-                        imageUrl:
-                            'https://image.tmdb.org/t/p/w500${movie.posterPath}',
-                        placeholder: (context, url) => Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
-                      ),
-                    ),
-                  ),
-                );
+                    padding: const EdgeInsets.all(4.0),
+                    child: ContentTile(
+                      imageUrl: movie.posterPath ?? '',
+                      onTap: () {
+                        Navigator.pushReplacementNamed(
+                          context,
+                          MovieDetailPage.ROUTE_NAME,
+                          arguments: movie.id,
+                        );
+                      },
+                    ));
               },
               itemCount: data.movieRecommendations.length,
             ),
