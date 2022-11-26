@@ -1,5 +1,6 @@
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/utils.dart';
+import 'package:ditonton/feature/tv_series/provider/now_playing_tv_series_notifier.dart';
 import 'package:ditonton/feature/tv_series/provider/tv_series_detail_notifier.dart';
 import 'package:ditonton/feature/home/page/main_page.dart';
 import 'package:ditonton/feature/home/provider/tv_series_list_notifier.dart';
@@ -46,6 +47,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<TvSeriesListNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<NowPlayingTvSeriesNotifier>(),
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<PopularTvSeriesNotifier>(),
