@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2022-11-26 16:31:11</td>
+            <td class="headerValue">2022-11-26 16:41:59</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -152,7 +152,7 @@
 <a name="90"><span class="lineNum">      90 </span>            :   Future&lt;List&lt;TvSeriesModel&gt;&gt; searchTvSeries(String query) async {</a>
 <a name="91"><span class="lineNum">      91 </span>            :     final response =</a>
 <a name="92"><span class="lineNum">      92 </span><span class="lineCov">          4 :         await client.get(_urlBuilder.buildSearchTvSeriesUrl(query));</span></a>
-<a name="93"><span class="lineNum">      93 </span>            :         </a>
+<a name="93"><span class="lineNum">      93 </span>            : </a>
 <a name="94"><span class="lineNum">      94 </span><span class="lineCov">          2 :     if (response.statusCode == 200) {</span></a>
 <a name="95"><span class="lineNum">      95 </span><span class="lineCov">          4 :       return TvSeriesResponse.fromJson(json.decode(response.body)).tvSeriesList;</span></a>
 <a name="96"><span class="lineNum">      96 </span>            :     } else {</a>

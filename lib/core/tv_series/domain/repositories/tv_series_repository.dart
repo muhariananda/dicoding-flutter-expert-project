@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:ditonton/core/tv_series/domain/entities/tv_series.dart';
 import 'package:ditonton/core/tv_series/domain/entities/tv_series_detail.dart';
 
-
 import '../../../../common/failure.dart';
 
 abstract class TvSeriesRepository {

@@ -39,7 +39,8 @@ class SeasonModel extends Equatable {
       id: json['id'] as int,
       name: json['name'] as String,
       overview: json['overview'] as String,
-      posterPath: json['poster_path'] != null ? json['poster_path'] as String : null,
+      posterPath:
+          json['poster_path'] != null ? json['poster_path'] as String : null,
       seasonNumber: json['season_number'] as int,
     );
   }

@@ -1,4 +1,3 @@
-
 import 'package:ditonton/core/movie/domain/entities/genre.dart';
 import 'package:equatable/equatable.dart';
 

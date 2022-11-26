@@ -1,4 +1,3 @@
-
 import 'package:ditonton/core/movie/data/models/movie_model.dart';
 import 'package:ditonton/core/movie/domain/entities/movie.dart';
 import 'package:flutter_test/flutter_test.dart';

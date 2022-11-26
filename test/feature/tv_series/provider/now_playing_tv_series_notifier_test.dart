@@ -25,7 +25,7 @@ void main() {
         listenerCallCount += 1;
       });
   });
-  
+
   group('get now playing tv series,', () {
     test('initial state should be empty', () {
       expect(provider.state, RequestState.Empty);

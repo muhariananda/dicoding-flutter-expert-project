@@ -90,7 +90,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
   Future<List<TvSeriesModel>> searchTvSeries(String query) async {
     final response =
         await client.get(_urlBuilder.buildSearchTvSeriesUrl(query));
-        
+
     if (response.statusCode == 200) {
       return TvSeriesResponse.fromJson(json.decode(response.body)).tvSeriesList;
     } else {

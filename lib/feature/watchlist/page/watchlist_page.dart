@@ -109,7 +109,9 @@ class _WatchlistMovieList extends StatelessWidget {
           return CenteredProgressCircularIndicator();
         } else if (state == RequestState.Loaded) {
           return VerticaledMovieList(
-              key: Key('movie_listview'), movies: value.watchlistMovies,);
+            key: Key('movie_listview'),
+            movies: value.watchlistMovies,
+          );
         } else {
           return CenteredText(
             value.message,

@@ -20,7 +20,7 @@ void main() {
   test('should return list of Tv Series from the repository', () async {
     //arrange
     when(mockRepository.getWatchlistTvSeries())
-      .thenAnswer((_) async => Right(tTvSeries));
+        .thenAnswer((_) async => Right(tTvSeries));
 
     //act
     final result = await usecase.execute();
