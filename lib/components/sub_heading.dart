@@ -13,16 +13,16 @@ class SubHeading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          title,
-          style: kHeading6,
-        ),
-        InkWell(
-          onTap: onTap,
-          child: Padding(
+    return GestureDetector(
+      onTap: onTap,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: kHeading6,
+          ),
+          Padding(
             padding: const EdgeInsets.all(8),
             child: Row(
               children: [
@@ -30,9 +30,9 @@ class SubHeading extends StatelessWidget {
                 Icon(Icons.arrow_forward_ios),
               ],
             ),
-          ),
-        )
-      ],
+          )
+        ],
+      ),
     );
   }
 }

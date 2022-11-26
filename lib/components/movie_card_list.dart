@@ -7,13 +7,16 @@ import 'package:flutter/material.dart';
 class MovieCard extends StatelessWidget {
   final Movie movie;
 
-  MovieCard(Key? key, this.movie) : super(key: key);
+  MovieCard({
+    Key? key,
+    required this.movie,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 4),
-      child: InkWell(
+      child: GestureDetector(
         onTap: () {
           Navigator.pushNamed(
             context,

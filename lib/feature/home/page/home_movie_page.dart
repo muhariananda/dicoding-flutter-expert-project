@@ -57,7 +57,6 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                 }
               }),
               SubHeading(
-                key: Key('popular_movie_heading'),
                 title: 'Popular',
                 onTap: () {
                   Navigator.pushNamed(context, PopularMoviesPage.ROUTE_NAME);
