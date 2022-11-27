@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+const API_KEY = 'api_key=2174d146bb9c0eab47529b2e77d6b526';
+const BASE_URL = 'https://api.themoviedb.org/3';
 const String BASE_IMAGE_URL = 'https://image.tmdb.org/t/p/w500';
 
 // colors
@@ -20,14 +22,6 @@ final TextStyle kSubtitle = GoogleFonts.poppins(
     fontSize: 15, fontWeight: FontWeight.w400, letterSpacing: 0.15);
 final TextStyle kBodyText = GoogleFonts.poppins(
     fontSize: 13, fontWeight: FontWeight.w400, letterSpacing: 0.25);
-
-// text theme
-final kTextTheme = TextTheme(
-  headline5: kHeading5,
-  headline6: kHeading6,
-  subtitle1: kSubtitle,
-  bodyText2: kBodyText,
-);
 
 const kColorScheme = ColorScheme(
   primary: kMikadoYellow,
