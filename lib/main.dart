@@ -17,7 +17,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ditonton/injection.dart' as di;
 
+import 'common/secure_http_client.dart';
+
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  HttpSslPinning.init();
   di.init();
   runApp(MyApp());
 }

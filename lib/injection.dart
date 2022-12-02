@@ -14,6 +14,7 @@ import 'package:ditonton/core/movie/domain/usecase/get_watchlist_status.dart';
 import 'package:ditonton/core/movie/domain/usecase/remove_watchlist.dart';
 import 'package:ditonton/core/movie/domain/usecase/save_watchlist.dart';
 import 'package:ditonton/core/movie/domain/usecase/search_movies.dart';
+import 'package:ditonton/common/secure_http_client.dart';
 import 'package:ditonton/core/tv_series/data/datasource/tv_series_local_data_source.dart';
 import 'package:ditonton/core/tv_series/data/datasource/tv_series_remote_data_source.dart';
 import 'package:ditonton/core/tv_series/data/repositories/tv_series_repository_impl.dart';
@@ -39,7 +40,6 @@ import 'package:ditonton/feature/tv_series/provider/popular_tv_series_notifier.d
 import 'package:ditonton/feature/tv_series/provider/top_rated_tv_series_notifier.dart';
 import 'package:ditonton/feature/tv_series/provider/tv_series_detail_notifier.dart';
 import 'package:ditonton/feature/home/provider/tv_series_list_notifier.dart';
-import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
 
 final locator = GetIt.instance;
@@ -175,5 +175,5 @@ void init() {
   );
 
   // external
-  locator.registerLazySingleton(() => http.Client());
+  locator.registerLazySingleton(() => HttpSslPinning.client);
 }
