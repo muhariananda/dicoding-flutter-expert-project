@@ -1,6 +1,6 @@
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/core/movie/domain/entities/movie.dart';
-import 'package:ditonton/feature/movie/page/top_rated_movies_page.dart';
+import 'package:ditonton/feature/movie_list/page/top_rated_movies_page.dart';
 import 'package:ditonton/feature/movie/provider/top_rated_movies_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';

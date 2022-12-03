@@ -1,6 +1,6 @@
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/components/components.dart';
-import 'package:ditonton/feature/home/page/home_movie_page.dart';
+import 'package:ditonton/feature/movie_list/page/movie_list_page.dart';
 import 'package:ditonton/feature/home/provider/movie_list_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';

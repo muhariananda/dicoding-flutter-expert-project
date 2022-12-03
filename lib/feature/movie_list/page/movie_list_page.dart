@@ -7,8 +7,8 @@ import 'package:ditonton/components/components.dart';
 import 'package:ditonton/core/movie/domain/entities/movie.dart';
 import 'package:ditonton/feature/movie/page/movie_detail_page.dart';
 import 'package:ditonton/feature/home/provider/movie_list_notifier.dart';
-import 'package:ditonton/feature/movie/page/popular_movies_page.dart';
-import 'package:ditonton/feature/movie/page/top_rated_movies_page.dart';
+import 'package:ditonton/feature/movie_list/page/popular_movies_page.dart';
+import 'package:ditonton/feature/movie_list/page/top_rated_movies_page.dart';
 
 class HomeMoviePage extends StatefulWidget {
   const HomeMoviePage({Key? key}) : super(key: key);

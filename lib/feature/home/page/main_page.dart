@@ -1,5 +1,5 @@
-import 'package:ditonton/feature/home/page/home_movie_page.dart';
-import 'package:ditonton/feature/home/page/home_tv_series_page.dart';
+import 'package:ditonton/feature/movie_list/page/movie_list_page.dart';
+import 'package:ditonton/feature/tv_series_list/page/tv_series_list_page.dart';
 import 'package:ditonton/feature/about/about_page.dart';
 import 'package:ditonton/feature/search/page/search_page.dart';
 import 'package:ditonton/feature/watchlist/page/watchlist_page.dart';

@@ -1,6 +1,6 @@
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/components/centered_progress_circular_indicator.dart';
-import 'package:ditonton/feature/home/page/home_tv_series_page.dart';
+import 'package:ditonton/feature/tv_series_list/page/tv_series_list_page.dart';
 import 'package:ditonton/feature/home/provider/tv_series_list_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';

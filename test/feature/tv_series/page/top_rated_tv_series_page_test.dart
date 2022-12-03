@@ -1,7 +1,7 @@
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/core/tv_series/domain/entities/tv_series.dart';
 import 'package:ditonton/feature/tv_series/provider/top_rated_tv_series_notifier.dart';
-import 'package:ditonton/feature/tv_series/page/top_reated_tv_series_page.dart';
+import 'package:ditonton/feature/tv_series_list/page/top_reated_tv_series_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
