@@ -11,16 +11,20 @@ class NowPlayingMovieCubit extends Cubit<NowPlayingMovieState> {
 
   NowPlayingMovieCubit({
     required this.getNowPlayingMovies,
-  }) : super(NowPlayingMovieState.loading);
+  }) : super(const NowPlayingMovieInProgress());
 
   Future<void> fetchNowPlayingMovie() async {
     final result = await getNowPlayingMovies.execute();
     result.fold(
       (failure) {
-        emit(NowPlayingMovieState.error(failure.message));
+        emit(
+          NowPlayingMovieFailure(failure.message),
+        );
       },
       (movies) {
-        emit(NowPlayingMovieState.success(movies));
+        emit(
+          NowPlayingMovieSuccess(movies),
+        );
       },
     );
   }

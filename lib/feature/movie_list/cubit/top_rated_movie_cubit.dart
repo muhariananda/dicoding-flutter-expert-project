@@ -11,16 +11,20 @@ class TopRatedMovieCubit extends Cubit<TopRatedMovieState> {
 
   TopRatedMovieCubit({
     required this.getTopRatedMovies,
-  }) : super(TopRatedMovieState.loading);
+  }) : super(const TopRatedMovieInProgress());
 
   Future<void> fetchTopRatedMovie() async {
     final result = await getTopRatedMovies.execute();
     result.fold(
       (failure) {
-        emit(TopRatedMovieState.error(failure.message));
+        emit(
+          TopRatedMovieFailure(failure.message),
+        );
       },
       (data) {
-        emit(TopRatedMovieState.success(data));
+        emit(
+          TopRatedMovieSuccess(data),
+        );
       },
     );
   }

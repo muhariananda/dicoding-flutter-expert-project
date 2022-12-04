@@ -22,7 +22,7 @@ void main() {
 
   group("Get now playing movies,", () {
     test('initial state should be [Loading]', () {
-      expect(cubit.state, Loading());
+      expect(cubit.state, NowPlayingMovieInProgress());
     });
 
     blocTest<NowPlayingMovieCubit, NowPlayingMovieState>(
@@ -34,7 +34,7 @@ void main() {
       },
       act: (cubit) => cubit.fetchNowPlayingMovie(),
       expect: () => [
-        Success(testMovieList),
+        NowPlayingMovieSuccess(testMovieList),
       ],
       verify: (_) {
         verify(mockGetNowPlayingMovies.execute());
@@ -50,7 +50,7 @@ void main() {
       },
       act: (cubit) => cubit.fetchNowPlayingMovie(),
       expect: () => [
-        Error('Server Failure'),
+        NowPlayingMovieFailure('Server Failure'),
       ],
       verify: (_) {
         verify(mockGetNowPlayingMovies.execute());

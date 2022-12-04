@@ -2,23 +2,19 @@ part of 'popular_movie_cubit.dart';
 
 abstract class PopularMovieState extends Equatable {
   const PopularMovieState();
-
-  static const loading = const Loading();
-  factory PopularMovieState.success(List<Movie> movies) = Success;
-  factory PopularMovieState.error(String message) = Error;
 }
 
-class Loading extends PopularMovieState {
-  const Loading();
+class PopularMovieInProgress extends PopularMovieState {
+  const PopularMovieInProgress();
 
   @override
   List<Object?> get props => [];
 }
 
-class Success extends PopularMovieState {
+class PopularMovieSuccess extends PopularMovieState {
   final List<Movie> movies;
 
-  Success(
+  PopularMovieSuccess(
     this.movies,
   );
 
@@ -26,10 +22,10 @@ class Success extends PopularMovieState {
   List<Object?> get props => [movies];
 }
 
-class Error extends PopularMovieState {
+class PopularMovieFailure extends PopularMovieState {
   final String message;
 
-  Error(
+  PopularMovieFailure(
     this.message,
   );
 

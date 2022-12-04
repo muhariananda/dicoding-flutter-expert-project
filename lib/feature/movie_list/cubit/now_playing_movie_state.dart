@@ -2,23 +2,19 @@ part of 'now_playing_movie_cubit.dart';
 
 abstract class NowPlayingMovieState extends Equatable {
   const NowPlayingMovieState();
-
-  static const loading = const Loading();
-  factory NowPlayingMovieState.success(List<Movie> movies) = Success;
-  factory NowPlayingMovieState.error(String message) = Error;
 }
 
-class Loading extends NowPlayingMovieState {
-  const Loading();
+class NowPlayingMovieInProgress extends NowPlayingMovieState {
+  const NowPlayingMovieInProgress();
 
   @override
   List<Object?> get props => [];
 }
 
-class Success extends NowPlayingMovieState {
+class NowPlayingMovieSuccess extends NowPlayingMovieState {
   final List<Movie> movies;
 
-  const Success(
+  const NowPlayingMovieSuccess(
     this.movies,
   );
 
@@ -26,10 +22,10 @@ class Success extends NowPlayingMovieState {
   List<Object?> get props => [movies];
 }
 
-class Error extends NowPlayingMovieState {
+class NowPlayingMovieFailure extends NowPlayingMovieState {
   final String message;
 
-  const Error(
+  const NowPlayingMovieFailure(
     this.message,
   );
 
