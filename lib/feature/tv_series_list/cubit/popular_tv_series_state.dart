@@ -2,32 +2,28 @@ part of 'popular_tv_series_cubit.dart';
 
 abstract class PopularTvSeriesState extends Equatable {
   const PopularTvSeriesState();
-
-  static const loading = const Loading();
-  factory PopularTvSeriesState.success(List<TvSeries> tvSeries) = HasData;
-  factory PopularTvSeriesState.error(String message) = Error;
 }
 
-class Loading extends PopularTvSeriesState {
-  const Loading();
+class PopularTvSeriesInProgress extends PopularTvSeriesState {
+  const PopularTvSeriesInProgress();
 
   @override
   List<Object?> get props => [];
 }
 
-class HasData extends PopularTvSeriesState {
+class PopularTvSeriesSuccess extends PopularTvSeriesState {
   final List<TvSeries> tvSeries;
 
-  const HasData(this.tvSeries);
+  const PopularTvSeriesSuccess(this.tvSeries);
 
   @override
   List<Object?> get props => [tvSeries];
 }
 
-class Error extends PopularTvSeriesState {
+class PopularTvSeriesFailure extends PopularTvSeriesState {
   final String message;
 
-  const Error(this.message);
+  const PopularTvSeriesFailure(this.message);
 
   @override
   List<Object?> get props => [message];

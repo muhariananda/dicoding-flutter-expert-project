@@ -24,7 +24,7 @@ void main() {
 
   group('Get now playing tv series,', () {
     test('initial state should be [Loading]', () {
-      expect(cubit.state, Loading());
+      expect(cubit.state, NowPayingTvSeriesInProgress());
     });
 
     blocTest<NowPlayingTvSeriesCubit, NowPlayingTvSeriesState>(
@@ -35,7 +35,7 @@ void main() {
         return cubit;
       },
       act: (cubit) => cubit.fetchNowPlayingTvSeries(),
-      expect: () => [HasData(testTvSeriesList)],
+      expect: () => [NowPayingTvSeriesSuccess(testTvSeriesList)],
       verify: (_) {
         verify(mockGetNowPlayingTvSeries.execute());
       },
@@ -50,7 +50,7 @@ void main() {
       },
       act: (cubit) => cubit.fetchNowPlayingTvSeries(),
       expect: () => [
-        Error('Server Failure'),
+        NowPayingTvSeriesFailure('Server Failure'),
       ],
       verify: (_) {
         verify(mockGetNowPlayingTvSeries.execute());

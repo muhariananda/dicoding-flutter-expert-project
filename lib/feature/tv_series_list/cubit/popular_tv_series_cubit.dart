@@ -11,16 +11,20 @@ class PopularTvSeriesCubit extends Cubit<PopularTvSeriesState> {
 
   PopularTvSeriesCubit({
     required this.getPopularTvSeries,
-  }) : super(PopularTvSeriesState.loading);
+  }) : super(const PopularTvSeriesInProgress());
 
   Future<void> fetchPopularTvSeries() async {
     final result = await getPopularTvSeries.execute();
     result.fold(
       (failure) {
-        emit(PopularTvSeriesState.error(failure.message));
+        emit(
+          PopularTvSeriesFailure(failure.message),
+        );
       },
       (data) {
-        emit(PopularTvSeriesState.success(data));
+        emit(
+          PopularTvSeriesSuccess(data),
+        );
       },
     );
   }

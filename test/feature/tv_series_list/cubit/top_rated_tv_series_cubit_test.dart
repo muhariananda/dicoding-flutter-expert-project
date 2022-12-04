@@ -22,7 +22,7 @@ void main() {
 
   group('Get top rated tv series,', () {
     test('initial state should be [Loading]', () {
-      expect(cubit.state, Loading());
+      expect(cubit.state, TopRatedTvSeriesInProgress());
     });
 
     blocTest<TopRatedTvSeriesCubit, TopRatedTvSeriesState>(
@@ -34,7 +34,7 @@ void main() {
       },
       act: (cubit) => cubit.fetchTopRatedTvSeries(),
       expect: () => [
-        HasData(testTvSeriesList),
+        TopRatedTvSeriesSuccess(testTvSeriesList),
       ],
       verify: (_) {
         verify(mockGetTopRatedTvSeries.execute());
@@ -50,7 +50,7 @@ void main() {
       },
       act: (cubit) => cubit.fetchTopRatedTvSeries(),
       expect: () => [
-        Error(''),
+        TopRatedTvSeriesFailure(''),
       ],
       verify: (_) {
         verify(mockGetTopRatedTvSeries.execute());
