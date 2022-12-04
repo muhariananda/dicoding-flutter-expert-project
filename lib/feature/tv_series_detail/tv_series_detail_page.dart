@@ -11,7 +11,7 @@ import 'package:ditonton/core/tv_series/domain/entities/season.dart';
 import 'package:ditonton/core/tv_series/domain/entities/tv_series_detail.dart';
 import 'package:ditonton/feature/tv_series/provider/tv_series_detail_notifier.dart';
 
-import '../../../common/state_enum.dart';
+import '../../common/state_enum.dart';
 
 class TvSeriesDetailPage extends StatefulWidget {
   static const ROUTE_NAME = '/detail-tv-series';

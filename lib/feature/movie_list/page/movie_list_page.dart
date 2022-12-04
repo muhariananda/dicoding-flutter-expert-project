@@ -5,7 +5,7 @@ import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/components/components.dart';
 import 'package:ditonton/core/movie/domain/entities/movie.dart';
-import 'package:ditonton/feature/movie/page/movie_detail_page.dart';
+import 'package:ditonton/feature/movie_detail/page/movie_detail_page.dart';
 import 'package:ditonton/feature/home/provider/movie_list_notifier.dart';
 import 'package:ditonton/feature/movie_list/page/popular_movies_page.dart';
 import 'package:ditonton/feature/movie_list/page/top_rated_movies_page.dart';

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/core/movie/domain/entities/movie.dart';
-import 'package:ditonton/feature/movie/page/movie_detail_page.dart';
+import 'package:ditonton/feature/movie_detail/page/movie_detail_page.dart';
 
 class MovieCard extends StatelessWidget {
   final Movie movie;
