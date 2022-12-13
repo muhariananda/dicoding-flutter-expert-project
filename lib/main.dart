@@ -1,68 +1,86 @@
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/utils.dart';
-import 'package:ditonton/feature/tv_series/provider/now_playing_tv_series_notifier.dart';
-import 'package:ditonton/feature/tv_series/provider/tv_series_detail_notifier.dart';
-import 'package:ditonton/feature/home/page/main_page.dart';
-import 'package:ditonton/feature/home/provider/tv_series_list_notifier.dart';
-import 'package:ditonton/feature/tv_series/provider/popular_tv_series_notifier.dart';
-import 'package:ditonton/feature/tv_series/provider/top_rated_tv_series_notifier.dart';
-import 'package:ditonton/feature/movie/provider/movie_detail_notifier.dart';
-import 'package:ditonton/feature/home/provider/movie_list_notifier.dart';
-import 'package:ditonton/feature/search/provider/search_notifier.dart';
-import 'package:ditonton/feature/movie/provider/popular_movies_notifier.dart';
-import 'package:ditonton/feature/movie/provider/top_rated_movies_notifier.dart';
-import 'package:ditonton/feature/watchlist/provider/watchlist_notifier.dart';
+import 'package:ditonton/feature/about/about_page.dart';
+import 'package:ditonton/feature/movie_detail/bloc/movie_detail_bloc.dart';
+import 'package:ditonton/feature/movie_detail/cubit/movie_recommendations_cubit.dart';
+import 'package:ditonton/feature/movie_list/cubit/popular_movie_cubit.dart';
+import 'package:ditonton/feature/movie_list/cubit/top_rated_movie_cubit.dart';
+import 'package:ditonton/feature/movie_list/page/movie_list_page.dart';
+import 'package:ditonton/feature/search/bloc/search_movie_bloc.dart';
+import 'package:ditonton/feature/search/bloc/search_tv_series_bloc.dart';
+import 'package:ditonton/feature/search/page/search_page.dart';
+import 'package:ditonton/feature/tv_series_detail/bloc/tv_series_detail_bloc.dart';
+import 'package:ditonton/feature/tv_series_detail/cubit/tv_series_recommendations_cubit.dart';
+import 'package:ditonton/feature/tv_series_list/cubit/now_playing_tv_series_cubit.dart';
+import 'package:ditonton/feature/tv_series_list/cubit/popular_tv_series_cubit.dart';
+import 'package:ditonton/feature/tv_series_list/cubit/top_rated_tv_series_cubit.dart';
+import 'package:ditonton/feature/tv_series_list/page/tv_series_list_page.dart';
+import 'package:ditonton/feature/watchlist/cubit/watchlist_movie_cubit.dart';
+import 'package:ditonton/feature/watchlist/cubit/watchlist_tv_series_cubit.dart';
+import 'package:ditonton/feature/watchlist/page/watchlist_page.dart';
 import 'package:ditonton/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ditonton/injection.dart' as di;
 
-import 'common/secure_http_client.dart';
+import 'common/http_ssl_pinning.dart';
+import 'feature/movie_list/cubit/now_playing_movie_cubit.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   HttpSslPinning.init();
   di.init();
+
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
+    return MultiBlocProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieListNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<NowPlayingMovieCubit>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieDetailNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<PopularMovieCubit>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<SearchNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<TopRatedMovieCubit>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TopRatedMoviesNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<WatchlistMovieCubit>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<PopularMoviesNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<SearchMovieBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<WatchlistNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<MovieDetailBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvSeriesListNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<MovieRecommendationsCubit>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<NowPlayingTvSeriesNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<NowPlayingTvSeriesCubit>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<PopularTvSeriesNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<PopularTvSeriesCubit>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TopRatedTvSeriesNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<TopRatedTvSeriesCubit>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvSeriesDetailNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<WatchlistTvSeriesCubit>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<SearchTvSeriesBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<TvSeriesDetailBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<TvSeriesRecommendationsCubit>(),
         ),
       ],
       child: MaterialApp(
@@ -75,6 +93,99 @@ class MyApp extends StatelessWidget {
         home: MainPage(),
         navigatorObservers: [routeObserver],
         onGenerateRoute: Routes.routes(),
+      ),
+    );
+  }
+}
+
+class MainPage extends StatefulWidget {
+  @override
+  State<MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  int _selectedIndex = 0;
+  List<Widget> pageList = <Widget>[];
+
+  @override
+  void initState() {
+    super.initState();
+    pageList
+      ..add(const MovieListPage())
+      ..add(const TvSeriesListPage());
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      drawer: Drawer(
+        child: Column(
+          children: [
+            UserAccountsDrawerHeader(
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: AssetImage('assets/circle-g.png'),
+              ),
+              accountName: Text('Ditonton'),
+              accountEmail: Text('ditonton@dicoding.com'),
+            ),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text('Home'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.save_alt),
+              title: Text('Watchlist'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, WatchlistPage.ROUTE_NAME);
+              },
+            ),
+            ListTile(
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, AboutPage.ROUTE_NAME);
+              },
+              leading: Icon(Icons.info_outline),
+              title: Text('About'),
+            ),
+          ],
+        ),
+      ),
+      appBar: AppBar(
+        title: Text('Ditonton'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, SearchPage.ROUTE_NAME);
+            },
+            icon: Icon(Icons.search),
+          ),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.movie),
+            label: 'Movie',
+          ),
+          BottomNavigationBarItem(icon: Icon(Icons.tv), label: 'Tv Show'),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.orange,
+        onTap: _onItemTapped,
+      ),
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: pageList,
       ),
     );
   }

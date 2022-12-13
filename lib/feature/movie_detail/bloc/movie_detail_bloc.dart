@@ -45,18 +45,21 @@ class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
     Emitter emitter,
     MovieDetailOnRequested event,
   ) async {
-    emitter(MovieDetailState.loading());
-
+    emitter(MovieDetailState());
     final result = await getMovieDetail.execute(event.id);
     result.fold(
       (failure) {
         emitter(
-          MovieDetailState.error(message: failure.message),
+          state.copyWith(
+            errorMessage: failure.message,
+          ),
         );
       },
       (data) {
         emitter(
-          MovieDetailState.success(movie: data),
+          state.copyWith(
+            movie: data,
+          ),
         );
       },
     );
@@ -68,7 +71,9 @@ class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
   ) async {
     final result = await getWatchListStatus.execute(event.id);
     emitter(
-      state.copyWithNewWatchlistStatus(result),
+      state.copyWith(
+        watchlistStatus: result,
+      ),
     );
   }
 
@@ -77,42 +82,28 @@ class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
     MovieDetailWatchlistToggled event,
   ) async {
     final movie = event.movie;
-    final watchlistMessage = (event is MovieDetailOnAddedWatchlist)
-        ? await _addedToWatchlist(movie)
-        : await _removedWatchlist(movie);
-    emitter(
-      state.copyWithNewWatchlistMessage(watchlistMessage),
+    final result = (event is MovieDetailOnAddedWatchlist)
+        ? await saveWatchlist.execute(movie)
+        : await removeWatchlist.execute(movie);
+
+    await result.fold(
+      (failure) async {
+        emitter(
+          state.copyWith(
+            upsertStatus: MovieDetailUpsertFailure(failure.message),
+          ),
+        );
+      },
+      (successMessage) async {
+        emitter(
+          state.copyWith(
+            upsertStatus: MovieDetailUpsertSuccess(successMessage),
+          ),
+        );
+      },
     );
     add(
       MovieDetailOnCheckedWatchlistStatus(movie.id),
     );
-  }
-
-  Future<String> _addedToWatchlist(MovieDetail movie) async {
-    String message = '';
-    final result = await saveWatchlist.execute(movie);
-    result.fold(
-      (failure) {
-        message = failure.message;
-      },
-      (successMessage) {
-        message = successMessage;
-      },
-    );
-    return message;
-  }
-
-  Future<String> _removedWatchlist(MovieDetail movie) async {
-    String message = '';
-    final result = await removeWatchlist.execute(movie);
-    result.fold(
-      (failure) {
-        message = failure.message;
-      },
-      (successMessage) {
-        message = successMessage;
-      },
-    );
-    return message;
   }
 }

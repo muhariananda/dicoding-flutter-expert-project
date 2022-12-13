@@ -41,9 +41,10 @@ void main() {
 
   group('Get detail tv series,', () {
     final tId = 1;
+    final tTvSeriesDetailState = TvSeriesDetailState();
 
     blocTest<TvSeriesDetailBloc, TvSeriesDetailState>(
-      'should emits [TvSeriesDetailState.success] when TvSeriesDetailOnRequested is added.',
+      'should emits [TvSeriesDetailState] with tv series data when TvSeriesDetailOnRequested is added.',
       build: () {
         when(mockGetDetailTvSeries.execute(tId))
             .thenAnswer((_) async => Right(testTvSeriesDetail));
@@ -51,13 +52,15 @@ void main() {
       },
       act: (bloc) => bloc.add(TvSeriesDetailOnRequested(tId)),
       expect: () => <TvSeriesDetailState>[
-        TvSeriesDetailState(),
-        TvSeriesDetailState.success(tvSeries: testTvSeriesDetail),
+        tTvSeriesDetailState,
+        tTvSeriesDetailState.copyWith(
+          tvSeries: testTvSeriesDetail,
+        ),
       ],
     );
 
     blocTest<TvSeriesDetailBloc, TvSeriesDetailState>(
-      'should emits [TvSeriesDetailState.error] when TvSeriesDetailOnRequested is added.',
+      'should emits [TvSeriesDetailState] with error message when TvSeriesDetailOnRequested is added.',
       build: () {
         when(mockGetDetailTvSeries.execute(tId)).thenAnswer(
           (_) async => Left(ServerFailure('Not found')),
@@ -67,16 +70,17 @@ void main() {
       },
       act: (bloc) => bloc.add(TvSeriesDetailOnRequested(tId)),
       expect: () => <TvSeriesDetailState>[
-        TvSeriesDetailState(),
-        TvSeriesDetailState.error(message: 'Not found'),
+        tTvSeriesDetailState,
+        tTvSeriesDetailState.copyWith(
+          errorMessage: 'Not found',
+        ),
       ],
     );
   });
 
   group('Save watchlist tv series', () {
     final tTvDetailState = TvSeriesDetailState(
-      watchlistMessage: 'Added to Watchlist',
-      watchlistStatus: false,
+      upsertStatus: TvSeriesDetailUpsertSuccess('Added to Watchlist'),
     );
 
     blocTest<TvSeriesDetailBloc, TvSeriesDetailState>(
@@ -92,7 +96,9 @@ void main() {
           bloc.add(TvSeriesDetailOnAddedWatchlist(testTvSeriesDetail)),
       expect: () => <TvSeriesDetailState>[
         tTvDetailState,
-        tTvDetailState.copyWithNewWatchlistStatus(true),
+        tTvDetailState.copyWith(
+          watchlistStatus: true,
+        ),
       ],
       verify: (_) {
         verify(mockSaveWatchlistTvSeries.execute(testTvSeriesDetail));
@@ -112,7 +118,9 @@ void main() {
       act: (bloc) =>
           bloc.add(TvSeriesDetailOnAddedWatchlist(testTvSeriesDetail)),
       expect: () => <TvSeriesDetailState>[
-        tTvDetailState.copyWithNewWatchlistMessage('Failure'),
+        tTvDetailState.copyWith(
+          upsertStatus: TvSeriesDetailUpsertFailure('Failure'),
+        ),
       ],
       verify: (_) {
         verify(mockSaveWatchlistTvSeries.execute(testTvSeriesDetail));
@@ -123,7 +131,7 @@ void main() {
 
   group('Remove watchlist tv series,', () {
     final tTvSeriesDetailState = TvSeriesDetailState(
-      watchlistMessage: 'Failure',
+      upsertStatus: TvSeriesDetailUpsertFailure('Failure'),
     );
 
     blocTest<TvSeriesDetailBloc, TvSeriesDetailState>(
@@ -138,7 +146,9 @@ void main() {
       act: (bloc) =>
           bloc.add(TvSeriesDetailOnRemovedWatchlist(testTvSeriesDetail)),
       expect: () => <TvSeriesDetailState>[
-        tTvSeriesDetailState.copyWithNewWatchlistMessage('Removed from Watchlist'),
+        tTvSeriesDetailState.copyWith(
+            upsertStatus:
+                TvSeriesDetailUpsertSuccess('Removed from Watchlist')),
       ],
       verify: (_) {
         mockRemoveWatchlistTvSeries.execute(testTvSeriesDetail);
@@ -159,7 +169,7 @@ void main() {
           bloc.add(TvSeriesDetailOnRemovedWatchlist(testTvSeriesDetail)),
       expect: () => <TvSeriesDetailState>[
         tTvSeriesDetailState,
-        tTvSeriesDetailState.copyWithNewWatchlistStatus(true),
+        tTvSeriesDetailState.copyWith(watchlistStatus: true),
       ],
       verify: (_) {
         mockRemoveWatchlistTvSeries.execute(testTvSeriesDetail);

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2022-12-01 22:39:02</td>
+            <td class="headerValue">2022-12-13 20:45:06</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -61,7 +61,7 @@
 <pre class="sourceHeading">          Line data    Source code</pre>
 <pre class="source">
 <a name="1"><span class="lineNum">       1 </span>            : import 'package:ditonton/components/components.dart';</a>
-<a name="2"><span class="lineNum">       2 </span>            : import 'package:ditonton/feature/movie/page/movie_detail_page.dart';</a>
+<a name="2"><span class="lineNum">       2 </span>            : import 'package:ditonton/feature/movie_detail/page/movie_detail_page.dart';</a>
 <a name="3"><span class="lineNum">       3 </span>            : import 'package:flutter/material.dart';</a>
 <a name="4"><span class="lineNum">       4 </span>            : </a>
 <a name="5"><span class="lineNum">       5 </span>            : import 'package:ditonton/core/movie/domain/entities/movie.dart';</a>
@@ -78,10 +78,10 @@
 <a name="16"><span class="lineNum">      16 </span>            :   Widget build(BuildContext context) {</a>
 <a name="17"><span class="lineNum">      17 </span><span class="lineCov">          4 :     return ListView.builder(</span></a>
 <a name="18"><span class="lineNum">      18 </span><span class="lineCov">          8 :       itemCount: movies.length,</span></a>
-<a name="19"><span class="lineNum">      19 </span><span class="lineCov">          2 :       itemBuilder: (BuildContext context, int index) {</span></a>
-<a name="20"><span class="lineNum">      20 </span><span class="lineCov">          4 :         final movie = movies[index];</span></a>
-<a name="21"><span class="lineNum">      21 </span><span class="lineCov">          2 :         return MovieCard(</span></a>
-<a name="22"><span class="lineNum">      22 </span><span class="lineCov">          4 :           key: Key('movie$index'),</span></a>
+<a name="19"><span class="lineNum">      19 </span><span class="lineCov">          4 :       itemBuilder: (BuildContext context, int index) {</span></a>
+<a name="20"><span class="lineNum">      20 </span><span class="lineCov">          8 :         final movie = movies[index];</span></a>
+<a name="21"><span class="lineNum">      21 </span><span class="lineCov">          4 :         return MovieCard(</span></a>
+<a name="22"><span class="lineNum">      22 </span><span class="lineCov">          8 :           key: Key('movie$index'),</span></a>
 <a name="23"><span class="lineNum">      23 </span>            :           movie: movie,</a>
 <a name="24"><span class="lineNum">      24 </span><span class="lineNoCov">          0 :           onTap: () {</span></a>
 <a name="25"><span class="lineNum">      25 </span><span class="lineNoCov">          0 :             Navigator.pushNamed(</span></a>

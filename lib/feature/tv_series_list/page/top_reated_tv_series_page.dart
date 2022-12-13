@@ -1,8 +1,7 @@
-import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/components/components.dart';
-import 'package:ditonton/feature/tv_series/provider/top_rated_tv_series_notifier.dart';
+import 'package:ditonton/feature/tv_series_list/cubit/top_rated_tv_series_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TopRatedTvSeriesPage extends StatefulWidget {
   static const ROUTE_NAME = '/top-rated-tv-series';
@@ -13,14 +12,6 @@ class TopRatedTvSeriesPage extends StatefulWidget {
 
 class _TopRatedTvSeriesPageState extends State<TopRatedTvSeriesPage> {
   @override
-  void initState() {
-    super.initState();
-    Future.microtask(
-      () => context.read<TopRatedTvSeriesNotifier>().fetchTopRatedTvSeries(),
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -28,20 +19,19 @@ class _TopRatedTvSeriesPageState extends State<TopRatedTvSeriesPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8),
-        child: Consumer<TopRatedTvSeriesNotifier>(
-          builder: (context, value, child) {
-            final state = value.topRatedTvSeriesState;
-            if (state == RequestState.Loading) {
-              return CenteredProgressCircularIndicator();
-            } else if (state == RequestState.Loaded) {
-              return VerticaledTvSeriesList(
-                tvSeriesList: value.topRatedTvSeries,
-              );
-            } else {
+        child: BlocBuilder<TopRatedTvSeriesCubit, TopRatedTvSeriesState>(
+          builder: (context, state) {
+            if (state is TopRatedTvSeriesInProgress) {
+              return const CenteredProgressCircularIndicator();
+            } else if (state is TopRatedTvSeriesSuccess) {
+              return VerticaledTvSeriesList(tvSeriesList: state.tvSeries);
+            } else if (state is TopRatedTvSeriesFailure) {
               return CenteredText(
-                value.message,
+                state.message,
                 key: Key('error_message'),
               );
+            } else {
+              return Container();
             }
           },
         ),

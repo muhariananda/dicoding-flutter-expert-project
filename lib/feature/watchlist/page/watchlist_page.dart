@@ -1,10 +1,10 @@
-import 'package:ditonton/common/content_selection.dart';
-import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/common/tag.dart';
 import 'package:ditonton/common/utils.dart';
 import 'package:ditonton/components/components.dart';
-import 'package:ditonton/feature/watchlist/provider/watchlist_notifier.dart';
+import 'package:ditonton/feature/watchlist/cubit/watchlist_movie_cubit.dart';
+import 'package:ditonton/feature/watchlist/cubit/watchlist_tv_series_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class WatchlistPage extends StatefulWidget {
   static const ROUTE_NAME = '/watchlist-movie';
@@ -14,14 +14,17 @@ class WatchlistPage extends StatefulWidget {
 }
 
 class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
+  WatchlistMovieCubit get _watchlistMovieCubit =>
+      context.read<WatchlistMovieCubit>();
+  WatchlistTvSeriesCubit get _watchlistTvSeriesCubit =>
+      context.read<WatchlistTvSeriesCubit>();
+  Tag _tag = Tag.movie;
+
   @override
   void initState() {
     super.initState();
-    Future.microtask(
-      () => context.read<WatchlistNotifier>()
-        ..fetchWatchlistMovies()
-        ..fetchWatchlistTvSeries(),
-    );
+    _watchlistMovieCubit.fetchWatchlistMovies();
+    _watchlistTvSeriesCubit.fetchWatchlistTvSeries();
   }
 
   @override
@@ -31,9 +34,8 @@ class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
   }
 
   void didPopNext() {
-    context.read<WatchlistNotifier>()
-      ..fetchWatchlistMovies()
-      ..fetchWatchlistTvSeries();
+    _watchlistMovieCubit.fetchWatchlistMovies();
+    _watchlistTvSeriesCubit.fetchWatchlistTvSeries();
   }
 
   @override
@@ -53,36 +55,30 @@ class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
                 FilterChip(
                   key: Key('movie_filter_chip'),
                   label: Text('Movie'),
-                  selected: Provider.of<WatchlistNotifier>(context)
-                          .contentSelection ==
-                      ContentSelection.movie,
+                  selected: _tag == Tag.movie,
                   onSelected: (_) {
-                    context
-                        .read<WatchlistNotifier>()
-                        .setSelectedContent(ContentSelection.movie);
+                    setState(() {
+                      _tag = Tag.movie;
+                    });
                   },
                 ),
                 FilterChip(
                   key: Key('tv_series_filter_chip'),
                   label: Text('Tv Series'),
-                  selected: Provider.of<WatchlistNotifier>(context)
-                          .contentSelection ==
-                      ContentSelection.tv,
+                  selected: _tag == Tag.tv,
                   onSelected: (_) {
-                    context
-                        .read<WatchlistNotifier>()
-                        .setSelectedContent(ContentSelection.tv);
+                    setState(() {
+                      _tag = Tag.tv;
+                    });
                   },
                 ),
               ],
             ),
             const SizedBox(height: 16),
             Expanded(
-              child:
-                  (Provider.of<WatchlistNotifier>(context).contentSelection ==
-                          ContentSelection.movie)
-                      ? _WatchlistMovieList()
-                      : _WatchlistTvSeriesList(),
+              child: (_tag == Tag.movie)
+                  ? _WatchlistMovieList()
+                  : _WatchlistTvSeriesList(),
             )
           ],
         ),
@@ -102,21 +98,22 @@ class _WatchlistMovieList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<WatchlistNotifier>(
-      builder: (context, value, child) {
-        final state = value.movieState;
-        if (state == RequestState.Loading) {
-          return CenteredProgressCircularIndicator();
-        } else if (state == RequestState.Loaded) {
+    return BlocBuilder<WatchlistMovieCubit, WatchlistMovieState>(
+      builder: (context, state) {
+        if (state is WatchlistMovieInProgress) {
+          return const CenteredProgressCircularIndicator();
+        } else if (state is WatchlistMovieSuccess) {
           return VerticaledMovieList(
-            key: Key('movie_listview'),
-            movies: value.watchlistMovies,
+            key: Key('movie_list_view'),
+            movies: state.movies,
           );
-        } else {
+        } else if (state is WatchlistMovieFailure) {
           return CenteredText(
-            value.message,
+            state.message,
             key: Key('error_message'),
           );
+        } else {
+          return Container();
         }
       },
     );
@@ -128,21 +125,22 @@ class _WatchlistTvSeriesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<WatchlistNotifier>(
-      builder: (context, value, child) {
-        final state = value.tvSeriesState;
-        if (state == RequestState.Loading) {
-          return CenteredProgressCircularIndicator();
-        } else if (state == RequestState.Loaded) {
+    return BlocBuilder<WatchlistTvSeriesCubit, WatchlistTvSeriesState>(
+      builder: (context, state) {
+        if (state is WatchlistTvSeriesInProgress) {
+          return const CenteredProgressCircularIndicator();
+        } else if (state is WatchlistTvSeriesSuccess) {
           return VerticaledTvSeriesList(
-            key: Key('tv_series_listview'),
-            tvSeriesList: value.watchlistTvSeries,
+            key: Key('tv_series_list_view'),
+            tvSeriesList: state.tvSeries,
           );
-        } else {
+        } else if (state is WatchlistTvSeriesFailure) {
           return CenteredText(
-            value.message,
+            state.message,
             key: Key('error_message'),
           );
+        } else {
+          return Container();
         }
       },
     );

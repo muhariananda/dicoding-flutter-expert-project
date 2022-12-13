@@ -1,8 +1,7 @@
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/components/verticaled_movie_list.dart';
-import 'package:ditonton/feature/movie/provider/top_rated_movies_notifier.dart';
+import 'package:ditonton/components/components.dart';
+import 'package:ditonton/feature/movie_list/cubit/top_rated_movie_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TopRatedMoviesPage extends StatefulWidget {
   static const ROUTE_NAME = '/top-rated-movie';
@@ -13,14 +12,6 @@ class TopRatedMoviesPage extends StatefulWidget {
 
 class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
   @override
-  void initState() {
-    super.initState();
-    Future.microtask(() =>
-        Provider.of<TopRatedMoviesNotifier>(context, listen: false)
-            .fetchTopRatedMovies());
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -28,19 +19,19 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<TopRatedMoviesNotifier>(
-          builder: (context, data, child) {
-            if (data.state == RequestState.Loading) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (data.state == RequestState.Loaded) {
-              return VerticaledMovieList(movies: data.movies);
-            } else {
-              return Center(
+        child: BlocBuilder<TopRatedMovieCubit, TopRatedMovieState>(
+          builder: (context, state) {
+            if (state is TopRatedMovieInProgress) {
+              return const CenteredProgressCircularIndicator();
+            } else if (state is TopRatedMovieSuccess) {
+              return VerticaledMovieList(movies: state.movies);
+            } else if (state is TopRatedMovieFailure) {
+              return CenteredText(
+                state.message,
                 key: Key('error_message'),
-                child: Text(data.message),
               );
+            } else {
+              return Container();
             }
           },
         ),

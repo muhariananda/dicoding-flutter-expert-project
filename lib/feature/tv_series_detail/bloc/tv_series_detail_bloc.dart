@@ -36,7 +36,7 @@ class TvSeriesDetailBloc
         } else if (event is TvSeriesDetailOnCheckedWatchlistStatus) {
           await _handleTvSeriesDetailOnCheckedWatchlistStatus(emitter, event);
         } else if (event is TvSeriesDetailWatchlistToggled) {
-          await _handleTvSeriesDetailWatchlistToggled(emitter, event);
+          await _handleTvSeriesDetailToggled(emitter, event);
         }
       },
     );
@@ -46,20 +46,18 @@ class TvSeriesDetailBloc
     Emitter emitter,
     TvSeriesDetailOnRequested event,
   ) async {
-    emitter(
-      TvSeriesDetailState(),
-    );
-    
+    emitter(TvSeriesDetailState());
+
     final result = await getDetailTvSeries.execute(event.id);
     result.fold(
       (failure) {
         emitter(
-          TvSeriesDetailState.error(message: failure.message),
+          state.copyWith(errorMessage: failure.message),
         );
       },
       (data) {
         emitter(
-          TvSeriesDetailState.success(tvSeries: data),
+          state.copyWith(tvSeries: data),
         );
       },
     );
@@ -72,51 +70,37 @@ class TvSeriesDetailBloc
     final result = await getWatchlistStatus.execute(event.id);
 
     emitter(
-      state.copyWithNewWatchlistStatus(result),
+      state.copyWith(watchlistStatus: result),
     );
   }
 
-  Future<void> _handleTvSeriesDetailWatchlistToggled(
+  Future<void> _handleTvSeriesDetailToggled(
     Emitter emitter,
     TvSeriesDetailWatchlistToggled event,
   ) async {
     final tvSeries = event.tvSeries;
-    final watchlistMessage = (event is TvSeriesDetailOnAddedWatchlist)
-        ? await _addedToWatchlist(tvSeries)
-        : await _removeWatchlist(tvSeries);
-    emitter(
-      state.copyWithNewWatchlistMessage(watchlistMessage),
+    final result = (event is TvSeriesDetailOnAddedWatchlist)
+        ? await saveWatchlistTvSeries.execute(tvSeries)
+        : await removeWatchlistTvSeries.execute(tvSeries);
+
+    result.fold(
+      (failure) {
+        emitter(
+          state.copyWith(
+            upsertStatus: TvSeriesDetailUpsertFailure(failure.message),
+          ),
+        );
+      },
+      (successMessage) {
+        emitter(
+          state.copyWith(
+            upsertStatus: TvSeriesDetailUpsertSuccess(successMessage),
+          ),
+        );
+      },
     );
     add(
       TvSeriesDetailOnCheckedWatchlistStatus(tvSeries.id),
     );
-  }
-
-  Future<String> _addedToWatchlist(TvSeriesDetail tvSeries) async {
-    String message = '';
-    final result = await saveWatchlistTvSeries.execute(tvSeries);
-    result.fold(
-      (failure) {
-        message = failure.message;
-      },
-      (successMessage) {
-        message = successMessage;
-      },
-    );
-    return message;
-  }
-
-  Future<String> _removeWatchlist(TvSeriesDetail tvSeries) async {
-    String message = '';
-    final result = await removeWatchlistTvSeries.execute(tvSeries);
-    result.fold(
-      (failure) {
-        message = failure.message;
-      },
-      (successMessage) {
-        message = successMessage;
-      },
-    );
-    return message;
   }
 }

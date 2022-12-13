@@ -1,32 +1,35 @@
+import 'package:ditonton/feature/movie_list/cubit/now_playing_movie_cubit.dart';
+import 'package:ditonton/feature/movie_list/cubit/popular_movie_cubit.dart';
+import 'package:ditonton/feature/movie_list/cubit/top_rated_movie_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/components/components.dart';
 import 'package:ditonton/core/movie/domain/entities/movie.dart';
 import 'package:ditonton/feature/movie_detail/page/movie_detail_page.dart';
-import 'package:ditonton/feature/home/provider/movie_list_notifier.dart';
 import 'package:ditonton/feature/movie_list/page/popular_movies_page.dart';
 import 'package:ditonton/feature/movie_list/page/top_rated_movies_page.dart';
 
-class HomeMoviePage extends StatefulWidget {
-  const HomeMoviePage({Key? key}) : super(key: key);
+class MovieListPage extends StatefulWidget {
+  const MovieListPage({Key? key}) : super(key: key);
 
   @override
-  _HomeMoviePageState createState() => _HomeMoviePageState();
+  _MovieListPageState createState() => _MovieListPageState();
 }
 
-class _HomeMoviePageState extends State<HomeMoviePage> {
+class _MovieListPageState extends State<MovieListPage> {
+  NowPlayingMovieCubit get _nowPlayingCubit =>
+      context.read<NowPlayingMovieCubit>();
+  PopularMovieCubit get _popularCubit => context.read<PopularMovieCubit>();
+  TopRatedMovieCubit get _topRatedCubit => context.read<TopRatedMovieCubit>();
+
   @override
   void initState() {
     super.initState();
-    Future.microtask(
-      () => Provider.of<MovieListNotifier>(context, listen: false)
-        ..fetchNowPlayingMovies()
-        ..fetchPopularMovies()
-        ..fetchTopRatedMovies(),
-    );
+    _nowPlayingCubit.fetchNowPlayingMovie();
+    _popularCubit.fetchPopularMovies();
+    _topRatedCubit.fetchTopRatedMovie();
   }
 
   @override
@@ -42,57 +45,66 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                 'Now Playing',
                 style: kHeading6,
               ),
-              Consumer<MovieListNotifier>(builder: (context, data, child) {
-                final state = data.nowPlayingState;
-                if (state == RequestState.Loading) {
-                  return CenteredProgressCircularIndicator();
-                } else if (state == RequestState.Loaded) {
-                  return _MovieList(movies: data.nowPlayingMovies);
-                } else {
-                  return Text(
-                    'Failed',
-                    key: Key('error_message'),
-                  );
-                }
-              }),
+              BlocBuilder<NowPlayingMovieCubit, NowPlayingMovieState>(
+                builder: (context, state) {
+                  if (state is NowPlayingMovieInProgress) {
+                    return const CenteredProgressCircularIndicator();
+                  } else if (state is NowPlayingMovieSuccess) {
+                    return _MovieList(movies: state.movies);
+                  } else if (state is NowPlayingMovieFailure) {
+                    return Text(
+                      state.message,
+                      key: Key('error_message'),
+                    );
+                  } else {
+                    return Container();
+                  }
+                },
+              ),
               SubHeading(
                 title: 'Popular',
                 onTap: () {
                   Navigator.pushNamed(context, PopularMoviesPage.ROUTE_NAME);
                 },
               ),
-              Consumer<MovieListNotifier>(builder: (context, data, child) {
-                final state = data.popularMoviesState;
-                if (state == RequestState.Loading) {
-                  return CenteredProgressCircularIndicator();
-                } else if (state == RequestState.Loaded) {
-                  return _MovieList(movies: data.popularMovies);
-                } else {
-                  return Text(
-                    'Failed',
-                    key: Key('error_message'),
-                  );
-                }
-              }),
+              BlocBuilder<PopularMovieCubit, PopularMovieState>(
+                builder: (context, state) {
+                  if (state is PopularMovieInProgress) {
+                    return const CenteredProgressCircularIndicator();
+                  } else if (state is PopularMovieSuccess) {
+                    return _MovieList(movies: state.movies);
+                  } else if (state is PopularMovieFailure) {
+                    return Text(
+                      state.message,
+                      key: Key('error_message'),
+                    );
+                  } else {
+                    return Container();
+                  }
+                },
+              ),
               SubHeading(
                 title: 'Top Rated',
                 onTap: () {
                   Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME);
                 },
               ),
-              Consumer<MovieListNotifier>(builder: (context, data, child) {
-                final state = data.topRatedMoviesState;
-                if (state == RequestState.Loading) {
-                  return CenteredProgressCircularIndicator();
-                } else if (state == RequestState.Loaded) {
-                  return _MovieList(movies: data.topRatedMovies);
-                } else {
-                  return Text(
-                    'Failed',
-                    key: Key('error_message'),
-                  );
-                }
-              }),
+              BlocBuilder<TopRatedMovieCubit, TopRatedMovieState>(
+                builder: (context, state) {
+                  if (state is TopRatedMovieInProgress) {
+                    return const CenteredProgressCircularIndicator();
+                  } else if (state is TopRatedMovieSuccess) {
+                    return _MovieList(movies: state.movies);
+                  } else if (state is TopRatedMovieFailure) {
+                    return Text(
+                      state.message,
+                      key: Key('error_message'),
+                    );
+                  } else {
+                    return Container();
+                  }
+                },
+              )
             ],
           ),
         ),

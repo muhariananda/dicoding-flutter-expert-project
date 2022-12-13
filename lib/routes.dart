@@ -1,5 +1,4 @@
 import 'package:ditonton/feature/about/about_page.dart';
-import 'package:ditonton/feature/home/page/main_page.dart';
 import 'package:ditonton/feature/movie_detail/page/movie_detail_page.dart';
 import 'package:ditonton/feature/movie_list/page/popular_movies_page.dart';
 import 'package:ditonton/feature/movie_list/page/top_rated_movies_page.dart';
@@ -9,6 +8,7 @@ import 'package:ditonton/feature/tv_series_list/page/popular_tv_series_page.dart
 import 'package:ditonton/feature/tv_series_list/page/top_reated_tv_series_page.dart';
 import 'package:ditonton/feature/tv_series_detail/tv_series_detail_page.dart';
 import 'package:ditonton/feature/watchlist/page/watchlist_page.dart';
+import 'package:ditonton/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

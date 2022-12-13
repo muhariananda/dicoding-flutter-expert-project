@@ -41,6 +41,7 @@ void main() {
 
   group('Get movie detail,', () {
     final tId = 1;
+    final tMovieDetailState = MovieDetailState();
 
     blocTest<MovieDetailBloc, MovieDetailState>(
       'should emits [MovieDetailState] with movie data '
@@ -52,8 +53,10 @@ void main() {
       },
       act: (bloc) => bloc.add(MovieDetailOnRequested(tId)),
       expect: () => <MovieDetailState>[
-        MovieDetailState.loading(),
-        MovieDetailState.success(movie: testMovieDetail),
+        tMovieDetailState,
+        tMovieDetailState.copyWith(
+          movie: testMovieDetail,
+        ),
       ],
       verify: (_) {
         mockGetMovieDetail.execute(tId);
@@ -70,8 +73,10 @@ void main() {
       },
       act: (bloc) => bloc.add(MovieDetailOnRequested(tId)),
       expect: () => <MovieDetailState>[
-        MovieDetailState.loading(),
-        MovieDetailState.error(message: 'Not found'),
+        tMovieDetailState,
+        tMovieDetailState.copyWith(
+          errorMessage: 'Not found',
+        ),
       ],
       verify: (_) {
         mockGetMovieDetail.execute(tId);
@@ -81,7 +86,8 @@ void main() {
 
   group('Save movie to watchlist,', () {
     final tMoveiDetailState = MovieDetailState(
-      watchlistMessage: 'Added to Watchlist',
+      upsertStatus: MovieDetailUpsertSuccess('Added to Watchlist'),
+      watchlistStatus: false,
     );
 
     blocTest<MovieDetailBloc, MovieDetailState>(
@@ -97,7 +103,9 @@ void main() {
       act: (bloc) => bloc.add(MovieDetailOnAddedWatchlist(testMovieDetail)),
       expect: () => <MovieDetailState>[
         tMoveiDetailState,
-        tMoveiDetailState.copyWithNewWatchlistStatus(true),
+        tMoveiDetailState.copyWith(
+          watchlistStatus: true,
+        ),
       ],
       verify: (_) {
         verify(mockSaveWatchlist.execute(testMovieDetail));
@@ -116,8 +124,11 @@ void main() {
         return bloc;
       },
       act: (bloc) => bloc.add(MovieDetailOnAddedWatchlist(testMovieDetail)),
-      expect: () =>
-          <MovieDetailState>[MovieDetailState(watchlistMessage: 'Failure')],
+      expect: () => <MovieDetailState>[
+        tMoveiDetailState.copyWith(
+          upsertStatus: MovieDetailUpsertFailure('Failure'),
+        ),
+      ],
       verify: (_) {
         verify(mockSaveWatchlist.execute(testMovieDetail));
         verify(mockGetWatchListStatus.execute(testMovieDetail.id));
@@ -127,7 +138,7 @@ void main() {
 
   group('Remove movie from watchlist,', () {
     final tMovieDetailState = MovieDetailState(
-      watchlistMessage: 'Failure',
+      upsertStatus: MovieDetailUpsertFailure('Failure'),
     );
 
     blocTest<MovieDetailBloc, MovieDetailState>(
@@ -142,7 +153,8 @@ void main() {
       },
       act: (bloc) => bloc.add(MovieDetailOnRemovedWatchlist(testMovieDetail)),
       expect: () => <MovieDetailState>[
-        tMovieDetailState.copyWithNewWatchlistMessage('Removed from Watchlist'),
+        tMovieDetailState.copyWith(
+            upsertStatus: MovieDetailUpsertSuccess('Removed from Watchlist')),
       ],
       verify: (_) {
         verify(mockRemoveWatchlist.execute(testMovieDetail));
@@ -163,7 +175,7 @@ void main() {
       act: (bloc) => bloc.add(MovieDetailOnRemovedWatchlist(testMovieDetail)),
       expect: () => <MovieDetailState>[
         tMovieDetailState,
-        tMovieDetailState.copyWithNewWatchlistStatus(true),
+        tMovieDetailState.copyWith(watchlistStatus: true),
       ],
       verify: (_) {
         verify(mockRemoveWatchlist.execute(testMovieDetail));

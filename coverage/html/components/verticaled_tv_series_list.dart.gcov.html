@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2022-12-01 22:39:02</td>
+            <td class="headerValue">2022-12-13 20:45:06</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -62,7 +62,7 @@
 <pre class="source">
 <a name="1"><span class="lineNum">       1 </span>            : import 'package:ditonton/components/components.dart';</a>
 <a name="2"><span class="lineNum">       2 </span>            : import 'package:ditonton/core/tv_series/domain/entities/tv_series.dart';</a>
-<a name="3"><span class="lineNum">       3 </span>            : import 'package:ditonton/feature/tv_series/page/tv_series_detail_page.dart';</a>
+<a name="3"><span class="lineNum">       3 </span>            : import 'package:ditonton/feature/tv_series_detail/tv_series_detail_page.dart';</a>
 <a name="4"><span class="lineNum">       4 </span>            : import 'package:flutter/material.dart';</a>
 <a name="5"><span class="lineNum">       5 </span>            : </a>
 <a name="6"><span class="lineNum">       6 </span>            : class VerticaledTvSeriesList extends StatelessWidget {</a>
@@ -77,10 +77,10 @@
 <a name="15"><span class="lineNum">      15 </span>            :   Widget build(BuildContext context) {</a>
 <a name="16"><span class="lineNum">      16 </span><span class="lineCov">          5 :     return ListView.builder(</span></a>
 <a name="17"><span class="lineNum">      17 </span><span class="lineCov">         10 :       itemCount: tvSeriesList.length,</span></a>
-<a name="18"><span class="lineNum">      18 </span><span class="lineCov">          2 :       itemBuilder: (BuildContext context, int index) {</span></a>
-<a name="19"><span class="lineNum">      19 </span><span class="lineCov">          4 :         final tvSeries = tvSeriesList[index];</span></a>
-<a name="20"><span class="lineNum">      20 </span><span class="lineCov">          2 :         return TvSeriesCard(</span></a>
-<a name="21"><span class="lineNum">      21 </span><span class="lineCov">          4 :           key: Key('tvSeries$index'),</span></a>
+<a name="18"><span class="lineNum">      18 </span><span class="lineCov">          5 :       itemBuilder: (BuildContext context, int index) {</span></a>
+<a name="19"><span class="lineNum">      19 </span><span class="lineCov">         10 :         final tvSeries = tvSeriesList[index];</span></a>
+<a name="20"><span class="lineNum">      20 </span><span class="lineCov">          5 :         return TvSeriesCard(</span></a>
+<a name="21"><span class="lineNum">      21 </span><span class="lineCov">         10 :           key: Key('tvSeries$index'),</span></a>
 <a name="22"><span class="lineNum">      22 </span>            :           tvSeries: tvSeries,</a>
 <a name="23"><span class="lineNum">      23 </span><span class="lineNoCov">          0 :           onTap: () {</span></a>
 <a name="24"><span class="lineNum">      24 </span><span class="lineNoCov">          0 :             Navigator.pushNamed(</span></a>

@@ -2,52 +2,58 @@ part of 'movie_detail_bloc.dart';
 
 class MovieDetailState extends Equatable {
   final MovieDetail? movie;
-  final dynamic error;
+  final dynamic errorMessage;
   final bool watchlistStatus;
-  final dynamic watchlistMessage;
+  final MovieDetailUpsertStatus? upsertStatus;
 
   const MovieDetailState({
     this.movie,
-    this.error,
+    this.errorMessage,
     this.watchlistStatus = false,
-    this.watchlistMessage,
+    this.upsertStatus,
   });
 
-  MovieDetailState.loading() : this();
-
-  MovieDetailState.success({
-    required MovieDetail movie,
-  }) : this(movie: movie);
-
-  MovieDetailState.error({
-    required String message,
-  }) : this(error: message);
-
-  MovieDetailState copyWithNewWatchlistStatus(
-    bool watchlistStatus,
-  ) =>
-      MovieDetailState(
-        movie: this.movie,
-        error: this.error,
-        watchlistStatus: watchlistStatus,
-        watchlistMessage: this.watchlistMessage,
-      );
-
-  MovieDetailState copyWithNewWatchlistMessage(
-    String watchlistMessage,
-  ) =>
-      MovieDetailState(
-        movie: this.movie,
-        error: this.error,
-        watchlistStatus: this.watchlistStatus,
-        watchlistMessage: watchlistMessage,
-      );
+  MovieDetailState copyWith({
+    MovieDetail? movie,
+    dynamic errorMessage,
+    bool? watchlistStatus,
+    MovieDetailUpsertStatus? upsertStatus,
+  }) {
+    return MovieDetailState(
+      movie: movie ?? this.movie,
+      errorMessage: errorMessage ?? this.errorMessage,
+      watchlistStatus: watchlistStatus ?? this.watchlistStatus,
+      upsertStatus: upsertStatus ?? this.upsertStatus,
+    );
+  }
 
   @override
   List<Object?> get props => [
         movie,
-        error,
+        errorMessage,
         watchlistStatus,
-        watchlistMessage,
+        upsertStatus,
       ];
+}
+
+abstract class MovieDetailUpsertStatus extends Equatable {
+  const MovieDetailUpsertStatus();
+}
+
+class MovieDetailUpsertSuccess extends MovieDetailUpsertStatus {
+  final String message;
+
+  const MovieDetailUpsertSuccess(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}
+
+class MovieDetailUpsertFailure extends MovieDetailUpsertStatus {
+  final String error;
+
+  const MovieDetailUpsertFailure(this.error);
+
+  @override
+  List<Object?> get props => [error];
 }
