@@ -19,15 +19,24 @@ import 'package:ditonton/feature/watchlist/cubit/watchlist_movie_cubit.dart';
 import 'package:ditonton/feature/watchlist/cubit/watchlist_tv_series_cubit.dart';
 import 'package:ditonton/feature/watchlist/page/watchlist_page.dart';
 import 'package:ditonton/routes.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ditonton/injection.dart' as di;
 
 import 'common/http_ssl_pinning.dart';
 import 'feature/movie_list/cubit/now_playing_movie_cubit.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  // FirebaseCrashlytics.instance.crash();
 
   HttpSslPinning.init();
   di.init();
