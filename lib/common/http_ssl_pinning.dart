@@ -9,24 +9,25 @@ class HttpSslPinning {
   static http.Client get client => _client ?? http.Client();
 
   static Future<http.Client> get _instance async =>
-      _client ??= await _generateClient();
+      _client ??= await _generateSecureClient();
 
   static Future<void> init() async {
     _client = await _instance;
   }
 
-  static Future<SecurityContext> get _globalContext async {
+  static Future<HttpClient> _secureHttpClient() async {
     final sslCert =
-        await rootBundle.load('ceritificates/certificates.pem');
+        await rootBundle.load('certificates/moviedb_certificates.pem');
     SecurityContext securityContext = SecurityContext(withTrustedRoots: false);
-    securityContext.setClientAuthoritiesBytes(sslCert.buffer.asUint8List());
-    return securityContext;
+    securityContext.setTrustedCertificatesBytes(sslCert.buffer.asInt8List());
+    HttpClient httpClient = HttpClient(context: securityContext);
+    httpClient.badCertificateCallback = (cert, host, port) => false;
+
+    return httpClient;
   }
 
-  static Future<http.Client> _generateClient() async {
-    HttpClient httpClient = HttpClient(context: await _globalContext);
-    httpClient.badCertificateCallback = (cert, host, port) => false;
-    IOClient ioClient = IOClient(httpClient);
+  static Future<http.Client> _generateSecureClient() async {
+    IOClient ioClient = IOClient(await _secureHttpClient());
     return ioClient;
   }
 }

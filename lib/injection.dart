@@ -45,6 +45,7 @@ import 'package:ditonton/feature/watchlist/cubit/watchlist_movie_cubit.dart';
 import 'package:ditonton/feature/watchlist/cubit/watchlist_tv_series_cubit.dart';
 
 import 'package:get_it/get_it.dart';
+import 'package:http/http.dart';
 
 final locator = GetIt.instance;
 
