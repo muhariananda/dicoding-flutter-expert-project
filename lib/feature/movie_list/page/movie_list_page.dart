@@ -47,17 +47,12 @@ class _MovieListPageState extends State<MovieListPage> {
               ),
               BlocBuilder<NowPlayingMovieCubit, NowPlayingMovieState>(
                 builder: (context, state) {
-                  if (state is NowPlayingMovieInProgress) {
-                    return const CenteredProgressCircularIndicator();
-                  } else if (state is NowPlayingMovieSuccess) {
+                  if (state is NowPlayingMovieSuccess) {
                     return _MovieList(movies: state.movies);
                   } else if (state is NowPlayingMovieFailure) {
-                    return Text(
-                      state.message,
-                      key: Key('error_message'),
-                    );
+                    return Text(state.message);
                   } else {
-                    return Container();
+                    return const CenteredProgressCircularIndicator();
                   }
                 },
               ),
@@ -69,17 +64,12 @@ class _MovieListPageState extends State<MovieListPage> {
               ),
               BlocBuilder<PopularMovieCubit, PopularMovieState>(
                 builder: (context, state) {
-                  if (state is PopularMovieInProgress) {
-                    return const CenteredProgressCircularIndicator();
-                  } else if (state is PopularMovieSuccess) {
+                  if (state is PopularMovieSuccess) {
                     return _MovieList(movies: state.movies);
                   } else if (state is PopularMovieFailure) {
-                    return Text(
-                      state.message,
-                      key: Key('error_message'),
-                    );
+                    return Text(state.message);
                   } else {
-                    return Container();
+                    return const CenteredProgressCircularIndicator();
                   }
                 },
               ),
@@ -91,17 +81,12 @@ class _MovieListPageState extends State<MovieListPage> {
               ),
               BlocBuilder<TopRatedMovieCubit, TopRatedMovieState>(
                 builder: (context, state) {
-                  if (state is TopRatedMovieInProgress) {
-                    return const CenteredProgressCircularIndicator();
-                  } else if (state is TopRatedMovieSuccess) {
+                  if (state is TopRatedMovieSuccess) {
                     return _MovieList(movies: state.movies);
                   } else if (state is TopRatedMovieFailure) {
-                    return Text(
-                      state.message,
-                      key: Key('error_message'),
-                    );
+                    return Text(state.message);
                   } else {
-                    return Container();
+                    return const CenteredProgressCircularIndicator();
                   }
                 },
               )

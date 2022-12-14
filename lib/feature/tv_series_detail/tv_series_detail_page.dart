@@ -313,9 +313,7 @@ class _TvSeriesRecommendationsList extends StatelessWidget {
     return BlocBuilder<TvSeriesRecommendationsCubit,
         TvSeriesRecommendationsState>(
       builder: (context, state) {
-        if (state is TvSeriesRecommendationsInProgress) {
-          return const CenteredProgressCircularIndicator();
-        } else if (state is TvSeriesRecommendationsFailure) {
+        if (state is TvSeriesRecommendationsFailure) {
           return Text(
             state.message,
             key: Key('error_recommendation_message'),
@@ -346,7 +344,7 @@ class _TvSeriesRecommendationsList extends StatelessWidget {
             ),
           );
         } else {
-          return Container();
+          return const CenteredProgressCircularIndicator();
         }
       },
     );

@@ -100,20 +100,15 @@ class _WatchlistMovieList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<WatchlistMovieCubit, WatchlistMovieState>(
       builder: (context, state) {
-        if (state is WatchlistMovieInProgress) {
-          return const CenteredProgressCircularIndicator();
-        } else if (state is WatchlistMovieSuccess) {
+        if (state is WatchlistMovieSuccess) {
           return VerticaledMovieList(
             key: Key('movie_list_view'),
             movies: state.movies,
           );
         } else if (state is WatchlistMovieFailure) {
-          return CenteredText(
-            state.message,
-            key: Key('error_message'),
-          );
+          return CenteredText(state.message);
         } else {
-          return Container();
+          return const CenteredProgressCircularIndicator();
         }
       },
     );
@@ -127,20 +122,15 @@ class _WatchlistTvSeriesList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<WatchlistTvSeriesCubit, WatchlistTvSeriesState>(
       builder: (context, state) {
-        if (state is WatchlistTvSeriesInProgress) {
-          return const CenteredProgressCircularIndicator();
-        } else if (state is WatchlistTvSeriesSuccess) {
+        if (state is WatchlistTvSeriesSuccess) {
           return VerticaledTvSeriesList(
             key: Key('tv_series_list_view'),
             tvSeriesList: state.tvSeries,
           );
         } else if (state is WatchlistTvSeriesFailure) {
-          return CenteredText(
-            state.message,
-            key: Key('error_message'),
-          );
+          return CenteredText(state.message);
         } else {
-          return Container();
+          return const CenteredProgressCircularIndicator();
         }
       },
     );

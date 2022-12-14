@@ -21,17 +21,12 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
         padding: const EdgeInsets.all(8.0),
         child: BlocBuilder<PopularMovieCubit, PopularMovieState>(
           builder: (context, state) {
-            if (state is PopularMovieInProgress) {
-              return const CenteredProgressCircularIndicator();
-            } else if (state is PopularMovieSuccess) {
+            if (state is PopularMovieSuccess) {
               return VerticaledMovieList(movies: state.movies);
             } else if (state is PopularMovieFailure) {
-              return CenteredText(
-                state.message,
-                key: Key('error_message'),
-              );
+              return CenteredText(state.message);
             } else {
-              return Container();
+              return const CenteredProgressCircularIndicator();
             }
           },
         ),

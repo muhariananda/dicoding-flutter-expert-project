@@ -106,19 +106,14 @@ class _MovieSearchList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SearchMovieBloc, SearchMovieState>(
       builder: (context, state) {
-        if (state is SearchMovieInProgress) {
-          return const CenteredProgressCircularIndicator();
-        } else if (state is SearchMovieSuccess) {
+        if (state is SearchMovieSuccess) {
           return VerticaledMovieList(movies: state.movies);
         } else if (state is SearchMovieEmpty) {
           return const ExceptionIndicator();
         } else if (state is SearchMovieFailure) {
-          return CenteredText(
-            state.message,
-            key: Key('error_message'),
-          );
+          return CenteredText(state.message);
         } else {
-          return Container();
+          return const CenteredProgressCircularIndicator();
         }
       },
     );
@@ -132,19 +127,14 @@ class _TvSeriesSearchList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SearchTvSeriesBloc, SearchTvSeriesState>(
       builder: (context, state) {
-        if (state is SearchTvSeriesInProgress) {
-          return const CenteredProgressCircularIndicator();
-        } else if (state is SearchTvSeriesSuccess) {
+        if (state is SearchTvSeriesSuccess) {
           return VerticaledTvSeriesList(tvSeriesList: state.tvSeries);
         } else if (state is SearchTvSeriesEmpty) {
           return const ExceptionIndicator();
         } else if (state is SearchTvSeriesFailure) {
-          return CenteredText(
-            state.message,
-            key: Key('error_message'),
-          );
+          return CenteredText(state.message);
         } else {
-          return Container();
+          return const CenteredProgressCircularIndicator();
         }
       },
     );

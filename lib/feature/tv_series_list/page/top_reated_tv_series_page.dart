@@ -21,17 +21,12 @@ class _TopRatedTvSeriesPageState extends State<TopRatedTvSeriesPage> {
         padding: const EdgeInsets.all(8),
         child: BlocBuilder<TopRatedTvSeriesCubit, TopRatedTvSeriesState>(
           builder: (context, state) {
-            if (state is TopRatedTvSeriesInProgress) {
-              return const CenteredProgressCircularIndicator();
-            } else if (state is TopRatedTvSeriesSuccess) {
+            if (state is TopRatedTvSeriesSuccess) {
               return VerticaledTvSeriesList(tvSeriesList: state.tvSeries);
             } else if (state is TopRatedTvSeriesFailure) {
-              return CenteredText(
-                state.message,
-                key: Key('error_message'),
-              );
+              return CenteredText(state.message);
             } else {
-              return Container();
+              return const CenteredProgressCircularIndicator();
             }
           },
         ),

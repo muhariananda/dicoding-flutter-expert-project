@@ -31,13 +31,13 @@
             <td class="headerValue">lcov.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">150</td>
-            <td class="headerCovTableEntry">158</td>
-            <td class="headerCovTableEntryHi">94.9 %</td>
+            <td class="headerCovTableEntry">149</td>
+            <td class="headerCovTableEntry">156</td>
+            <td class="headerCovTableEntryHi">95.5 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2022-12-13 20:45:06</td>
+            <td class="headerValue">2022-12-14 12:34:59</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -375,45 +375,43 @@
 <a name="313"><span class="lineNum">     313 </span><span class="lineCov">          1 :     return BlocBuilder&lt;TvSeriesRecommendationsCubit,</span></a>
 <a name="314"><span class="lineNum">     314 </span>            :         TvSeriesRecommendationsState&gt;(</a>
 <a name="315"><span class="lineNum">     315 </span><span class="lineCov">          1 :       builder: (context, state) {</span></a>
-<a name="316"><span class="lineNum">     316 </span><span class="lineCov">          1 :         if (state is TvSeriesRecommendationsInProgress) {</span></a>
-<a name="317"><span class="lineNum">     317 </span>            :           return const CenteredProgressCircularIndicator();</a>
-<a name="318"><span class="lineNum">     318 </span><span class="lineCov">          1 :         } else if (state is TvSeriesRecommendationsFailure) {</span></a>
-<a name="319"><span class="lineNum">     319 </span><span class="lineCov">          1 :           return Text(</span></a>
-<a name="320"><span class="lineNum">     320 </span><span class="lineCov">          1 :             state.message,</span></a>
-<a name="321"><span class="lineNum">     321 </span><span class="lineCov">          1 :             key: Key('error_recommendation_message'),</span></a>
-<a name="322"><span class="lineNum">     322 </span>            :           );</a>
-<a name="323"><span class="lineNum">     323 </span><span class="lineCov">          1 :         } else if (state is TvSeriesRecommendationsSuccess) {</span></a>
-<a name="324"><span class="lineNum">     324 </span><span class="lineCov">          1 :           final recommendations = state.tvSeries;</span></a>
-<a name="325"><span class="lineNum">     325 </span><span class="lineCov">          1 :           return SizedBox(</span></a>
-<a name="326"><span class="lineNum">     326 </span>            :             height: 150,</a>
-<a name="327"><span class="lineNum">     327 </span><span class="lineCov">          1 :             child: ListView.builder(</span></a>
-<a name="328"><span class="lineNum">     328 </span>            :               scrollDirection: Axis.horizontal,</a>
-<a name="329"><span class="lineNum">     329 </span><span class="lineCov">          1 :               itemCount: recommendations.length,</span></a>
-<a name="330"><span class="lineNum">     330 </span><span class="lineCov">          1 :               itemBuilder: (context, index) {</span></a>
-<a name="331"><span class="lineNum">     331 </span><span class="lineCov">          1 :                 final tvSeries = recommendations[index];</span></a>
-<a name="332"><span class="lineNum">     332 </span><span class="lineCov">          1 :                 return Padding(</span></a>
-<a name="333"><span class="lineNum">     333 </span>            :                   padding: const EdgeInsets.all(4),</a>
-<a name="334"><span class="lineNum">     334 </span><span class="lineCov">          1 :                   child: ContentTile(</span></a>
-<a name="335"><span class="lineNum">     335 </span><span class="lineCov">          1 :                     imageUrl: tvSeries.posterPath ?? '',</span></a>
-<a name="336"><span class="lineNum">     336 </span><span class="lineNoCov">          0 :                     onTap: () {</span></a>
-<a name="337"><span class="lineNum">     337 </span><span class="lineNoCov">          0 :                       Navigator.pushReplacementNamed(</span></a>
-<a name="338"><span class="lineNum">     338 </span>            :                         context,</a>
-<a name="339"><span class="lineNum">     339 </span>            :                         TvSeriesDetailPage.ROUTE_NAME,</a>
-<a name="340"><span class="lineNum">     340 </span><span class="lineNoCov">          0 :                         arguments: tvSeries.id,</span></a>
-<a name="341"><span class="lineNum">     341 </span>            :                       );</a>
-<a name="342"><span class="lineNum">     342 </span>            :                     },</a>
-<a name="343"><span class="lineNum">     343 </span>            :                   ),</a>
-<a name="344"><span class="lineNum">     344 </span>            :                 );</a>
-<a name="345"><span class="lineNum">     345 </span>            :               },</a>
-<a name="346"><span class="lineNum">     346 </span>            :             ),</a>
-<a name="347"><span class="lineNum">     347 </span>            :           );</a>
-<a name="348"><span class="lineNum">     348 </span>            :         } else {</a>
-<a name="349"><span class="lineNum">     349 </span><span class="lineNoCov">          0 :           return Container();</span></a>
-<a name="350"><span class="lineNum">     350 </span>            :         }</a>
-<a name="351"><span class="lineNum">     351 </span>            :       },</a>
-<a name="352"><span class="lineNum">     352 </span>            :     );</a>
-<a name="353"><span class="lineNum">     353 </span>            :   }</a>
-<a name="354"><span class="lineNum">     354 </span>            : }</a>
+<a name="316"><span class="lineNum">     316 </span><span class="lineCov">          1 :         if (state is TvSeriesRecommendationsFailure) {</span></a>
+<a name="317"><span class="lineNum">     317 </span><span class="lineCov">          1 :           return Text(</span></a>
+<a name="318"><span class="lineNum">     318 </span><span class="lineCov">          1 :             state.message,</span></a>
+<a name="319"><span class="lineNum">     319 </span><span class="lineCov">          1 :             key: Key('error_recommendation_message'),</span></a>
+<a name="320"><span class="lineNum">     320 </span>            :           );</a>
+<a name="321"><span class="lineNum">     321 </span><span class="lineCov">          1 :         } else if (state is TvSeriesRecommendationsSuccess) {</span></a>
+<a name="322"><span class="lineNum">     322 </span><span class="lineCov">          1 :           final recommendations = state.tvSeries;</span></a>
+<a name="323"><span class="lineNum">     323 </span><span class="lineCov">          1 :           return SizedBox(</span></a>
+<a name="324"><span class="lineNum">     324 </span>            :             height: 150,</a>
+<a name="325"><span class="lineNum">     325 </span><span class="lineCov">          1 :             child: ListView.builder(</span></a>
+<a name="326"><span class="lineNum">     326 </span>            :               scrollDirection: Axis.horizontal,</a>
+<a name="327"><span class="lineNum">     327 </span><span class="lineCov">          1 :               itemCount: recommendations.length,</span></a>
+<a name="328"><span class="lineNum">     328 </span><span class="lineCov">          1 :               itemBuilder: (context, index) {</span></a>
+<a name="329"><span class="lineNum">     329 </span><span class="lineCov">          1 :                 final tvSeries = recommendations[index];</span></a>
+<a name="330"><span class="lineNum">     330 </span><span class="lineCov">          1 :                 return Padding(</span></a>
+<a name="331"><span class="lineNum">     331 </span>            :                   padding: const EdgeInsets.all(4),</a>
+<a name="332"><span class="lineNum">     332 </span><span class="lineCov">          1 :                   child: ContentTile(</span></a>
+<a name="333"><span class="lineNum">     333 </span><span class="lineCov">          1 :                     imageUrl: tvSeries.posterPath ?? '',</span></a>
+<a name="334"><span class="lineNum">     334 </span><span class="lineNoCov">          0 :                     onTap: () {</span></a>
+<a name="335"><span class="lineNum">     335 </span><span class="lineNoCov">          0 :                       Navigator.pushReplacementNamed(</span></a>
+<a name="336"><span class="lineNum">     336 </span>            :                         context,</a>
+<a name="337"><span class="lineNum">     337 </span>            :                         TvSeriesDetailPage.ROUTE_NAME,</a>
+<a name="338"><span class="lineNum">     338 </span><span class="lineNoCov">          0 :                         arguments: tvSeries.id,</span></a>
+<a name="339"><span class="lineNum">     339 </span>            :                       );</a>
+<a name="340"><span class="lineNum">     340 </span>            :                     },</a>
+<a name="341"><span class="lineNum">     341 </span>            :                   ),</a>
+<a name="342"><span class="lineNum">     342 </span>            :                 );</a>
+<a name="343"><span class="lineNum">     343 </span>            :               },</a>
+<a name="344"><span class="lineNum">     344 </span>            :             ),</a>
+<a name="345"><span class="lineNum">     345 </span>            :           );</a>
+<a name="346"><span class="lineNum">     346 </span>            :         } else {</a>
+<a name="347"><span class="lineNum">     347 </span>            :           return const CenteredProgressCircularIndicator();</a>
+<a name="348"><span class="lineNum">     348 </span>            :         }</a>
+<a name="349"><span class="lineNum">     349 </span>            :       },</a>
+<a name="350"><span class="lineNum">     350 </span>            :     );</a>
+<a name="351"><span class="lineNum">     351 </span>            :   }</a>
+<a name="352"><span class="lineNum">     352 </span>            : }</a>
 </pre>
       </td>
     </tr>

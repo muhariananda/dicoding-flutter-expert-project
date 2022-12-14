@@ -21,17 +21,12 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
         padding: const EdgeInsets.all(8.0),
         child: BlocBuilder<TopRatedMovieCubit, TopRatedMovieState>(
           builder: (context, state) {
-            if (state is TopRatedMovieInProgress) {
-              return const CenteredProgressCircularIndicator();
-            } else if (state is TopRatedMovieSuccess) {
+            if (state is TopRatedMovieSuccess) {
               return VerticaledMovieList(movies: state.movies);
             } else if (state is TopRatedMovieFailure) {
-              return CenteredText(
-                state.message,
-                key: Key('error_message'),
-              );
+              return CenteredText(state.message);
             } else {
-              return Container();
+              return const CenteredProgressCircularIndicator();
             }
           },
         ),

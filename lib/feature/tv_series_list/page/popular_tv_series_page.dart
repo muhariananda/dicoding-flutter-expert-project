@@ -26,12 +26,9 @@ class _PopularTvSeriesPageState extends State<PopularTvSeriesPage> {
             } else if (state is PopularTvSeriesSuccess) {
               return VerticaledTvSeriesList(tvSeriesList: state.tvSeries);
             } else if (state is PopularTvSeriesFailure) {
-              return CenteredText(
-                state.message,
-                key: Key('error_message'),
-              );
+              return CenteredText(state.message);
             } else {
-              return Container();
+              return const CenteredProgressCircularIndicator();
             }
           },
         ),

@@ -257,9 +257,7 @@ class _MovieRecommendationsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<MovieRecommendationsCubit, MovieRecommendationsState>(
       builder: (context, state) {
-        if (state is MovieRecommendationsInProgress) {
-          return CenteredProgressCircularIndicator();
-        } else if (state is MovieRecommendationsFailure) {
+        if (state is MovieRecommendationsFailure) {
           return Text(
             state.message,
             key: Key('error_recommendation_message'),
@@ -290,7 +288,7 @@ class _MovieRecommendationsList extends StatelessWidget {
             ),
           );
         } else {
-          return Container();
+          return const CenteredProgressCircularIndicator();
         }
       },
     );

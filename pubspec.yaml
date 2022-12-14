@@ -50,10 +50,13 @@ dev_dependencies:
     sdk: flutter
   flutter_test:
     sdk: flutter
-  mockito: ^5.0.8
   flutter_lints: ^2.0.1
   build_runner: ^2.0.4
   bloc_test: ^9.0.0-dev.4
+  mockito: ^5.3.2
+  mocktail: ^0.2.0
+  mockingjay: ^0.2.0
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

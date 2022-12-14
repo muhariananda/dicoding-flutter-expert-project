@@ -21,17 +21,12 @@ class _NowPlayingTvSeriesState extends State<NowPlayingTvSeriesPage> {
         padding: const EdgeInsets.all(8),
         child: BlocBuilder<NowPlayingTvSeriesCubit, NowPlayingTvSeriesState>(
           builder: (context, state) {
-            if (state is NowPayingTvSeriesInProgress) {
-              return const CenteredProgressCircularIndicator();
-            } else if (state is NowPayingTvSeriesSuccess) {
+            if (state is NowPayingTvSeriesSuccess) {
               return VerticaledTvSeriesList(tvSeriesList: state.tvSeriesList);
             } else if (state is NowPayingTvSeriesFailure) {
-              return CenteredText(
-                state.message,
-                key: Key('error_message'),
-              );
+              return CenteredText(state.message);
             } else {
-              return Container();
+              return const CenteredProgressCircularIndicator();
             }
           },
         ),

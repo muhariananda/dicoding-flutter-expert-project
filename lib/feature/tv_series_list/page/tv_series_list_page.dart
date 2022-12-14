@@ -53,17 +53,12 @@ class _TvSeriesListPageState extends State<TvSeriesListPage> {
               ),
               BlocBuilder<NowPlayingTvSeriesCubit, NowPlayingTvSeriesState>(
                 builder: (context, state) {
-                  if (state is NowPayingTvSeriesInProgress) {
-                    return const CenteredProgressCircularIndicator();
-                  } else if (state is NowPayingTvSeriesSuccess) {
+                  if (state is NowPayingTvSeriesSuccess) {
                     return _TvSeriesList(tvSeriesList: state.tvSeriesList);
                   } else if (state is NowPayingTvSeriesFailure) {
-                    return Text(
-                      state.message,
-                      key: Key('error_message'),
-                    );
+                    return Text(state.message);
                   } else {
-                    return Container();
+                    return const CenteredProgressCircularIndicator();
                   }
                 },
               ),
@@ -75,17 +70,14 @@ class _TvSeriesListPageState extends State<TvSeriesListPage> {
               ),
               BlocBuilder<PopularTvSeriesCubit, PopularTvSeriesState>(
                 builder: (context, state) {
-                  if (state is PopularTvSeriesInProgress) {
-                    return const CenteredProgressCircularIndicator();
-                  } else if (state is PopularTvSeriesSuccess) {
+                  if (state is PopularTvSeriesSuccess) {
                     return _TvSeriesList(tvSeriesList: state.tvSeries);
                   } else if (state is PopularTvSeriesFailure) {
                     return Text(
                       state.message,
-                      key: Key('error_message'),
                     );
                   } else {
-                    return Container();
+                    return const CenteredProgressCircularIndicator();
                   }
                 },
               ),
@@ -97,17 +89,12 @@ class _TvSeriesListPageState extends State<TvSeriesListPage> {
               ),
               BlocBuilder<TopRatedTvSeriesCubit, TopRatedTvSeriesState>(
                 builder: (context, state) {
-                  if (state is TopRatedTvSeriesInProgress) {
-                    return const CenteredProgressCircularIndicator();
-                  } else if (state is TopRatedTvSeriesSuccess) {
+                  if (state is TopRatedTvSeriesSuccess) {
                     return _TvSeriesList(tvSeriesList: state.tvSeries);
                   } else if (state is TopRatedTvSeriesFailure) {
-                    return Text(
-                      state.message,
-                      key: Key('error_message'),
-                    );
+                    return Text(state.message);
                   } else {
-                    return Container();
+                    return const CenteredProgressCircularIndicator();
                   }
                 },
               ),
