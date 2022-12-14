@@ -267,6 +267,27 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.2"
+  firebase_analytics:
+    dependency: "direct main"
+    description:
+      name: firebase_analytics
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "10.0.7"
+  firebase_analytics_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_analytics_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.3.15"
+  firebase_analytics_web:
+    dependency: transitive
+    description:
+      name: firebase_analytics_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.5.1+6"
   firebase_core:
     dependency: "direct main"
     description:
@@ -493,13 +514,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.3"
-  mockingjay:
-    dependency: "direct dev"
-    description:
-      name: mockingjay
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.0"
   mockito:
     dependency: "direct dev"
     description:
@@ -508,7 +522,7 @@ packages:
     source: hosted
     version: "5.3.2"
   mocktail:
-    dependency: "direct dev"
+    dependency: transitive
     description:
       name: mocktail
       url: "https://pub.dartlang.org"

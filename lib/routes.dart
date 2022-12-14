@@ -8,7 +8,7 @@ import 'package:ditonton/feature/tv_series_list/page/popular_tv_series_page.dart
 import 'package:ditonton/feature/tv_series_list/page/top_reated_tv_series_page.dart';
 import 'package:ditonton/feature/tv_series_detail/tv_series_detail_page.dart';
 import 'package:ditonton/feature/watchlist/page/watchlist_page.dart';
-import 'package:ditonton/main.dart';
+import 'package:ditonton/tab_container_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +17,7 @@ class Routes {
     return (RouteSettings settings) {
       switch (settings.name) {
         case '/home':
-          return MaterialPageRoute(builder: (_) => MainPage());
+          return MaterialPageRoute(builder: (_) => TabContainerPage());
         case PopularMoviesPage.ROUTE_NAME:
           return CupertinoPageRoute(builder: (_) => PopularMoviesPage());
         case TopRatedMoviesPage.ROUTE_NAME:
