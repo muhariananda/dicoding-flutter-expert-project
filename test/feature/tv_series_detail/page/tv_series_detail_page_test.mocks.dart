@@ -5,7 +5,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i9;
 
-import 'package:bloc/bloc.dart' as _i10;
+import 'package:ditonton/core/tv_series/domain/entities/tv_series_detail.dart'
+    as _i10;
 import 'package:ditonton/core/tv_series/domain/usecase/get_detail_tv_series.dart'
     as _i2;
 import 'package:ditonton/core/tv_series/domain/usecase/get_tv_series_recommendations.dart'
@@ -16,10 +17,11 @@ import 'package:ditonton/core/tv_series/domain/usecase/remove_watchlist_tv_serie
     as _i5;
 import 'package:ditonton/core/tv_series/domain/usecase/save_watchlist_tv_series.dart'
     as _i4;
-import 'package:ditonton/feature/tv_series_detail/bloc/tv_series_detail_bloc.dart'
+import 'package:ditonton/feature/tv_series_detail/cubit/tv_series_detail_cubit.dart'
     as _i6;
 import 'package:ditonton/feature/tv_series_detail/cubit/tv_series_recommendations_cubit.dart'
     as _i8;
+import 'package:flutter_bloc/flutter_bloc.dart' as _i11;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -110,12 +112,12 @@ class _FakeTvSeriesRecommendationsState_6 extends _i1.SmartFake
         );
 }
 
-/// A class which mocks [TvSeriesDetailBloc].
+/// A class which mocks [TvSeriesDetailCubit].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockTvSeriesDetailBloc extends _i1.Mock
-    implements _i6.TvSeriesDetailBloc {
-  MockTvSeriesDetailBloc() {
+class MockTvSeriesDetailCubit extends _i1.Mock
+    implements _i6.TvSeriesDetailCubit {
+  MockTvSeriesDetailCubit() {
     _i1.throwOnMissingStub(this);
   }
 
@@ -171,21 +173,43 @@ class MockTvSeriesDetailBloc extends _i1.Mock
         returnValue: false,
       ) as bool);
   @override
-  void add(_i6.TvSeriesDetailEvent? event) => super.noSuchMethod(
+  _i9.Future<void> fetchTvSeriesDetail(int? id) => (super.noSuchMethod(
         Invocation.method(
-          #add,
-          [event],
+          #fetchTvSeriesDetail,
+          [id],
         ),
-        returnValueForMissingStub: null,
-      );
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
   @override
-  void onEvent(_i6.TvSeriesDetailEvent? event) => super.noSuchMethod(
+  _i9.Future<void> loadWatchlistStatus(int? id) => (super.noSuchMethod(
         Invocation.method(
-          #onEvent,
-          [event],
+          #loadWatchlistStatus,
+          [id],
         ),
-        returnValueForMissingStub: null,
-      );
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+  @override
+  _i9.Future<void> addedToWatchlist(_i10.TvSeriesDetail? tvSeries) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addedToWatchlist,
+          [tvSeries],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+  @override
+  _i9.Future<void> removeFromWatchlist(_i10.TvSeriesDetail? tvSeries) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #removeFromWatchlist,
+          [tvSeries],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
   @override
   void emit(_i6.TvSeriesDetailState? state) => super.noSuchMethod(
         Invocation.method(
@@ -195,40 +219,7 @@ class MockTvSeriesDetailBloc extends _i1.Mock
         returnValueForMissingStub: null,
       );
   @override
-  void on<E extends _i6.TvSeriesDetailEvent>(
-    _i10.EventHandler<E, _i6.TvSeriesDetailState>? handler, {
-    _i10.EventTransformer<E>? transformer,
-  }) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #on,
-          [handler],
-          {#transformer: transformer},
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  void onTransition(
-          _i10.Transition<_i6.TvSeriesDetailEvent, _i6.TvSeriesDetailState>?
-              transition) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onTransition,
-          [transition],
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  _i9.Future<void> close() => (super.noSuchMethod(
-        Invocation.method(
-          #close,
-          [],
-        ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
-  @override
-  void onChange(_i10.Change<_i6.TvSeriesDetailState>? change) =>
+  void onChange(_i11.Change<_i6.TvSeriesDetailState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -266,6 +257,15 @@ class MockTvSeriesDetailBloc extends _i1.Mock
         ),
         returnValueForMissingStub: null,
       );
+  @override
+  _i9.Future<void> close() => (super.noSuchMethod(
+        Invocation.method(
+          #close,
+          [],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
 }
 
 /// A class which mocks [TvSeriesRecommendationsCubit].
@@ -323,7 +323,7 @@ class MockTvSeriesRecommendationsCubit extends _i1.Mock
         returnValueForMissingStub: null,
       );
   @override
-  void onChange(_i10.Change<_i8.TvSeriesRecommendationsState>? change) =>
+  void onChange(_i11.Change<_i8.TvSeriesRecommendationsState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,

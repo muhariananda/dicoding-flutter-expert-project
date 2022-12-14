@@ -1,5 +1,5 @@
 import 'package:ditonton/components/components.dart';
-import 'package:ditonton/feature/tv_series_detail/bloc/tv_series_detail_bloc.dart';
+import 'package:ditonton/feature/tv_series_detail/cubit/tv_series_detail_cubit.dart';
 import 'package:ditonton/feature/tv_series_detail/cubit/tv_series_recommendations_cubit.dart';
 import 'package:ditonton/feature/tv_series_detail/tv_series_detail_page.dart';
 import 'package:flutter/material.dart';
@@ -12,23 +12,23 @@ import '../../../dummy_data/tv_series/dummy_tv_series.dart';
 import 'tv_series_detail_page_test.mocks.dart';
 
 @GenerateMocks([
-  TvSeriesDetailBloc,
+  TvSeriesDetailCubit,
   TvSeriesRecommendationsCubit,
 ])
 void main() {
-  late MockTvSeriesDetailBloc mockTvSeriesDetailBloc;
+  late MockTvSeriesDetailCubit mockTvSeriesDetailCubit;
   late MockTvSeriesRecommendationsCubit mockTvSeriesRecommendationsCubit;
 
   setUp(() {
-    mockTvSeriesDetailBloc = MockTvSeriesDetailBloc();
+    mockTvSeriesDetailCubit = MockTvSeriesDetailCubit();
     mockTvSeriesRecommendationsCubit = MockTvSeriesRecommendationsCubit();
   });
 
   Widget _makeTestableWidget(Widget body) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<TvSeriesDetailBloc>.value(
-          value: mockTvSeriesDetailBloc,
+        BlocProvider<TvSeriesDetailCubit>.value(
+          value: mockTvSeriesDetailCubit,
         ),
         BlocProvider<TvSeriesRecommendationsCubit>.value(
           value: mockTvSeriesRecommendationsCubit,
@@ -43,10 +43,10 @@ void main() {
   testWidgets(
     "Page should display progress bar when states of tv series is null",
     (WidgetTester tester) async {
-      when(mockTvSeriesDetailBloc.stream).thenAnswer(
+      when(mockTvSeriesDetailCubit.stream).thenAnswer(
         (_) => Stream.value(const TvSeriesDetailState()),
       );
-      when(mockTvSeriesDetailBloc.state).thenAnswer(
+      when(mockTvSeriesDetailCubit.state).thenAnswer(
         (_) => TvSeriesDetailState(),
       );
 
@@ -61,10 +61,10 @@ void main() {
   testWidgets(
     "Page should display detail content and 2 listView when state of tv series not null",
     (WidgetTester tester) async {
-      when(mockTvSeriesDetailBloc.stream).thenAnswer(
+      when(mockTvSeriesDetailCubit.stream).thenAnswer(
         (_) => Stream.value(const TvSeriesDetailState()),
       );
-      when(mockTvSeriesDetailBloc.state).thenAnswer(
+      when(mockTvSeriesDetailCubit.state).thenAnswer(
         (_) => TvSeriesDetailState(tvSeries: testTvSeriesDetail),
       );
       when(mockTvSeriesRecommendationsCubit.stream).thenAnswer(
@@ -87,10 +87,10 @@ void main() {
   testWidgets(
     "Page should display text with message when state of error is not null",
     (WidgetTester tester) async {
-      when(mockTvSeriesDetailBloc.stream).thenAnswer(
+      when(mockTvSeriesDetailCubit.stream).thenAnswer(
         (_) => Stream.value(const TvSeriesDetailState()),
       );
-      when(mockTvSeriesDetailBloc.state).thenAnswer(
+      when(mockTvSeriesDetailCubit.state).thenAnswer(
         (_) => TvSeriesDetailState(errorMessage: 'Not found'),
       );
 
@@ -103,10 +103,10 @@ void main() {
   testWidgets(
     "Watchlist button should display add icon when tv series not added to watchlist",
     (WidgetTester tester) async {
-      when(mockTvSeriesDetailBloc.stream).thenAnswer(
+      when(mockTvSeriesDetailCubit.stream).thenAnswer(
         (_) => Stream.value(const TvSeriesDetailState()),
       );
-      when(mockTvSeriesDetailBloc.state).thenAnswer(
+      when(mockTvSeriesDetailCubit.state).thenAnswer(
         (_) => TvSeriesDetailState(
           tvSeries: testTvSeriesDetail,
           watchlistStatus: false,
@@ -130,10 +130,10 @@ void main() {
   testWidgets(
     "Watchlist button should display check icon when tv series is adedd to watchlist",
     (WidgetTester tester) async {
-      when(mockTvSeriesDetailBloc.stream).thenAnswer(
+      when(mockTvSeriesDetailCubit.stream).thenAnswer(
         (_) => Stream.value(const TvSeriesDetailState()),
       );
-      when(mockTvSeriesDetailBloc.state).thenAnswer(
+      when(mockTvSeriesDetailCubit.state).thenAnswer(
         (_) => TvSeriesDetailState(
           tvSeries: testTvSeriesDetail,
           watchlistStatus: true,
@@ -157,7 +157,7 @@ void main() {
   testWidgets(
     "Page should display SnackBar with message when upsertStatus is Success to added",
     (WidgetTester tester) async {
-      when(mockTvSeriesDetailBloc.stream).thenAnswer(
+      when(mockTvSeriesDetailCubit.stream).thenAnswer(
         (_) => Stream.value(
           TvSeriesDetailState(
             tvSeries: testTvSeriesDetail,
@@ -166,7 +166,7 @@ void main() {
           ),
         ),
       );
-      when(mockTvSeriesDetailBloc.state).thenAnswer(
+      when(mockTvSeriesDetailCubit.state).thenAnswer(
         (_) => TvSeriesDetailState(
           tvSeries: testTvSeriesDetail,
           watchlistStatus: false,
@@ -196,7 +196,7 @@ void main() {
   testWidgets(
     "Page should display SnackBar with message when upsertStatus is Success to removed",
     (WidgetTester tester) async {
-      when(mockTvSeriesDetailBloc.stream).thenAnswer(
+      when(mockTvSeriesDetailCubit.stream).thenAnswer(
         (_) => Stream.value(
           TvSeriesDetailState(
             tvSeries: testTvSeriesDetail,
@@ -205,7 +205,7 @@ void main() {
           ),
         ),
       );
-      when(mockTvSeriesDetailBloc.state).thenAnswer(
+      when(mockTvSeriesDetailCubit.state).thenAnswer(
         (_) => TvSeriesDetailState(
           tvSeries: testTvSeriesDetail,
           watchlistStatus: true,
@@ -235,7 +235,7 @@ void main() {
   testWidgets(
     "Page should display AlertDialog when upsertStatus is Failure",
     (WidgetTester tester) async {
-      when(mockTvSeriesDetailBloc.stream).thenAnswer(
+      when(mockTvSeriesDetailCubit.stream).thenAnswer(
         (_) => Stream.value(
           TvSeriesDetailState(
             tvSeries: testTvSeriesDetail,
@@ -244,7 +244,7 @@ void main() {
           ),
         ),
       );
-      when(mockTvSeriesDetailBloc.state).thenAnswer(
+      when(mockTvSeriesDetailCubit.state).thenAnswer(
         (_) => TvSeriesDetailState(
           tvSeries: testTvSeriesDetail,
           watchlistStatus: false,
@@ -275,10 +275,10 @@ void main() {
     testWidgets(
       "Page should display progress bar when the data is InProgress",
       (WidgetTester tester) async {
-        when(mockTvSeriesDetailBloc.stream).thenAnswer(
+        when(mockTvSeriesDetailCubit.stream).thenAnswer(
           (_) => Stream.value(const TvSeriesDetailState()),
         );
-        when(mockTvSeriesDetailBloc.state).thenAnswer(
+        when(mockTvSeriesDetailCubit.state).thenAnswer(
           (_) => TvSeriesDetailState(tvSeries: testTvSeriesDetail),
         );
         when(mockTvSeriesRecommendationsCubit.stream).thenAnswer(
@@ -300,10 +300,10 @@ void main() {
     testWidgets(
       "Page should display error with message when error",
       (WidgetTester tester) async {
-        when(mockTvSeriesDetailBloc.stream).thenAnswer(
+        when(mockTvSeriesDetailCubit.stream).thenAnswer(
           (_) => Stream.value(const TvSeriesDetailState()),
         );
-        when(mockTvSeriesDetailBloc.state).thenAnswer(
+        when(mockTvSeriesDetailCubit.state).thenAnswer(
           (_) => TvSeriesDetailState(tvSeries: testTvSeriesDetail),
         );
         when(mockTvSeriesRecommendationsCubit.stream).thenAnswer(

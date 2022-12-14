@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/core/tv_series/domain/entities/genre.dart';
-import 'package:ditonton/feature/tv_series_detail/bloc/tv_series_detail_bloc.dart';
+import 'package:ditonton/feature/tv_series_detail/cubit/tv_series_detail_cubit.dart';
 import 'package:ditonton/feature/tv_series_detail/cubit/tv_series_recommendations_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,22 +23,22 @@ class TvSeriesDetailPage extends StatefulWidget {
 }
 
 class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
-  TvSeriesDetailBloc get _detailBloc => context.read<TvSeriesDetailBloc>();
+  TvSeriesDetailCubit get _detailCubit => context.read<TvSeriesDetailCubit>();
   TvSeriesRecommendationsCubit get _recommendationCubit =>
       context.read<TvSeriesRecommendationsCubit>();
 
   @override
   void initState() {
     super.initState();
-    _detailBloc
-      ..add(TvSeriesDetailOnRequested(widget.id))
-      ..add(TvSeriesDetailOnCheckedWatchlistStatus(widget.id));
+    _detailCubit
+      ..fetchTvSeriesDetail(widget.id)
+      ..loadWatchlistStatus(widget.id);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocConsumer<TvSeriesDetailBloc, TvSeriesDetailState>(
+      body: BlocConsumer<TvSeriesDetailCubit, TvSeriesDetailState>(
         listener: (context, state) {
           final upsertStatus = state.upsertStatus;
           if (upsertStatus != null) {
@@ -65,7 +65,7 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
             final tvSeries = state.tvSeries!;
             _recommendationCubit.fetchRecommendationsTvSeries(tvSeries.id);
             return DetailContent(
-              bloc: _detailBloc,
+              cubit: _detailCubit,
               tvSeries: tvSeries,
               isAddedWatchlist: state.watchlistStatus,
             );
@@ -84,13 +84,13 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
 }
 
 class DetailContent extends StatelessWidget {
-  final TvSeriesDetailBloc bloc;
+  final TvSeriesDetailCubit cubit;
   final TvSeriesDetail tvSeries;
   final bool isAddedWatchlist;
 
   const DetailContent(
       {Key? key,
-      required this.bloc,
+      required this.cubit,
       required this.tvSeries,
       required this.isAddedWatchlist})
       : super(key: key);
@@ -137,11 +137,11 @@ class DetailContent extends StatelessWidget {
                             ),
                             ElevatedButton(
                               onPressed: () async {
-                                (!isAddedWatchlist)
-                                    ? bloc.add(TvSeriesDetailOnAddedWatchlist(
-                                        tvSeries))
-                                    : bloc.add(TvSeriesDetailOnRemovedWatchlist(
-                                        tvSeries));
+                                if (!isAddedWatchlist) {
+                                  cubit.addedToWatchlist(tvSeries);
+                                } else {
+                                  cubit.removeFromWatchlist(tvSeries);
+                                }
                               },
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,

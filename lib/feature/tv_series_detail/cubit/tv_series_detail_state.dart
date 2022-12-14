@@ -1,4 +1,4 @@
-part of 'tv_series_detail_bloc.dart';
+part of 'tv_series_detail_cubit.dart';
 
 class TvSeriesDetailState extends Equatable {
   final TvSeriesDetail? tvSeries;

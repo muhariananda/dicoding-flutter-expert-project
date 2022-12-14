@@ -3,7 +3,7 @@ import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/components/components.dart';
 import 'package:ditonton/core/movie/domain/entities/genre.dart';
 import 'package:ditonton/core/movie/domain/entities/movie_detail.dart';
-import 'package:ditonton/feature/movie_detail/bloc/movie_detail_bloc.dart';
+import 'package:ditonton/feature/movie_detail/cubit/movie_detail_cubit.dart';
 import 'package:ditonton/feature/movie_detail/cubit/movie_recommendations_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,22 +20,22 @@ class MovieDetailPage extends StatefulWidget {
 }
 
 class _MovieDetailPageState extends State<MovieDetailPage> {
-  MovieDetailBloc get _detailBloc => context.read<MovieDetailBloc>();
+  MovieDetailCubit get _detailCubit => context.read<MovieDetailCubit>();
   MovieRecommendationsCubit get _recommendationsCubit =>
       context.read<MovieRecommendationsCubit>();
 
   @override
   void initState() {
     super.initState();
-    _detailBloc
-      ..add(MovieDetailOnRequested(widget.id))
-      ..add(MovieDetailOnCheckedWatchlistStatus(widget.id));
+    _detailCubit
+      ..fetchMovieDetail(widget.id)
+      ..loadWatchlistStatus(widget.id);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocConsumer<MovieDetailBloc, MovieDetailState>(
+      body: BlocConsumer<MovieDetailCubit, MovieDetailState>(
         listener: (context, state) {
           final upsertStatus = state.upsertStatus;
           if (upsertStatus != null) {
@@ -64,7 +64,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
             return DetailContent(
               movie: movie,
               isAddedToWatchlist: state.watchlistStatus,
-              bloc: _detailBloc,
+              cubit: _detailCubit,
             );
           } else if (state.errorMessage != null) {
             return CenteredText(
@@ -83,13 +83,13 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
 class DetailContent extends StatelessWidget {
   final MovieDetail movie;
   final bool isAddedToWatchlist;
-  final MovieDetailBloc bloc;
+  final MovieDetailCubit cubit;
 
   const DetailContent({
     Key? key,
     required this.movie,
     required this.isAddedToWatchlist,
-    required this.bloc,
+    required this.cubit,
   }) : super(key: key);
 
   @override
@@ -135,16 +135,15 @@ class DetailContent extends StatelessWidget {
                             ElevatedButton(
                               onPressed: () async {
                                 if (!isAddedToWatchlist) {
-                                  bloc.add(MovieDetailOnAddedWatchlist(movie));
+                                  cubit.addedToWatchlist(movie);
                                 } else {
-                                  bloc.add(
-                                      MovieDetailOnRemovedWatchlist(movie));
+                                  cubit.removeFromWatchlist(movie);
                                 }
                               },
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  bloc.state.watchlistStatus
+                                  cubit.state.watchlistStatus
                                       ? Icon(Icons.check)
                                       : Icon(Icons.add),
                                   Text('Watchlist'),

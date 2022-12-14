@@ -5,13 +5,13 @@ import 'package:ditonton/core/tv_series/domain/usecase/get_detail_tv_series.dart
 import 'package:ditonton/core/tv_series/domain/usecase/get_watchlist_status.dart';
 import 'package:ditonton/core/tv_series/domain/usecase/remove_watchlist_tv_series.dart';
 import 'package:ditonton/core/tv_series/domain/usecase/save_watchlist_tv_series.dart';
-import 'package:ditonton/feature/tv_series_detail/bloc/tv_series_detail_bloc.dart';
+import 'package:ditonton/feature/tv_series_detail/cubit/tv_series_detail_cubit.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../../dummy_data/tv_series/dummy_tv_series.dart';
-import 'tv_series_detail_bloc_test.mocks.dart';
+import 'tv_series_detail_cubit_test.mocks.dart';
 
 @GenerateMocks([
   GetDetailTvSeries,
@@ -20,7 +20,7 @@ import 'tv_series_detail_bloc_test.mocks.dart';
   RemoveWatchlistTvSeries,
 ])
 void main() {
-  late TvSeriesDetailBloc bloc;
+  late TvSeriesDetailCubit cubit;
   late MockGetDetailTvSeries mockGetDetailTvSeries;
   late MockGetWatchlistStatus mockGetWatchlistStatus;
   late MockSaveWatchlistTvSeries mockSaveWatchlistTvSeries;
@@ -31,7 +31,7 @@ void main() {
     mockGetWatchlistStatus = MockGetWatchlistStatus();
     mockSaveWatchlistTvSeries = MockSaveWatchlistTvSeries();
     mockRemoveWatchlistTvSeries = MockRemoveWatchlistTvSeries();
-    bloc = TvSeriesDetailBloc(
+    cubit = TvSeriesDetailCubit(
       getDetailTvSeries: mockGetDetailTvSeries,
       getWatchlistStatus: mockGetWatchlistStatus,
       saveWatchlistTvSeries: mockSaveWatchlistTvSeries,
@@ -39,66 +39,69 @@ void main() {
     );
   });
 
-  group('Get detail tv series,', () {
+  group('Get tv series detail,', () {
     final tId = 1;
     final tTvSeriesDetailState = TvSeriesDetailState();
 
-    blocTest<TvSeriesDetailBloc, TvSeriesDetailState>(
-      'should emits [TvSeriesDetailState] with tv series data when TvSeriesDetailOnRequested is added.',
+    test('initial state should be [MovieDetailState]', () {
+      expect(cubit.state, TvSeriesDetailState());
+    });
+
+    blocTest<TvSeriesDetailCubit, TvSeriesDetailState>(
+      'should emit [TvSeriesDetailState] with tv series data when data is gotten successfully',
       build: () {
         when(mockGetDetailTvSeries.execute(tId))
             .thenAnswer((_) async => Right(testTvSeriesDetail));
-        return bloc;
+        return cubit;
       },
-      act: (bloc) => bloc.add(TvSeriesDetailOnRequested(tId)),
+      act: (cubit) => cubit.fetchTvSeriesDetail(tId),
       expect: () => <TvSeriesDetailState>[
         tTvSeriesDetailState,
-        tTvSeriesDetailState.copyWith(
-          tvSeries: testTvSeriesDetail,
-        ),
+        tTvSeriesDetailState.copyWith(tvSeries: testTvSeriesDetail),
       ],
+      verify: (_) {
+        verify(mockGetDetailTvSeries.execute(tId));
+      },
     );
 
-    blocTest<TvSeriesDetailBloc, TvSeriesDetailState>(
-      'should emits [TvSeriesDetailState] with error message when TvSeriesDetailOnRequested is added.',
+    blocTest<TvSeriesDetailCubit, TvSeriesDetailState>(
+      'should emit [TvSeriesDetailState] with error message when data is gotten unsuccesfull',
       build: () {
-        when(mockGetDetailTvSeries.execute(tId)).thenAnswer(
-          (_) async => Left(ServerFailure('Not found')),
-        );
-
-        return bloc;
+        when(mockGetDetailTvSeries.execute(tId))
+            .thenAnswer((_) async => Left(ServerFailure('Not found')));
+        return cubit;
       },
-      act: (bloc) => bloc.add(TvSeriesDetailOnRequested(tId)),
+      act: (cubit) => cubit.fetchTvSeriesDetail(tId),
       expect: () => <TvSeriesDetailState>[
         tTvSeriesDetailState,
-        tTvSeriesDetailState.copyWith(
-          errorMessage: 'Not found',
-        ),
+        tTvSeriesDetailState.copyWith(errorMessage: 'Not found'),
       ],
+      verify: (_) {
+        verify(mockGetDetailTvSeries.execute(tId));
+      },
     );
   });
 
-  group('Save watchlist tv series', () {
-    final tTvDetailState = TvSeriesDetailState(
-      upsertStatus: TvSeriesDetailUpsertSuccess('Added to Watchlist'),
+  group('Save watchlist tv series,', () {
+    final tTvSeriesDetailState = TvSeriesDetailState(
+      upsertStatus: TvSeriesDetailUpsertSuccess('Added to watchlist'),
     );
 
-    blocTest<TvSeriesDetailBloc, TvSeriesDetailState>(
-      'should emit [TvSeriesDetailState] with success watchlist message when added TvSeriesDetailOnAddedWatchlist event',
+    blocTest<TvSeriesDetailCubit, TvSeriesDetailState>(
+      'should emit [TvSeriesDetailState] with success upsert status when added is success',
       build: () {
         when(mockSaveWatchlistTvSeries.execute(testTvSeriesDetail))
-            .thenAnswer((_) async => Right('Added to Watchlist'));
+            .thenAnswer((_) async => Right('Added to watchlist'));
         when(mockGetWatchlistStatus.execute(testTvSeriesDetail.id))
             .thenAnswer((_) async => true);
-        return bloc;
+        return cubit;
       },
-      act: (bloc) =>
-          bloc.add(TvSeriesDetailOnAddedWatchlist(testTvSeriesDetail)),
+      act: (cubit) => cubit.addedToWatchlist(testTvSeriesDetail),
       expect: () => <TvSeriesDetailState>[
-        tTvDetailState,
-        tTvDetailState.copyWith(
+        tTvSeriesDetailState,
+        tTvSeriesDetailState.copyWith(
           watchlistStatus: true,
-        ),
+        )
       ],
       verify: (_) {
         verify(mockSaveWatchlistTvSeries.execute(testTvSeriesDetail));
@@ -106,21 +109,19 @@ void main() {
       },
     );
 
-    blocTest<TvSeriesDetailBloc, TvSeriesDetailState>(
-      'should emit [TvSeriesDetailState] with failure watchlist message when added TvSeriesDetailOnAddedWatchlist event',
+    blocTest<TvSeriesDetailCubit, TvSeriesDetailState>(
+      'should emit [TvSeriesDetailState] with failure upsert status when added is unsuccess',
       build: () {
         when(mockSaveWatchlistTvSeries.execute(testTvSeriesDetail))
             .thenAnswer((_) async => Left(DatabaseFailure('Failure')));
         when(mockGetWatchlistStatus.execute(testTvSeriesDetail.id))
             .thenAnswer((_) async => false);
-        return bloc;
+        return cubit;
       },
-      act: (bloc) =>
-          bloc.add(TvSeriesDetailOnAddedWatchlist(testTvSeriesDetail)),
+      act: (cubit) => cubit.addedToWatchlist(testTvSeriesDetail),
       expect: () => <TvSeriesDetailState>[
-        tTvDetailState.copyWith(
-          upsertStatus: TvSeriesDetailUpsertFailure('Failure'),
-        ),
+        tTvSeriesDetailState.copyWith(
+            upsertStatus: TvSeriesDetailUpsertFailure('Failure'))
       ],
       verify: (_) {
         verify(mockSaveWatchlistTvSeries.execute(testTvSeriesDetail));
@@ -129,51 +130,50 @@ void main() {
     );
   });
 
-  group('Remove watchlist tv series,', () {
+  group('Remove watchlist tv series', () {
     final tTvSeriesDetailState = TvSeriesDetailState(
       upsertStatus: TvSeriesDetailUpsertFailure('Failure'),
     );
 
-    blocTest<TvSeriesDetailBloc, TvSeriesDetailState>(
-      'should emits [TvSeriesDetailState] with success message when added TvSeriesOnRemovedWatchlist event',
+    blocTest<TvSeriesDetailCubit, TvSeriesDetailState>(
+      'should emit [TvSeriesDetailState] with success upsert status when added is success',
       build: () {
         when(mockRemoveWatchlistTvSeries.execute(testTvSeriesDetail))
-            .thenAnswer((_) async => Right('Removed from Watchlist'));
+            .thenAnswer((_) async => Right('Remove from watchlist'));
         when(mockGetWatchlistStatus.execute(testTvSeriesDetail.id))
             .thenAnswer((_) async => false);
-        return bloc;
+        return cubit;
       },
-      act: (bloc) =>
-          bloc.add(TvSeriesDetailOnRemovedWatchlist(testTvSeriesDetail)),
+      act: (cubit) => cubit.removeFromWatchlist(testTvSeriesDetail),
       expect: () => <TvSeriesDetailState>[
         tTvSeriesDetailState.copyWith(
-            upsertStatus:
-                TvSeriesDetailUpsertSuccess('Removed from Watchlist')),
+            upsertStatus: TvSeriesDetailUpsertSuccess('Remove from watchlist')),
       ],
       verify: (_) {
-        mockRemoveWatchlistTvSeries.execute(testTvSeriesDetail);
-        mockGetWatchlistStatus.execute(testTvSeriesDetail.id);
+        verify(mockRemoveWatchlistTvSeries.execute(testTvSeriesDetail));
+        verify(mockGetWatchlistStatus.execute(testTvSeriesDetail.id));
       },
     );
 
-    blocTest<TvSeriesDetailBloc, TvSeriesDetailState>(
-      'should emits [TvSeriesDetailState] with failure message when added TvSeriesOnRemovedWatchlist event',
+    blocTest<TvSeriesDetailCubit, TvSeriesDetailState>(
+      'should emit [TvSeriesDetailState] with failure upsert status when added is unsuccess',
       build: () {
         when(mockRemoveWatchlistTvSeries.execute(testTvSeriesDetail))
             .thenAnswer((_) async => Left(DatabaseFailure('Failure')));
         when(mockGetWatchlistStatus.execute(testTvSeriesDetail.id))
             .thenAnswer((_) async => true);
-        return bloc;
+        return cubit;
       },
-      act: (bloc) =>
-          bloc.add(TvSeriesDetailOnRemovedWatchlist(testTvSeriesDetail)),
+      act: (cubit) => cubit.removeFromWatchlist(testTvSeriesDetail),
       expect: () => <TvSeriesDetailState>[
         tTvSeriesDetailState,
-        tTvSeriesDetailState.copyWith(watchlistStatus: true),
+        tTvSeriesDetailState.copyWith(
+          watchlistStatus: true,
+        )
       ],
       verify: (_) {
-        mockRemoveWatchlistTvSeries.execute(testTvSeriesDetail);
-        mockGetWatchlistStatus.execute(testTvSeriesDetail.id);
+        verify(mockRemoveWatchlistTvSeries.execute(testTvSeriesDetail));
+        verify(mockGetWatchlistStatus.execute(testTvSeriesDetail.id));
       },
     );
   });

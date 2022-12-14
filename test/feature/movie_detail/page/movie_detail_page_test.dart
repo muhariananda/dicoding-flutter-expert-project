@@ -1,5 +1,5 @@
 import 'package:ditonton/components/components.dart';
-import 'package:ditonton/feature/movie_detail/bloc/movie_detail_bloc.dart';
+import 'package:ditonton/feature/movie_detail/cubit/movie_detail_cubit.dart';
 import 'package:ditonton/feature/movie_detail/cubit/movie_recommendations_cubit.dart';
 import 'package:ditonton/feature/movie_detail/page/movie_detail_page.dart';
 import 'package:flutter/material.dart';
@@ -12,23 +12,23 @@ import '../../../dummy_data/movie/dummy_movie.dart';
 import 'movie_detail_page_test.mocks.dart';
 
 @GenerateMocks([
-  MovieDetailBloc,
+  MovieDetailCubit,
   MovieRecommendationsCubit,
 ])
 void main() {
-  late MockMovieDetailBloc mockMovieDetailBloc;
+  late MockMovieDetailCubit mockMovieDetailCubit;
   late MockMovieRecommendationsCubit mockMovieRecommendationsCubit;
 
   setUp(() {
-    mockMovieDetailBloc = MockMovieDetailBloc();
+    mockMovieDetailCubit = MockMovieDetailCubit();
     mockMovieRecommendationsCubit = MockMovieRecommendationsCubit();
   });
 
   Widget _makeTestableWidget(Widget body) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<MovieDetailBloc>.value(
-          value: mockMovieDetailBloc,
+        BlocProvider<MovieDetailCubit>.value(
+          value: mockMovieDetailCubit,
         ),
         BlocProvider<MovieRecommendationsCubit>.value(
           value: mockMovieRecommendationsCubit,
@@ -43,9 +43,9 @@ void main() {
   testWidgets(
     "Page should display centered progress bar when state of movie is null",
     (WidgetTester tester) async {
-      when(mockMovieDetailBloc.stream)
+      when(mockMovieDetailCubit.stream)
           .thenAnswer((_) => Stream.value(const MovieDetailState()));
-      when(mockMovieDetailBloc.state).thenAnswer((_) => MovieDetailState());
+      when(mockMovieDetailCubit.state).thenAnswer((_) => MovieDetailState());
 
       final progressBarFinder = find.byType(CenteredProgressCircularIndicator);
 
@@ -58,12 +58,12 @@ void main() {
   testWidgets(
     "Page should display Detail Content when state of movie is not null",
     (WidgetTester tester) async {
-      when(mockMovieDetailBloc.stream).thenAnswer(
+      when(mockMovieDetailCubit.stream).thenAnswer(
         (_) => Stream.value(const MovieDetailState()),
       );
       when(mockMovieRecommendationsCubit.stream).thenAnswer(
           (_) => Stream.value(const MovieRecommendationsInProgress()));
-      when(mockMovieDetailBloc.state).thenAnswer(
+      when(mockMovieDetailCubit.state).thenAnswer(
         (_) => MovieDetailState(
           movie: testMovieDetail,
         ),
@@ -83,10 +83,10 @@ void main() {
   testWidgets(
     "Page should display text error message when state of error is not null",
     (WidgetTester tester) async {
-      when(mockMovieDetailBloc.stream).thenAnswer(
+      when(mockMovieDetailCubit.stream).thenAnswer(
         (_) => Stream.value(const MovieDetailState()),
       );
-      when(mockMovieDetailBloc.state).thenAnswer(
+      when(mockMovieDetailCubit.state).thenAnswer(
         (_) => MovieDetailState(
           errorMessage: 'Not found',
         ),
@@ -103,13 +103,13 @@ void main() {
   testWidgets(
       'Watchlist button should display add icon when movie not added to watchlist',
       (WidgetTester tester) async {
-    when(mockMovieDetailBloc.stream).thenAnswer(
+    when(mockMovieDetailCubit.stream).thenAnswer(
       (_) => Stream.value(const MovieDetailState()),
     );
     when(mockMovieRecommendationsCubit.stream).thenAnswer(
       (_) => Stream.value(const MovieRecommendationsInProgress()),
     );
-    when(mockMovieDetailBloc.state).thenAnswer(
+    when(mockMovieDetailCubit.state).thenAnswer(
       (_) => MovieDetailState(
         movie: testMovieDetail,
         watchlistStatus: false,
@@ -129,13 +129,13 @@ void main() {
   testWidgets(
       'Watchlist button should dispay check icon when movie is added to wathclist',
       (WidgetTester tester) async {
-    when(mockMovieDetailBloc.stream).thenAnswer(
+    when(mockMovieDetailCubit.stream).thenAnswer(
       (_) => Stream.value(const MovieDetailState()),
     );
     when(mockMovieRecommendationsCubit.stream).thenAnswer(
       (_) => Stream.value(const MovieRecommendationsInProgress()),
     );
-    when(mockMovieDetailBloc.state).thenAnswer(
+    when(mockMovieDetailCubit.state).thenAnswer(
       (_) => MovieDetailState(
         movie: testMovieDetail,
         watchlistStatus: true,
@@ -155,7 +155,7 @@ void main() {
   testWidgets(
       'Page should display SnackBar with message when upsertStatus is Succes to added',
       (WidgetTester tester) async {
-    when(mockMovieDetailBloc.stream).thenAnswer(
+    when(mockMovieDetailCubit.stream).thenAnswer(
       (_) => Stream.value(
         MovieDetailState(
           movie: testMovieDetail,
@@ -167,7 +167,7 @@ void main() {
     when(mockMovieRecommendationsCubit.stream).thenAnswer(
       (_) => Stream.value(const MovieRecommendationsInProgress()),
     );
-    when(mockMovieDetailBloc.state).thenAnswer(
+    when(mockMovieDetailCubit.state).thenAnswer(
       (_) => MovieDetailState(
         movie: testMovieDetail,
         watchlistStatus: false,
@@ -192,7 +192,7 @@ void main() {
   testWidgets(
       'Page should display Snackbar with message when UpsertStatus is Success to removed',
       (WidgetTester tester) async {
-    when(mockMovieDetailBloc.stream).thenAnswer(
+    when(mockMovieDetailCubit.stream).thenAnswer(
       (_) => Stream.value(
         MovieDetailState(
           movie: testMovieDetail,
@@ -204,7 +204,7 @@ void main() {
     when(mockMovieRecommendationsCubit.stream).thenAnswer(
       (_) => Stream.value(const MovieRecommendationsInProgress()),
     );
-    when(mockMovieDetailBloc.state).thenAnswer(
+    when(mockMovieDetailCubit.state).thenAnswer(
       (_) => MovieDetailState(
         movie: testMovieDetail,
         watchlistStatus: true,
@@ -230,7 +230,7 @@ void main() {
   testWidgets(
     'Page should display AlertDialog when UpsertStatus is Failure',
     (WidgetTester tester) async {
-      when(mockMovieDetailBloc.stream).thenAnswer(
+      when(mockMovieDetailCubit.stream).thenAnswer(
         (_) => Stream.value(
           MovieDetailState(
             movie: testMovieDetail,
@@ -242,7 +242,7 @@ void main() {
       when(mockMovieRecommendationsCubit.stream).thenAnswer(
         (_) => Stream.value(const MovieRecommendationsInProgress()),
       );
-      when(mockMovieDetailBloc.state).thenAnswer(
+      when(mockMovieDetailCubit.state).thenAnswer(
         (_) => MovieDetailState(
           movie: testMovieDetail,
           upsertStatus: MovieDetailUpsertFailure('Failure'),
@@ -270,13 +270,13 @@ void main() {
     testWidgets(
       "should display centered progress bar when data is Loading",
       (WidgetTester tester) async {
-        when(mockMovieDetailBloc.stream).thenAnswer(
+        when(mockMovieDetailCubit.stream).thenAnswer(
           (_) => Stream.value(const MovieDetailState()),
         );
         when(mockMovieRecommendationsCubit.stream).thenAnswer(
           (_) => Stream.value(const MovieRecommendationsInProgress()),
         );
-        when(mockMovieDetailBloc.state).thenAnswer(
+        when(mockMovieDetailCubit.state).thenAnswer(
           (_) => MovieDetailState(
             movie: testMovieDetail,
           ),
@@ -297,13 +297,13 @@ void main() {
     testWidgets(
       "should display ListView when data was Loaded",
       (WidgetTester tester) async {
-        when(mockMovieDetailBloc.stream).thenAnswer(
+        when(mockMovieDetailCubit.stream).thenAnswer(
           (_) => Stream.value(const MovieDetailState()),
         );
         when(mockMovieRecommendationsCubit.stream).thenAnswer(
           (_) => Stream.value(const MovieRecommendationsInProgress()),
         );
-        when(mockMovieDetailBloc.state).thenAnswer(
+        when(mockMovieDetailCubit.state).thenAnswer(
           (_) => MovieDetailState(
             movie: testMovieDetail,
           ),
@@ -323,13 +323,13 @@ void main() {
     testWidgets(
       "should display text with message when error",
       (WidgetTester tester) async {
-        when(mockMovieDetailBloc.stream).thenAnswer(
+        when(mockMovieDetailCubit.stream).thenAnswer(
           (_) => Stream.value(const MovieDetailState()),
         );
         when(mockMovieRecommendationsCubit.stream).thenAnswer(
           (_) => Stream.value(const MovieRecommendationsInProgress()),
         );
-        when(mockMovieDetailBloc.state).thenAnswer(
+        when(mockMovieDetailCubit.state).thenAnswer(
           (_) => MovieDetailState(
             movie: testMovieDetail,
           ),

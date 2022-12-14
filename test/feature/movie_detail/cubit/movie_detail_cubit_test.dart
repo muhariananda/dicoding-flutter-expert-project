@@ -5,13 +5,13 @@ import 'package:ditonton/core/movie/domain/usecase/get_movie_detail.dart';
 import 'package:ditonton/core/movie/domain/usecase/get_watchlist_status.dart';
 import 'package:ditonton/core/movie/domain/usecase/remove_watchlist.dart';
 import 'package:ditonton/core/movie/domain/usecase/save_watchlist.dart';
-import 'package:ditonton/feature/movie_detail/bloc/movie_detail_bloc.dart';
+import 'package:ditonton/feature/movie_detail/cubit/movie_detail_cubit.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../../dummy_data/movie/dummy_movie.dart';
-import 'movie_detail_bloc_test.mocks.dart';
+import 'movie_detail_cubit_test.mocks.dart';
 
 @GenerateMocks([
   GetMovieDetail,
@@ -20,7 +20,7 @@ import 'movie_detail_bloc_test.mocks.dart';
   RemoveWatchlist,
 ])
 void main() {
-  late MovieDetailBloc bloc;
+  late MovieDetailCubit cubit;
   late MockGetMovieDetail mockGetMovieDetail;
   late MockGetWatchListStatus mockGetWatchListStatus;
   late MockSaveWatchlist mockSaveWatchlist;
@@ -31,7 +31,7 @@ void main() {
     mockGetWatchListStatus = MockGetWatchListStatus();
     mockSaveWatchlist = MockSaveWatchlist();
     mockRemoveWatchlist = MockRemoveWatchlist();
-    bloc = MovieDetailBloc(
+    cubit = MovieDetailCubit(
       getMovieDetail: mockGetMovieDetail,
       getWatchListStatus: mockGetWatchListStatus,
       saveWatchlist: mockSaveWatchlist,
@@ -43,69 +43,63 @@ void main() {
     final tId = 1;
     final tMovieDetailState = MovieDetailState();
 
-    blocTest<MovieDetailBloc, MovieDetailState>(
-      'should emits [MovieDetailState] with movie data '
-      'when added MovieDetailOnRequested event is gotten successfully',
+    test('initial state should be [MovieDetailState]', () {
+      expect(cubit.state, MovieDetailState());
+    });
+
+    blocTest<MovieDetailCubit, MovieDetailState>(
+      'should emit [MovieDetailState] with movie data when data is gotten successfully',
       build: () {
         when(mockGetMovieDetail.execute(tId))
             .thenAnswer((_) async => Right(testMovieDetail));
-        return bloc;
+        return cubit;
       },
-      act: (bloc) => bloc.add(MovieDetailOnRequested(tId)),
+      act: (cubit) => cubit.fetchMovieDetail(tId),
       expect: () => <MovieDetailState>[
         tMovieDetailState,
-        tMovieDetailState.copyWith(
-          movie: testMovieDetail,
-        ),
+        tMovieDetailState.copyWith(movie: testMovieDetail),
       ],
       verify: (_) {
-        mockGetMovieDetail.execute(tId);
+        verify(mockGetMovieDetail.execute(tId));
       },
     );
 
-    blocTest<MovieDetailBloc, MovieDetailState>(
-      'should emits [MovieDetailState] with error message '
-      'when added MovieDetailOnRequested event is gotten unsuccesful',
+    blocTest<MovieDetailCubit, MovieDetailState>(
+      'shoudl emit [MovieDetailState] with failure message when data is gotten unsuccessful',
       build: () {
         when(mockGetMovieDetail.execute(tId))
             .thenAnswer((_) async => Left(ServerFailure('Not found')));
-        return bloc;
+        return cubit;
       },
-      act: (bloc) => bloc.add(MovieDetailOnRequested(tId)),
+      act: (cubit) => cubit.fetchMovieDetail(tId),
       expect: () => <MovieDetailState>[
         tMovieDetailState,
-        tMovieDetailState.copyWith(
-          errorMessage: 'Not found',
-        ),
+        tMovieDetailState.copyWith(errorMessage: 'Not found'),
       ],
       verify: (_) {
-        mockGetMovieDetail.execute(tId);
+        verify(mockGetMovieDetail.execute(tId));
       },
     );
   });
 
-  group('Save movie to watchlist,', () {
-    final tMoveiDetailState = MovieDetailState(
-      upsertStatus: MovieDetailUpsertSuccess('Added to Watchlist'),
-      watchlistStatus: false,
+  group('Save watchlist movie,', () {
+    final tMovieDetailState = MovieDetailState(
+      upsertStatus: MovieDetailUpsertSuccess('Added to watchlist'),
     );
 
-    blocTest<MovieDetailBloc, MovieDetailState>(
-      'should emits [MovieDetailState] with success message '
-      'when added MovieDetailOnAddedWatchlist event is gotten successfully',
+    blocTest<MovieDetailCubit, MovieDetailState>(
+      'should emit [MovieDetailState] with upsertStatus is success',
       build: () {
         when(mockSaveWatchlist.execute(testMovieDetail))
-            .thenAnswer((_) async => Right('Added to Watchlist'));
+            .thenAnswer((_) async => Right('Added to watchlist'));
         when(mockGetWatchListStatus.execute(testMovieDetail.id))
             .thenAnswer((_) async => true);
-        return bloc;
+        return cubit;
       },
-      act: (bloc) => bloc.add(MovieDetailOnAddedWatchlist(testMovieDetail)),
+      act: (cubit) => cubit.addedToWatchlist(testMovieDetail),
       expect: () => <MovieDetailState>[
-        tMoveiDetailState,
-        tMoveiDetailState.copyWith(
-          watchlistStatus: true,
-        ),
+        tMovieDetailState,
+        tMovieDetailState.copyWith(watchlistStatus: true),
       ],
       verify: (_) {
         verify(mockSaveWatchlist.execute(testMovieDetail));
@@ -113,19 +107,18 @@ void main() {
       },
     );
 
-    blocTest<MovieDetailBloc, MovieDetailState>(
-      'should emits [MovieDetailState] with error message '
-      'when added MovieDetailOnAddedWatchlist event is gotten unsuccessful',
+    blocTest<MovieDetailCubit, MovieDetailState>(
+      'should emit [MovieDetailState] with upsertStatus is unsuccess',
       build: () {
         when(mockSaveWatchlist.execute(testMovieDetail))
             .thenAnswer((_) async => Left(DatabaseFailure('Failure')));
         when(mockGetWatchListStatus.execute(testMovieDetail.id))
             .thenAnswer((_) async => false);
-        return bloc;
+        return cubit;
       },
-      act: (bloc) => bloc.add(MovieDetailOnAddedWatchlist(testMovieDetail)),
+      act: (cubit) => cubit.addedToWatchlist(testMovieDetail),
       expect: () => <MovieDetailState>[
-        tMoveiDetailState.copyWith(
+        tMovieDetailState.copyWith(
           upsertStatus: MovieDetailUpsertFailure('Failure'),
         ),
       ],
@@ -136,25 +129,25 @@ void main() {
     );
   });
 
-  group('Remove movie from watchlist,', () {
+  group('Remove watchlist movie,', () {
     final tMovieDetailState = MovieDetailState(
       upsertStatus: MovieDetailUpsertFailure('Failure'),
     );
 
-    blocTest<MovieDetailBloc, MovieDetailState>(
-      'should emits [MovieDetailState] with success message '
-      'when added MovieDetailOnRemovedWatchlist event is gotten successfully.',
+    blocTest<MovieDetailCubit, MovieDetailState>(
+      'should emit [MovieDetailState] with upsertStatus is success',
       build: () {
         when(mockRemoveWatchlist.execute(testMovieDetail))
-            .thenAnswer((_) async => Right('Removed from Watchlist'));
+            .thenAnswer((_) async => Right('Remove from watchlist'));
         when(mockGetWatchListStatus.execute(testMovieDetail.id))
             .thenAnswer((_) async => false);
-        return bloc;
+        return cubit;
       },
-      act: (bloc) => bloc.add(MovieDetailOnRemovedWatchlist(testMovieDetail)),
+      act: (cubit) => cubit.removeFromWatchlist(testMovieDetail),
       expect: () => <MovieDetailState>[
         tMovieDetailState.copyWith(
-            upsertStatus: MovieDetailUpsertSuccess('Removed from Watchlist')),
+          upsertStatus: MovieDetailUpsertSuccess('Remove from watchlist'),
+        )
       ],
       verify: (_) {
         verify(mockRemoveWatchlist.execute(testMovieDetail));
@@ -162,20 +155,21 @@ void main() {
       },
     );
 
-    blocTest<MovieDetailBloc, MovieDetailState>(
-      'should emits [MovieDetailState] with error message '
-      'when added MovieDetailOnRemovedWatchlist event is gotten unsuccessful.',
+    blocTest<MovieDetailCubit, MovieDetailState>(
+      'should emit [MovieDetailState] with upsertStatus is unsuccess',
       build: () {
         when(mockRemoveWatchlist.execute(testMovieDetail))
             .thenAnswer((_) async => Left(DatabaseFailure('Failure')));
         when(mockGetWatchListStatus.execute(testMovieDetail.id))
             .thenAnswer((_) async => true);
-        return bloc;
+        return cubit;
       },
-      act: (bloc) => bloc.add(MovieDetailOnRemovedWatchlist(testMovieDetail)),
+      act: (cubit) => cubit.removeFromWatchlist(testMovieDetail),
       expect: () => <MovieDetailState>[
         tMovieDetailState,
-        tMovieDetailState.copyWith(watchlistStatus: true),
+        tMovieDetailState.copyWith(
+          watchlistStatus: true,
+        )
       ],
       verify: (_) {
         verify(mockRemoveWatchlist.execute(testMovieDetail));

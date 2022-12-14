@@ -1,4 +1,4 @@
-part of 'movie_detail_bloc.dart';
+part of 'movie_detail_cubit.dart';
 
 class MovieDetailState extends Equatable {
   final MovieDetail? movie;

@@ -1,11 +1,11 @@
 import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/feature/movie_detail/bloc/movie_detail_bloc.dart';
+import 'package:ditonton/feature/movie_detail/cubit/movie_detail_cubit.dart';
 import 'package:ditonton/feature/movie_detail/cubit/movie_recommendations_cubit.dart';
 import 'package:ditonton/feature/movie_list/cubit/popular_movie_cubit.dart';
 import 'package:ditonton/feature/movie_list/cubit/top_rated_movie_cubit.dart';
 import 'package:ditonton/feature/search/bloc/search_movie_bloc.dart';
 import 'package:ditonton/feature/search/bloc/search_tv_series_bloc.dart';
-import 'package:ditonton/feature/tv_series_detail/bloc/tv_series_detail_bloc.dart';
+import 'package:ditonton/feature/tv_series_detail/cubit/tv_series_detail_cubit.dart';
 import 'package:ditonton/feature/tv_series_detail/cubit/tv_series_recommendations_cubit.dart';
 import 'package:ditonton/feature/tv_series_list/cubit/now_playing_tv_series_cubit.dart';
 import 'package:ditonton/feature/tv_series_list/cubit/popular_tv_series_cubit.dart';
@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
           create: (_) => di.locator<SearchMovieBloc>(),
         ),
         BlocProvider(
-          create: (_) => di.locator<MovieDetailBloc>(),
+          create: (_) => di.locator<MovieDetailCubit>(),
         ),
         BlocProvider(
           create: (_) => di.locator<MovieRecommendationsCubit>(),
@@ -82,7 +82,7 @@ class MyApp extends StatelessWidget {
           create: (_) => di.locator<SearchTvSeriesBloc>(),
         ),
         BlocProvider(
-          create: (_) => di.locator<TvSeriesDetailBloc>(),
+          create: (_) => di.locator<TvSeriesDetailCubit>(),
         ),
         BlocProvider(
           create: (_) => di.locator<TvSeriesRecommendationsCubit>(),

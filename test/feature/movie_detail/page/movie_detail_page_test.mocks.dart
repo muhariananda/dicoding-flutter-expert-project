@@ -5,7 +5,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i9;
 
-import 'package:bloc/bloc.dart' as _i10;
+import 'package:ditonton/core/movie/domain/entities/movie_detail.dart' as _i10;
 import 'package:ditonton/core/movie/domain/usecase/get_movie_detail.dart'
     as _i2;
 import 'package:ditonton/core/movie/domain/usecase/get_movie_recommendations.dart'
@@ -15,10 +15,11 @@ import 'package:ditonton/core/movie/domain/usecase/get_watchlist_status.dart'
 import 'package:ditonton/core/movie/domain/usecase/remove_watchlist.dart'
     as _i5;
 import 'package:ditonton/core/movie/domain/usecase/save_watchlist.dart' as _i4;
-import 'package:ditonton/feature/movie_detail/bloc/movie_detail_bloc.dart'
+import 'package:ditonton/feature/movie_detail/cubit/movie_detail_cubit.dart'
     as _i6;
 import 'package:ditonton/feature/movie_detail/cubit/movie_recommendations_cubit.dart'
     as _i8;
+import 'package:flutter_bloc/flutter_bloc.dart' as _i11;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -108,11 +109,11 @@ class _FakeMovieRecommendationsState_6 extends _i1.SmartFake
         );
 }
 
-/// A class which mocks [MovieDetailBloc].
+/// A class which mocks [MovieDetailCubit].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockMovieDetailBloc extends _i1.Mock implements _i6.MovieDetailBloc {
-  MockMovieDetailBloc() {
+class MockMovieDetailCubit extends _i1.Mock implements _i6.MovieDetailCubit {
+  MockMovieDetailCubit() {
     _i1.throwOnMissingStub(this);
   }
 
@@ -167,21 +168,43 @@ class MockMovieDetailBloc extends _i1.Mock implements _i6.MovieDetailBloc {
         returnValue: false,
       ) as bool);
   @override
-  void add(_i6.MovieDetailEvent? event) => super.noSuchMethod(
+  _i9.Future<void> fetchMovieDetail(int? id) => (super.noSuchMethod(
         Invocation.method(
-          #add,
-          [event],
+          #fetchMovieDetail,
+          [id],
         ),
-        returnValueForMissingStub: null,
-      );
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
   @override
-  void onEvent(_i6.MovieDetailEvent? event) => super.noSuchMethod(
+  _i9.Future<void> loadWatchlistStatus(int? id) => (super.noSuchMethod(
         Invocation.method(
-          #onEvent,
-          [event],
+          #loadWatchlistStatus,
+          [id],
         ),
-        returnValueForMissingStub: null,
-      );
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+  @override
+  _i9.Future<void> addedToWatchlist(_i10.MovieDetail? movie) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addedToWatchlist,
+          [movie],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+  @override
+  _i9.Future<void> removeFromWatchlist(_i10.MovieDetail? movie) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #removeFromWatchlist,
+          [movie],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
   @override
   void emit(_i6.MovieDetailState? state) => super.noSuchMethod(
         Invocation.method(
@@ -191,40 +214,7 @@ class MockMovieDetailBloc extends _i1.Mock implements _i6.MovieDetailBloc {
         returnValueForMissingStub: null,
       );
   @override
-  void on<E extends _i6.MovieDetailEvent>(
-    _i10.EventHandler<E, _i6.MovieDetailState>? handler, {
-    _i10.EventTransformer<E>? transformer,
-  }) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #on,
-          [handler],
-          {#transformer: transformer},
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  void onTransition(
-          _i10.Transition<_i6.MovieDetailEvent, _i6.MovieDetailState>?
-              transition) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onTransition,
-          [transition],
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  _i9.Future<void> close() => (super.noSuchMethod(
-        Invocation.method(
-          #close,
-          [],
-        ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
-  @override
-  void onChange(_i10.Change<_i6.MovieDetailState>? change) =>
+  void onChange(_i11.Change<_i6.MovieDetailState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -262,6 +252,15 @@ class MockMovieDetailBloc extends _i1.Mock implements _i6.MovieDetailBloc {
         ),
         returnValueForMissingStub: null,
       );
+  @override
+  _i9.Future<void> close() => (super.noSuchMethod(
+        Invocation.method(
+          #close,
+          [],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
 }
 
 /// A class which mocks [MovieRecommendationsCubit].
@@ -318,7 +317,7 @@ class MockMovieRecommendationsCubit extends _i1.Mock
         returnValueForMissingStub: null,
       );
   @override
-  void onChange(_i10.Change<_i8.MovieRecommendationsState>? change) =>
+  void onChange(_i11.Change<_i8.MovieRecommendationsState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
