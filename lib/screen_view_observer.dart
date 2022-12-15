@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'package:ditonton/monitoring/analytics_service.dart';
+import 'package:monitoring/monitoring.dart';
 
 class ScreenViewObserver extends NavigatorObserver {
   final AnalyticsSerivce analyticsSerivce;

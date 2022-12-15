@@ -1,16 +1,13 @@
-import 'package:ditonton/feature/about/about_page.dart';
-import 'package:ditonton/feature/movie_detail/page/movie_detail_page.dart';
-import 'package:ditonton/feature/movie_list/page/popular_movies_page.dart';
-import 'package:ditonton/feature/movie_list/page/top_rated_movies_page.dart';
-import 'package:ditonton/feature/search/page/search_page.dart';
-import 'package:ditonton/feature/tv_series_list/page/now_playing_tv_series_page.dart';
-import 'package:ditonton/feature/tv_series_list/page/popular_tv_series_page.dart';
-import 'package:ditonton/feature/tv_series_list/page/top_reated_tv_series_page.dart';
-import 'package:ditonton/feature/tv_series_detail/tv_series_detail_page.dart';
-import 'package:ditonton/feature/watchlist/page/watchlist_page.dart';
+import 'package:about/about.dart';
 import 'package:ditonton/tab_container_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_detail/movie_detail.dart';
+import 'package:movie_list/movie_list.dart';
+import 'package:search/search.dart';
+import 'package:tv_series_detail/tv_series_detail.dart';
+import 'package:tv_series_list/tv_series_list.dart';
+import 'package:watchlist/watchlist.dart';
 
 class Routes {
   static RouteFactory? routes() {
@@ -18,33 +15,33 @@ class Routes {
       switch (settings.name) {
         case '/home':
           return MaterialPageRoute(builder: (_) => TabContainerPage());
-        case PopularMoviesPage.ROUTE_NAME:
+        case PopularMoviesPage.routeName:
           return CupertinoPageRoute(builder: (_) => PopularMoviesPage());
-        case TopRatedMoviesPage.ROUTE_NAME:
+        case TopRatedMoviesPage.routeName:
           return CupertinoPageRoute(builder: (_) => TopRatedMoviesPage());
-        case MovieDetailPage.ROUTE_NAME:
+        case MovieDetailPage.routeName:
           final id = settings.arguments as int;
           return MaterialPageRoute(
             builder: (_) => MovieDetailPage(id: id),
             settings: settings,
           );
-        case NowPlayingTvSeriesPage.ROUTE_NAME:
+        case NowPlayingTvSeriesPage.routeName:
           return CupertinoPageRoute(builder: (_) => NowPlayingTvSeriesPage());
-        case PopularTvSeriesPage.ROUTE_NAME:
+        case PopularTvSeriesPage.routeName:
           return CupertinoPageRoute(builder: (_) => PopularTvSeriesPage());
-        case TopRatedTvSeriesPage.ROUTE_NAME:
+        case TopRatedTvSeriesPage.routeName:
           return CupertinoPageRoute(builder: (_) => TopRatedTvSeriesPage());
-        case TvSeriesDetailPage.ROUTE_NAME:
+        case TvSeriesDetailPage.routeName:
           final id = settings.arguments as int;
           return MaterialPageRoute(
             builder: (_) => TvSeriesDetailPage(id: id),
             settings: settings,
           );
-        case SearchPage.ROUTE_NAME:
+        case SearchPage.routeName:
           return CupertinoPageRoute(builder: (_) => SearchPage());
-        case WatchlistPage.ROUTE_NAME:
+        case WatchlistPage.routeName:
           return MaterialPageRoute(builder: (_) => WatchlistPage());
-        case AboutPage.ROUTE_NAME:
+        case AboutPage.routeName:
           return MaterialPageRoute(builder: (_) => AboutPage());
         default:
           return MaterialPageRoute(

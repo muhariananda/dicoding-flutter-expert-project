@@ -1,9 +1,9 @@
-import 'package:ditonton/feature/about/about_page.dart';
-import 'package:ditonton/feature/movie_list/page/movie_list_page.dart';
-import 'package:ditonton/feature/search/page/search_page.dart';
-import 'package:ditonton/feature/tv_series_list/page/tv_series_list_page.dart';
-import 'package:ditonton/feature/watchlist/page/watchlist_page.dart';
+import 'package:about/about.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_list/movie_list.dart';
+import 'package:search/search.dart';
+import 'package:tv_series_list/tv_series_list.dart';
+import 'package:watchlist/watchlist.dart';
 
 class TabContainerPage extends StatefulWidget {
   @override
@@ -53,13 +53,13 @@ class _TabContainerPageState extends State<TabContainerPage> {
               title: Text('Watchlist'),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.pushNamed(context, WatchlistPage.ROUTE_NAME);
+                Navigator.pushNamed(context, WatchlistPage.routeName);
               },
             ),
             ListTile(
               onTap: () {
                 Navigator.pop(context);
-                Navigator.pushNamed(context, AboutPage.ROUTE_NAME);
+                Navigator.pushNamed(context, AboutPage.routeName);
               },
               leading: Icon(Icons.info_outline),
               title: Text('About'),
@@ -72,7 +72,7 @@ class _TabContainerPageState extends State<TabContainerPage> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, SearchPage.ROUTE_NAME);
+              Navigator.pushNamed(context, SearchPage.routeName);
             },
             icon: Icon(Icons.search),
           ),

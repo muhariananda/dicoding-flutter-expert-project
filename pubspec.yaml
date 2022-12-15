@@ -23,28 +23,43 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  about:
+    path: packages/features/about
+  component_library:
+    path: packages/component_library
+  db_sqflite:
+    path: packages/core/db_sqflite
+  http_ssl_pinning:
+    path: packages/core/http_ssl_pinning
+  movie_repository:
+    path: packages/core/movie_repository
+  movie_domain:
+    path: packages/core/movie_domain
+  movie_list:
+    path: packages/features/movie_list
+  movie_detail:
+    path: packages/features/movie_detail
+  tv_series_list:
+    path: packages/features/tv_series_list
+  tv_series_detail:
+    path: packages/features/tv_series_detail
+  tv_series_repository:
+    path: packages/core/tv_series_repository
+  tv_series_domain:
+    path: packages/core/tv_series_domain
+  search:
+    path: packages/features/search
+  watchlist:
+    path: packages/features/watchlist
+  monitoring:
+    path: packages/monitoring
 
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  http: ^0.13.3
-  provider: ^6.0.3
-  dartz: ^0.10.0-nullsafety.2
-  equatable: ^2.0.2
-  google_fonts: ^3.0.1
-  flutter_rating_bar: ^4.0.0
-  cached_network_image: ^3.0.0
   get_it: ^7.2.0
-  sqflite: ^2.0.0+3
-  path_provider: ^2.0.2
   flutter_bloc: ^8.1.1
-  rxdart: ^0.27.7
-  bloc_concurrency: ^0.2.0
-  firebase_core: ^2.4.0
-  firebase_crashlytics: ^3.0.7
-  firebase_analytics: ^10.0.7
-  
 
 dev_dependencies:
   integration_test:
@@ -52,9 +67,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.1
-  build_runner: ^2.0.4
-  bloc_test: ^9.0.0-dev.4
-  mockito: ^5.3.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -1,41 +1,27 @@
-import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/feature/movie_detail/cubit/movie_detail_cubit.dart';
-import 'package:ditonton/feature/movie_detail/cubit/movie_recommendations_cubit.dart';
-import 'package:ditonton/feature/movie_list/cubit/popular_movie_cubit.dart';
-import 'package:ditonton/feature/movie_list/cubit/top_rated_movie_cubit.dart';
-import 'package:ditonton/feature/search/bloc/search_movie_bloc.dart';
-import 'package:ditonton/feature/search/bloc/search_tv_series_bloc.dart';
-import 'package:ditonton/feature/tv_series_detail/cubit/tv_series_detail_cubit.dart';
-import 'package:ditonton/feature/tv_series_detail/cubit/tv_series_recommendations_cubit.dart';
-import 'package:ditonton/feature/tv_series_list/cubit/now_playing_tv_series_cubit.dart';
-import 'package:ditonton/feature/tv_series_list/cubit/popular_tv_series_cubit.dart';
-import 'package:ditonton/feature/tv_series_list/cubit/top_rated_tv_series_cubit.dart';
-import 'package:ditonton/feature/watchlist/cubit/watchlist_movie_cubit.dart';
-import 'package:ditonton/feature/watchlist/cubit/watchlist_tv_series_cubit.dart';
-import 'package:ditonton/monitoring/analytics_service.dart';
+import 'package:component_library/component_library.dart';
 import 'package:ditonton/routes.dart';
 import 'package:ditonton/screen_view_observer.dart';
 import 'package:ditonton/tab_container_page.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:ditonton/injection.dart' as di;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ditonton/injection.dart' as di;
-
-import 'common/http_ssl_pinning.dart';
-import 'feature/movie_list/cubit/now_playing_movie_cubit.dart';
-import 'monitoring/firebase_options.dart';
+import 'package:http_ssl_pinning/http_ssl_pinning.dart';
+import 'package:monitoring/monitoring.dart';
+import 'package:movie_detail/movie_detail.dart';
+import 'package:movie_list/movie_list.dart';
+import 'package:search/search.dart';
+import 'package:tv_series_detail/tv_series_detail.dart';
+import 'package:tv_series_list/tv_series_list.dart';
+import 'package:watchlist/watchlist.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await initializeFirebasePackage();
+  await intialiazeHttpSslPinnig();
+  di.init();
 
   // FirebaseCrashlytics.instance.crash();
-
-  HttpSslPinning.init();
-  di.init();
 
   runApp(MyApp());
 }
