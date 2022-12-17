@@ -4,7 +4,6 @@ import 'genre.dart';
 import 'season.dart';
 
 class TvSeriesDetail extends Equatable {
-  
   const TvSeriesDetail({
     required this.id,
     required this.backdropPath,

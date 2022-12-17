@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:tv_series_repository/src/models/models.dart';
 
 void main() {
-  final tTvSeriesDetailResponse = TvSeriesDetailResponse(
+  const tTvSeriesDetailResponse = TvSeriesDetailResponse(
     backdropPath: 'backdropPath',
     firstAirDate: 'firstAirDate',
     genres: [

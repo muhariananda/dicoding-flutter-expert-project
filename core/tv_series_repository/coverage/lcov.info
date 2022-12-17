@@ -44,7 +44,7 @@ LF:28
 LH:28
 end_of_record
 SF:lib/src/models/tv_series_model.dart
-DA:4,4
+DA:4,5
 DA:34,2
 DA:35,2
 DA:36,2
@@ -97,7 +97,7 @@ LF:49
 LH:49
 end_of_record
 SF:lib/src/models/tv_series_response.dart
-DA:6,2
+DA:6,3
 DA:12,1
 DA:13,1
 DA:14,5

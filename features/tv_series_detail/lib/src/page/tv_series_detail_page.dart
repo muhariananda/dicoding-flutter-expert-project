@@ -188,7 +188,7 @@ class DetailContent extends StatelessWidget {
                               'Recommendations',
                               style: kHeading6,
                             ),
-                            const _TvSeriesRecommendationsList(),
+                            _TvSeriesRecommendationsList(),
                           ],
                         ),
                       ),
@@ -230,7 +230,7 @@ class DetailContent extends StatelessWidget {
   String _showGenres(List<Genre> genres) {
     String result = '';
     for (var genre in genres) {
-      result += genre.name + ', ';
+      result += '${genre.name}, ';
     }
 
     if (result.isEmpty) {
@@ -302,10 +302,6 @@ class _SeasonList extends StatelessWidget {
 }
 
 class _TvSeriesRecommendationsList extends StatelessWidget {
-  const _TvSeriesRecommendationsList({
-    Key? key,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TvSeriesRecommendationsCubit,

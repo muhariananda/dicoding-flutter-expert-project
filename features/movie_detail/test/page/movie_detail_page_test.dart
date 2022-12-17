@@ -48,8 +48,7 @@ void main() {
 
       final progressBarFinder = find.byType(CenteredProgressCircularIndicator);
 
-      await tester
-          .pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
+      await tester.pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
 
       expect(progressBarFinder, findsOneWidget);
     },
@@ -74,8 +73,7 @@ void main() {
 
       final contentFinder = find.byType(DetailContent);
 
-      await tester
-          .pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
+      await tester.pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
 
       expect(contentFinder, findsOneWidget);
     },
@@ -95,8 +93,7 @@ void main() {
 
       final textFinder = find.text('Not found');
 
-      await tester
-          .pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
+      await tester.pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
 
       expect(textFinder, findsOneWidget);
     },
@@ -256,8 +253,7 @@ void main() {
 
       final buttonFinder = find.byType(ElevatedButton);
 
-      await tester
-          .pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
+      await tester.pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
 
       expect(buttonFinder, findsOneWidget);
       await tester.ensureVisible(buttonFinder);

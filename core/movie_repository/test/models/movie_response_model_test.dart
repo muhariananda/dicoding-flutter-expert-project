@@ -6,7 +6,7 @@ import 'package:movie_repository/src/models/models.dart';
 import '../json_reader.dart';
 
 void main() {
-  final tMovieModel = MovieModel(
+  const tMovieModel = MovieModel(
     adult: false,
     backdropPath: "/path.jpg",
     genreIds: [1, 2, 3, 4],
@@ -22,9 +22,9 @@ void main() {
     voteCount: 1,
   );
 
-  final tMovieResponseModel =
+  const tMovieResponseModel =
       MovieResponse(movieList: <MovieModel>[tMovieModel]);
-      
+
   group('fromJson', () {
     test('should return a valid model from JSON', () async {
       // arrange

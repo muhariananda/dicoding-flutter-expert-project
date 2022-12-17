@@ -29,7 +29,7 @@ class DatabaseHelper {
     return await openDatabase(databasePath, version: 1, onCreate: _onCreate);
   }
 
-  void _onCreate(Database db, int version) {
+  void _onCreate(Database db, int version) async {
     final initialScripts = [
       '''
       CREATE TABLE $_tblMovieWatchlist (
@@ -49,9 +49,9 @@ class DatabaseHelper {
     ''',
     ];
 
-    initialScripts.forEach((sql) async {
+    for (var sql in initialScripts) {
       await db.execute(sql);
-    });
+    }
   }
 
   Future<int> insertMovieWatchlist(MovieTable movie) async {

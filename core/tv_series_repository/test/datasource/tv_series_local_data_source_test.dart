@@ -39,8 +39,7 @@ void main() {
             .thenAnswer((_) async => 1);
 
         //act
-        final result =
-            await datasource.insertTvSeriesWatchlist(tTvSeriesTable);
+        final result = await datasource.insertTvSeriesWatchlist(tTvSeriesTable);
 
         //assert
         expect(result, 'Added to watchlist');
@@ -72,8 +71,7 @@ void main() {
             .thenAnswer((_) async => 1);
 
         //act
-        final result =
-            await datasource.removeTvSeriesWatchlist(tTvSeriesTable);
+        final result = await datasource.removeTvSeriesWatchlist(tTvSeriesTable);
 
         //assert
         expect(result, 'Removed from watchlist');

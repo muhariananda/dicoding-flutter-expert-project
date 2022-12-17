@@ -3,7 +3,7 @@ import 'package:tv_series_repository/src/models/models.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  final tTvSeriesModel = TvSeriesModel(
+  const tTvSeriesModel = TvSeriesModel(
     backdropPath: 'backdropPath',
     firstAirDate: 'firstAirDate',
     genreIds: [1, 2, 3],

@@ -2,7 +2,7 @@ import 'package:db_sqflite/db_sqflite.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  final tTvSeriesTable = TvSeriesTable(
+  const tTvSeriesTable = TvSeriesTable(
     id: 1,
     name: 'name',
     posterPath: 'posterPath',

@@ -182,7 +182,7 @@ class DetailContent extends StatelessWidget {
                               'Recommendations',
                               style: kHeading6,
                             ),
-                            const _MovieRecommendationsList(),
+                            _MovieRecommendationsList(),
                           ],
                         ),
                       ),
@@ -247,10 +247,6 @@ class DetailContent extends StatelessWidget {
 }
 
 class _MovieRecommendationsList extends StatelessWidget {
-  const _MovieRecommendationsList({
-    Key? key,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MovieRecommendationsCubit, MovieRecommendationsState>(

@@ -31,9 +31,9 @@ class TvSeries extends Equatable {
           originCountry: null,
           originalLanguage: null,
           originalName: null,
-          overview: overview, 
-          popularity: null, 
-          posterPath: posterPath, 
+          overview: overview,
+          popularity: null,
+          posterPath: posterPath,
           voteAverage: null,
           voteCount: null,
         );

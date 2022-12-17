@@ -63,7 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '935198254238',
     projectId: 'ditonton-758a0',
     storageBucket: 'ditonton-758a0.appspot.com',
-    iosClientId: '935198254238-8u3cti2l0l1bor0qdrkeiim8qulgp6t6.apps.googleusercontent.com',
+    iosClientId:
+        '935198254238-8u3cti2l0l1bor0qdrkeiim8qulgp6t6.apps.googleusercontent.com',
     iosBundleId: 'com.dicoding.ditonton',
   );
 }

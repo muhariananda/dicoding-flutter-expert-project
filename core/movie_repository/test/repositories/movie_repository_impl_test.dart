@@ -25,7 +25,7 @@ void main() {
     );
   });
 
-  final tMovieModel = MovieModel(
+  const tMovieModel = MovieModel(
     adult: false,
     backdropPath: '/muth4OYamXf41G2evdrLEg8d3om.jpg',
     genreIds: [14, 28],
@@ -42,7 +42,7 @@ void main() {
     voteCount: 13507,
   );
 
-  final tMovie = Movie(
+  const tMovie = Movie(
     adult: false,
     backdropPath: '/muth4OYamXf41G2evdrLEg8d3om.jpg',
     genreIds: [14, 28],
@@ -59,7 +59,7 @@ void main() {
     voteCount: 13507,
   );
 
-  final tMovieDetail = MovieDetail(
+  const tMovieDetail = MovieDetail(
     adult: false,
     backdropPath: 'backdropPath',
     genres: [Genre(id: 1, name: 'Action')],
@@ -81,7 +81,7 @@ void main() {
     overview: 'overview',
   );
 
-  final tWatchlistMovie = Movie.watchlist(
+  const tWatchlistMovie = Movie.watchlist(
     id: 1,
     title: 'title',
     posterPath: 'posterPath',
@@ -252,7 +252,7 @@ void main() {
       final result = await repository.getMovieDetail(tId);
       // assert
       verify(mockRemoteDataSource.getMovieDetail(tId));
-      expect(result, equals(Right(tMovieDetail)));
+      expect(result, equals(const Right(tMovieDetail)));
     });
 
     test(

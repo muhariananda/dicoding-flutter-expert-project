@@ -1,6 +1,6 @@
 import 'package:movie_domain/movie_domain.dart';
 
-final testMovie = Movie(
+const testMovie = Movie(
   adult: false,
   backdropPath: '/muth4OYamXf41G2evdrLEg8d3om.jpg',
   genreIds: [14, 28],
@@ -19,7 +19,7 @@ final testMovie = Movie(
 
 final testMovieList = [testMovie];
 
-final testMovieDetail = MovieDetail(
+const testMovieDetail = MovieDetail(
   adult: false,
   backdropPath: 'backdropPath',
   genres: [Genre(id: 1, name: 'Action')],

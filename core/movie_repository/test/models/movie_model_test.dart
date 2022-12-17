@@ -4,7 +4,7 @@ import 'package:movie_repository/src/mapper/mapper.dart';
 import 'package:movie_repository/src/models/models.dart';
 
 void main() {
-  final tMovieModel = MovieModel(
+  const tMovieModel = MovieModel(
     adult: false,
     backdropPath: 'backdropPath',
     genreIds: [1, 2, 3],
@@ -20,7 +20,7 @@ void main() {
     voteCount: 1,
   );
 
-  final tMovie = Movie(
+  const tMovie = Movie(
     adult: false,
     backdropPath: 'backdropPath',
     genreIds: [1, 2, 3],
@@ -36,7 +36,7 @@ void main() {
     voteCount: 1,
   );
 
-  test('should be a subclass of Movie entity', () async {
+  test('should map from model to entity', () {
     final result = tMovieModel.toEntity();
     expect(result, tMovie);
   });
