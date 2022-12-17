@@ -35,7 +35,7 @@ void main() {
       expect(searchBarFinder, findsOneWidget);
       await tester.enterText(searchBarFinder, 'Hulk');
       await tester.testTextInput.receiveAction(TextInputAction.done);
-      await tester.pumpAndSettle();
+      await tester.pumpAndSettle(const Duration(seconds: 1));
 
       expect(find.byType(ListView), findsOneWidget);
 
@@ -59,7 +59,7 @@ void main() {
       final tvChipFinder = find.byKey(Key('tv_series_filter_chip'));
       expect(tvChipFinder, findsOneWidget);
       await tester.tap(tvChipFinder);
-      await tester.pumpAndSettle();
+      await tester.pumpAndSettle(const Duration(seconds: 1));
 
       expect(find.byType(ListView), findsOneWidget);
 
@@ -112,7 +112,7 @@ void main() {
       expect(checkIconFinder, findsOneWidget);
       await tester.tap(checkIconFinder);
       await tester.pumpAndSettle();
-      expect(find.text('Removed from watchlist'), findsOneWidget);
+      expect(find.text('Removed from Watchlist'), findsOneWidget);
 
       await tester.tap(find.byIcon(Icons.arrow_back));
       await tester.pumpAndSettle();

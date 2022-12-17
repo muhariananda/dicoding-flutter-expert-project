@@ -1,64 +1,77 @@
-import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/common/utils.dart';
-import 'package:ditonton/feature/tv_series/provider/now_playing_tv_series_notifier.dart';
-import 'package:ditonton/feature/tv_series/provider/tv_series_detail_notifier.dart';
-import 'package:ditonton/feature/home/page/main_page.dart';
-import 'package:ditonton/feature/home/provider/tv_series_list_notifier.dart';
-import 'package:ditonton/feature/tv_series/provider/popular_tv_series_notifier.dart';
-import 'package:ditonton/feature/tv_series/provider/top_rated_tv_series_notifier.dart';
-import 'package:ditonton/feature/movie/provider/movie_detail_notifier.dart';
-import 'package:ditonton/feature/home/provider/movie_list_notifier.dart';
-import 'package:ditonton/feature/search/provider/search_notifier.dart';
-import 'package:ditonton/feature/movie/provider/popular_movies_notifier.dart';
-import 'package:ditonton/feature/movie/provider/top_rated_movies_notifier.dart';
-import 'package:ditonton/feature/watchlist/provider/watchlist_notifier.dart';
+import 'package:component_library/component_library.dart';
 import 'package:ditonton/routes.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:ditonton/screen_view_observer.dart';
+import 'package:ditonton/tab_container_page.dart';
 import 'package:ditonton/injection.dart' as di;
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:http_ssl_pinning/http_ssl_pinning.dart';
+import 'package:monitoring/monitoring.dart';
+import 'package:movie_detail/movie_detail.dart';
+import 'package:movie_list/movie_list.dart';
+import 'package:search/search.dart';
+import 'package:tv_series_detail/tv_series_detail.dart';
+import 'package:tv_series_list/tv_series_list.dart';
+import 'package:watchlist/watchlist.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await initializeFirebasePackage();
+  await intialiazeHttpSslPinnig();
   di.init();
+
+  // FirebaseCrashlytics.instance.crash();
+
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
+    return MultiBlocProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieListNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<NowPlayingMovieCubit>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieDetailNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<PopularMovieCubit>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<SearchNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<TopRatedMovieCubit>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TopRatedMoviesNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<WatchlistMovieCubit>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<PopularMoviesNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<SearchMovieBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<WatchlistNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<MovieDetailCubit>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvSeriesListNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<MovieRecommendationsCubit>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<NowPlayingTvSeriesNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<NowPlayingTvSeriesCubit>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<PopularTvSeriesNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<PopularTvSeriesCubit>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TopRatedTvSeriesNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<TopRatedTvSeriesCubit>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvSeriesDetailNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<WatchlistTvSeriesCubit>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<SearchTvSeriesBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<TvSeriesDetailCubit>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<TvSeriesRecommendationsCubit>(),
         ),
       ],
       child: MaterialApp(
@@ -68,8 +81,12 @@ class MyApp extends StatelessWidget {
           primaryColor: kRichBlack,
           scaffoldBackgroundColor: kRichBlack,
         ),
-        home: MainPage(),
-        navigatorObservers: [routeObserver],
+        home: TabContainerPage(),
+        navigatorObservers: [
+          ScreenViewObserver(
+            analyticsSerivce: AnalyticsSerivce(),
+          ),
+        ],
         onGenerateRoute: Routes.routes(),
       ),
     );

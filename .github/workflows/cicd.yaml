@@ -1,0 +1,30 @@
+name: Test and build
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+permissions: read-all
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone Flutter repository with master channel
+        uses: subosito/flutter-action@v2
+        with:
+          channel: master
+        
+      - name: Run flutter doctor
+        run: flutter doctor -v
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Get all packages and test
+        run: make get && make test
