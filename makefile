@@ -1,6 +1,6 @@
 PACKAGES := $(wildcard packages/*)
-CORES := $(wildcard packages/core/*)
-FEATURES := $(wildcard packages/features/*)
+CORES := $(wildcard core/*)
+FEATURES := $(wildcard features/*)
 
 print:
 	for feature in $(FEATURES); do \
@@ -19,13 +19,13 @@ get:
 		cd $${feature} ; \
 		echo "Updating dependencies on $${feature}" ; \
 		flutter pub get ; \
-		cd ../../../ ; \
+		cd ../../ ; \
 	done
 	for core in $(CORES); do \
 		cd $${core} ; \
 		echo "Updating dependencies on $${core}" ; \
 		flutter pub get ; \
-		cd ../../../ ; \
+		cd ../../ ; \
 	done
 	for package in $(PACKAGES); do \
 		cd $${package} ; \
@@ -46,7 +46,7 @@ upgrade:
 		cd $${core} ; \
 		echo "Upgrading dependencies on $${core}" ; \
 		flutter pub upgrade ; \
-		cd ../../../ ; \
+		cd ../../ ; \
 	done
 	for package in $(PACKAGES); do \
 		cd $${package} ; \
@@ -61,13 +61,13 @@ clean:
 		cd $${feature} ; \
 		echo "Cleaning dependencies on $${feature}" ; \
 		flutter clean ; \
-		cd ../../../ ; \
+		cd ../../ ; \
 	done
 	for core in $(CORES); do \
 		cd $${core} ; \
 		echo "Cleaning dependencies on $${core}" ; \
 		flutter clean ; \
-		cd ../../../ ; \
+		cd ../../ ; \
 	done
 	for package in $(PACKAGES); do \
 		cd $${package} ; \
@@ -87,13 +87,13 @@ test:
 		cd $${feature} ; \
 		echo "Testing dependencies on $${feature}" ; \
 		flutter test ; \
-		cd ../../../ ; \
+		cd ../../ ; \
 	done
 	for core in $(CORES); do \
 		cd $${core} ; \
 		echo "Testing dependencies on $${core}" ; \
 		flutter test ; \
-		cd ../../../ ; \
+		cd ../../ ; \
 	done
 	for package in $(PACKAGES); do \
 		cd $${package} ; \
@@ -107,13 +107,13 @@ test-coverage:
 		cd $${feature} ; \
 		echo "Testing dependencies on $${feature}" ; \
 		flutter test --coverage ; \
-		cd ../../../ ; \
+		cd ../../ ; \
 	done
 	for core in $(CORES); do \
 		cd $${core} ; \
 		echo "Testing dependencies on $${core}" ; \
 		flutter test --coverage ; \
-		cd ../../../ ; \
+		cd ../../ ; \
 	done
 	for package in $(PACKAGES); do \
 		cd $${package} ; \

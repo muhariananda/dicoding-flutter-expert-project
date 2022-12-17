@@ -24,33 +24,33 @@ dependencies:
   flutter:
     sdk: flutter
   about:
-    path: packages/features/about
+    path: features/about
   component_library:
     path: packages/component_library
   db_sqflite:
-    path: packages/core/db_sqflite
+    path: core/db_sqflite
   http_ssl_pinning:
-    path: packages/core/http_ssl_pinning
+    path: core/http_ssl_pinning
   movie_repository:
-    path: packages/core/movie_repository
+    path: core/movie_repository
   movie_domain:
-    path: packages/core/movie_domain
+    path: core/movie_domain
   movie_list:
-    path: packages/features/movie_list
+    path: features/movie_list
   movie_detail:
-    path: packages/features/movie_detail
+    path: features/movie_detail
   tv_series_list:
-    path: packages/features/tv_series_list
+    path: features/tv_series_list
   tv_series_detail:
-    path: packages/features/tv_series_detail
+    path: features/tv_series_detail
   tv_series_repository:
-    path: packages/core/tv_series_repository
+    path: core/tv_series_repository
   tv_series_domain:
-    path: packages/core/tv_series_domain
+    path: core/tv_series_domain
   search:
-    path: packages/features/search
+    path: features/search
   watchlist:
-    path: packages/features/watchlist
+    path: features/watchlist
   monitoring:
     path: packages/monitoring
 

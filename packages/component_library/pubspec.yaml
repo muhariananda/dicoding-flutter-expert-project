@@ -13,13 +13,13 @@ dependencies:
   common:
     path: ../common
   movie_detail:
-    path: ../features/movie_detail
+    path: ../../features/movie_detail
   movie_domain:
-    path: ../core/movie_domain
+    path: ../../core/movie_domain
   tv_series_detail:
-    path: ../features/tv_series_detail
+    path: ../../features/tv_series_detail
   tv_series_domain:
-    path: ../core/tv_series_domain
+    path: ../../core/tv_series_domain
 
 dev_dependencies:
   flutter_test:

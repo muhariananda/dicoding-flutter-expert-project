@@ -210,14 +210,14 @@ packages:
   movie_detail:
     dependency: "direct main"
     description:
-      path: "../features/movie_detail"
+      path: "../../features/movie_detail"
       relative: true
     source: path
     version: "0.0.0"
   movie_domain:
     dependency: "direct main"
     description:
-      path: "../core/movie_domain"
+      path: "../../core/movie_domain"
       relative: true
     source: path
     version: "0.0.0"
@@ -404,14 +404,14 @@ packages:
   tv_series_detail:
     dependency: "direct main"
     description:
-      path: "../features/tv_series_detail"
+      path: "../../features/tv_series_detail"
       relative: true
     source: path
     version: "0.0.0"
   tv_series_domain:
     dependency: "direct main"
     description:
-      path: "../core/tv_series_domain"
+      path: "../../core/tv_series_domain"
       relative: true
     source: path
     version: "0.0.0"
