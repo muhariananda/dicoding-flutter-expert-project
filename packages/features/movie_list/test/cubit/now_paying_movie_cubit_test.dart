@@ -22,7 +22,7 @@ void main() {
 
   group("Get now playing movies,", () {
     test('initial state should be [Loading]', () {
-      expect(cubit.state, const NowPlayingMovieInProgress());
+      expect(cubit.state, NowPlayingMovieInProgress());
     });
 
     blocTest<NowPlayingMovieCubit, NowPlayingMovieState>(

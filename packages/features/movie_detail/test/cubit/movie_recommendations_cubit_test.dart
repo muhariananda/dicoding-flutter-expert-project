@@ -26,7 +26,7 @@ void main() {
     const tId = 1;
 
     test('initial state should be [MovieRecommendationsInProgress]', () {
-      expect(cubit.state, const MovieRecommendationsInProgress());
+      expect(cubit.state, MovieRecommendationsInProgress());
     });
 
     blocTest<MovieRecommendationsCubit, MovieRecommendationsState>(

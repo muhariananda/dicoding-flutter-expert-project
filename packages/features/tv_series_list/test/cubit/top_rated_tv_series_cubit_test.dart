@@ -23,7 +23,7 @@ void main() {
 
   group('Get top rated tv series,', () {
     test('initial state should be [Loading]', () {
-      expect(cubit.state, const TopRatedTvSeriesInProgress());
+      expect(cubit.state, TopRatedTvSeriesInProgress());
     });
 
     blocTest<TopRatedTvSeriesCubit, TopRatedTvSeriesState>(

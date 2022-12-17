@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:tv_series_repository/src/models/models.dart';
 
 void main() {
-  const tTvSeriesModel = TvSeriesModel(
+  final tTvSeriesModel = TvSeriesModel(
     backdropPath: 'backdropPath',
     firstAirDate: 'firstAirDate',
     genreIds: [1, 2, 3],
@@ -18,7 +18,7 @@ void main() {
     voteCount: 1,
   );
 
-  const tTvSeriesResponse =
+  final tTvSeriesResponse =
       TvSeriesResponse(tvSeriesList: <TvSeriesModel>[tTvSeriesModel]);
 
   final tMapTvSeriesResponse = {

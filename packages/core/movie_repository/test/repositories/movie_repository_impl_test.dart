@@ -25,7 +25,7 @@ void main() {
     );
   });
 
-  const tMovieModel = MovieModel(
+  final tMovieModel = MovieModel(
     adult: false,
     backdropPath: '/muth4OYamXf41G2evdrLEg8d3om.jpg',
     genreIds: [14, 28],
@@ -42,7 +42,7 @@ void main() {
     voteCount: 13507,
   );
 
-  const tMovie = Movie(
+  final tMovie = Movie(
     adult: false,
     backdropPath: '/muth4OYamXf41G2evdrLEg8d3om.jpg',
     genreIds: [14, 28],
@@ -81,7 +81,7 @@ void main() {
     overview: 'overview',
   );
 
-  const tWatchlistMovie = Movie.watchlist(
+  final tWatchlistMovie = Movie.watchlist(
     id: 1,
     title: 'title',
     posterPath: 'posterPath',

@@ -26,7 +26,7 @@ void main() {
     const tquery = 'query';
 
     test('initial state should be [SearchTvSeriesInitial]', () {
-      expect(bloc.state, const SearchTvSeriesInitial());
+      expect(bloc.state, SearchTvSeriesInitial());
     });
 
     blocTest<SearchTvSeriesBloc, SearchTvSeriesState>(

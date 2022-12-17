@@ -22,7 +22,7 @@ void main() {
 
   group('Get popular movies,', () {
     test('initial state should be [Loading]', () {
-      expect(cubit.state, const PopularMovieInProgress());
+      expect(cubit.state, PopularMovieInProgress());
     });
 
     blocTest<PopularMovieCubit, PopularMovieState>(

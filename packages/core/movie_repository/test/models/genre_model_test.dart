@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:movie_repository/src/models/models.dart';
 
 void main() {
-  const tGenreModel = GenreModel(
+  final tGenreModel = GenreModel(
     id: 1,
     name: 'name',
   );

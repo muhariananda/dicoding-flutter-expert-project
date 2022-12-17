@@ -24,7 +24,7 @@ void main() {
 
   group('Get now playing tv series,', () {
     test('initial state should be [Loading]', () {
-      expect(cubit.state, const NowPayingTvSeriesInProgress());
+      expect(cubit.state, NowPayingTvSeriesInProgress());
     });
 
     blocTest<NowPlayingTvSeriesCubit, NowPlayingTvSeriesState>(

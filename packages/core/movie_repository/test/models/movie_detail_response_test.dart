@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:movie_repository/src/models/models.dart';
 
 void main() {
-  const tMovieDetailResponse = MovieDetailResponse(
+  final tMovieDetailResponse = MovieDetailResponse(
     adult: true,
     backdropPath: 'backdropPath',
     budget: 1,

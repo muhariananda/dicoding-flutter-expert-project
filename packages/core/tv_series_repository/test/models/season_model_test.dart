@@ -5,7 +5,7 @@ import 'package:tv_series_repository/src/mapper/mappers.dart';
 import 'package:tv_series_repository/src/models/models.dart';
 
 void main() {
-  const tSeasonModel = SeasonModel(
+  final tSeasonModel = SeasonModel(
     airDate: 'airDate',
     episodeCount: 1,
     id: 1,
@@ -25,7 +25,7 @@ void main() {
     'season_number': 1,
   };
 
-  const tSeason = Season(
+  final tSeason = Season(
     airDate: 'airDate',
     episodeCount: 1,
     id: 1,

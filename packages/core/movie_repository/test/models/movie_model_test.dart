@@ -4,7 +4,7 @@ import 'package:movie_repository/src/mapper/mapper.dart';
 import 'package:movie_repository/src/models/models.dart';
 
 void main() {
-  const tMovieModel = MovieModel(
+  final tMovieModel = MovieModel(
     adult: false,
     backdropPath: 'backdropPath',
     genreIds: [1, 2, 3],
@@ -20,7 +20,7 @@ void main() {
     voteCount: 1,
   );
 
-  const tMovie = Movie(
+  final tMovie = Movie(
     adult: false,
     backdropPath: 'backdropPath',
     genreIds: [1, 2, 3],
