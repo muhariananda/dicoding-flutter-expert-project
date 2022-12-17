@@ -6,7 +6,6 @@ on:
       - main
   push:
     branches:
-      - main
       - submission2
 
 permissions: read-all
@@ -28,7 +27,7 @@ jobs:
         uses: actions/checkout@v2
       
       - name: Get all packages and test
-        run: make get && make testing
+        run: make get && make test
   
   android:
     name: Build Android
