@@ -28,13 +28,11 @@ dependencies:
   component_library:
     path: packages/component_library
   db_sqflite:
-    path: core/db_sqflite
+    path: packages/db_sqflite
   http_ssl_pinning:
-    path: core/http_ssl_pinning
-  movie_repository:
-    path: core/movie_repository
-  movie_domain:
-    path: core/movie_domain
+    path: packages/http_ssl_pinning
+  movie_core:
+    path: packages/movie_core
   movie_list:
     path: features/movie_list
   movie_detail:
@@ -43,10 +41,8 @@ dependencies:
     path: features/tv_series_list
   tv_series_detail:
     path: features/tv_series_detail
-  tv_series_repository:
-    path: core/tv_series_repository
-  tv_series_domain:
-    path: core/tv_series_domain
+  tv_series_core:
+    path: packages/tv_series_core
   search:
     path: features/search
   watchlist:
