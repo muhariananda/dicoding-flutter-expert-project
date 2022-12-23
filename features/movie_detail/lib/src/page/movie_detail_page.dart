@@ -3,7 +3,7 @@ import 'package:component_library/component_library.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:movie_domain/movie_domain.dart';
+import 'package:movie_core/movie_core.dart';
 
 import '../cubit/movie_detail_cubit.dart';
 import '../cubit/movie_recommendations_cubit.dart';
@@ -61,7 +61,7 @@ class MovieDetailPageState extends State<MovieDetailPage> {
             final movie = state.movie!;
             _recommendationsCubit.fetchMovieRecommendations(movie.id);
             return DetailContent(
-              movie: movie,
+              displayedMovie: movie,
               isAddedToWatchlist: state.watchlistStatus,
               cubit: _detailCubit,
             );
@@ -80,13 +80,13 @@ class MovieDetailPageState extends State<MovieDetailPage> {
 }
 
 class DetailContent extends StatelessWidget {
-  final MovieDetail movie;
+  final MovieDetail displayedMovie;
   final bool isAddedToWatchlist;
   final MovieDetailCubit cubit;
 
   const DetailContent({
     Key? key,
-    required this.movie,
+    required this.displayedMovie,
     required this.isAddedToWatchlist,
     required this.cubit,
   }) : super(key: key);
@@ -97,7 +97,7 @@ class DetailContent extends StatelessWidget {
     return Stack(
       children: [
         CachedNetworkImage(
-          imageUrl: 'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+          imageUrl: 'https://image.tmdb.org/t/p/w500${displayedMovie.posterPath}',
           width: screenWidth,
           placeholder: (context, url) => const Center(
             child: CircularProgressIndicator(),
@@ -128,15 +128,15 @@ class DetailContent extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              movie.title,
+                              displayedMovie.title,
                               style: kHeading5,
                             ),
                             ElevatedButton(
                               onPressed: () async {
                                 if (!isAddedToWatchlist) {
-                                  cubit.addedToWatchlist(movie);
+                                  cubit.addedToWatchlist(displayedMovie);
                                 } else {
-                                  cubit.removeFromWatchlist(movie);
+                                  cubit.removeFromWatchlist(displayedMovie);
                                 }
                               },
                               child: Row(
@@ -150,15 +150,15 @@ class DetailContent extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              _showGenres(movie.genres),
+                              _showGenres(displayedMovie.genres),
                             ),
                             Text(
-                              _showDuration(movie.runtime),
+                              _showDuration(displayedMovie.runtime),
                             ),
                             Row(
                               children: [
                                 RatingBarIndicator(
-                                  rating: movie.voteAverage / 2,
+                                  rating: displayedMovie.voteAverage / 2,
                                   itemCount: 5,
                                   itemBuilder: (context, index) => const Icon(
                                     Icons.star,
@@ -166,7 +166,7 @@ class DetailContent extends StatelessWidget {
                                   ),
                                   itemSize: 24,
                                 ),
-                                Text('${movie.voteAverage}')
+                                Text('${displayedMovie.voteAverage}')
                               ],
                             ),
                             const SizedBox(height: 16),
@@ -175,7 +175,7 @@ class DetailContent extends StatelessWidget {
                               style: kHeading6,
                             ),
                             Text(
-                              movie.overview,
+                              displayedMovie.overview,
                             ),
                             const SizedBox(height: 16),
                             Text(
@@ -212,7 +212,7 @@ class DetailContent extends StatelessWidget {
             child: IconButton(
               icon: const Icon(Icons.arrow_back),
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.of(context).pop();
               },
             ),
           ),

@@ -14,8 +14,8 @@ dependencies:
     path: ../../packages/component_library
   tv_series_detail:
     path: ../tv_series_detail
-  tv_series_domain:
-    path: ../../core/tv_series_domain
+  tv_series_core:
+    path: ../../packages/tv_series_core
 
 dev_dependencies:
   flutter_test:

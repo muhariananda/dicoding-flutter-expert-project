@@ -7,7 +7,7 @@ import 'dart:async' as _i4;
 
 import 'package:flutter_bloc/flutter_bloc.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:tv_series_domain/tv_series_domain.dart' as _i2;
+import 'package:tv_series_core/tv_series_core.dart' as _i2;
 import 'package:tv_series_list/src/cubit/popular_tv_series_cubit.dart' as _i3;
 
 // ignore_for_file: type=lint

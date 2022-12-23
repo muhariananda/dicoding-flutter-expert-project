@@ -7,15 +7,15 @@ environment:
 
 dependencies:
   equatable: ^2.0.5
+  cached_network_image: ^3.2.3
+  flutter_rating_bar: ^4.0.1
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.1
   component_library:
     path: ../../packages/component_library
-  movie_domain:
-    path: ../../core/movie_domain
-  cached_network_image: ^3.2.3
-  flutter_rating_bar: ^4.0.1
+  movie_core:
+    path: ../../packages/movie_core
 
 dev_dependencies:
   flutter_test:

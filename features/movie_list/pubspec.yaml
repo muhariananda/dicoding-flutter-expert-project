@@ -14,8 +14,8 @@ dependencies:
     path: ../../packages/component_library
   movie_detail:
     path: ../movie_detail
-  movie_domain:
-    path: ../../core/movie_domain
+  movie_core:
+    path: ../../packages/movie_core
 
 dev_dependencies:
   flutter_test:

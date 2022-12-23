@@ -1,4 +1,4 @@
-import 'package:movie_domain/movie_domain.dart';
+import 'package:movie_core/movie_core.dart';
 
 const testMovie = Movie(
   adult: false,

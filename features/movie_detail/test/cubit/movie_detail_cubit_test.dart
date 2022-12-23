@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:movie_detail/movie_detail.dart';
-import 'package:movie_domain/movie_domain.dart';
+import 'package:movie_core/movie_core.dart';
 
 import '../dummy_movie.dart';
 import 'movie_detail_cubit_test.mocks.dart';

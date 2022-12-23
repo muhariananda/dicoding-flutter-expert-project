@@ -4,7 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:tv_series_domain/tv_series_domain.dart';
+import 'package:tv_series_core/tv_series_core.dart';
 import 'package:tv_series_list/tv_series_list.dart';
 
 import '../dummy_tv_series.dart';

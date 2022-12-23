@@ -3,7 +3,7 @@ import 'package:component_library/component_library.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:tv_series_domain/tv_series_domain.dart';
+import 'package:tv_series_core/tv_series_core.dart';
 
 import '../cubit/tv_series_detail_cubit.dart';
 import '../cubit/tv_series_recommendations_cubit.dart';

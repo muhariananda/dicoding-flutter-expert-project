@@ -1,4 +1,4 @@
-import 'package:tv_series_domain/tv_series_domain.dart';
+import 'package:tv_series_core/tv_series_core.dart';
 
 const testTvSeries = TvSeries(
   backdropPath: 'backdropPath',

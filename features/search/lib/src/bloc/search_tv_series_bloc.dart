@@ -2,7 +2,7 @@ import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:tv_series_domain/tv_series_domain.dart';
+import 'package:tv_series_core/tv_series_core.dart';
 
 part 'search_tv_series_event.dart';
 part 'search_tv_series_state.dart';

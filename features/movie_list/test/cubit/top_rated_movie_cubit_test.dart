@@ -5,7 +5,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:movie_domain/movie_domain.dart';
+import 'package:movie_core/movie_core.dart';
 import 'package:movie_list/movie_list.dart';
 
 import '../dummy_movie.dart';

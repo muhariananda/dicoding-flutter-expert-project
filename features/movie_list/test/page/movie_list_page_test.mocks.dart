@@ -7,7 +7,7 @@ import 'dart:async' as _i6;
 
 import 'package:flutter_bloc/flutter_bloc.dart' as _i7;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:movie_domain/movie_domain.dart' as _i2;
+import 'package:movie_core/movie_core.dart' as _i2;
 import 'package:movie_list/src/cubit/now_playing_movie_cubit.dart' as _i3;
 import 'package:movie_list/src/cubit/popular_movie_cubit.dart' as _i4;
 import 'package:movie_list/src/cubit/top_rated_movie_cubit.dart' as _i5;

@@ -2,7 +2,7 @@ import 'package:component_library/component_library.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_detail/movie_detail.dart';
-import 'package:movie_domain/movie_domain.dart';
+import 'package:movie_core/movie_core.dart';
 
 import '../cubit/now_playing_movie_cubit.dart';
 import '../cubit/popular_movie_cubit.dart';

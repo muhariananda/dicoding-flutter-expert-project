@@ -4,8 +4,8 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:tv_series_core/tv_series_core.dart';
 import 'package:tv_series_detail/tv_series_detail.dart';
-import 'package:tv_series_domain/tv_series_domain.dart';
 
 import '../dummy_tv_series.dart';
 import 'tv_series_detail_cubit_test.mocks.dart';
@@ -48,7 +48,7 @@ void main() {
       'should emit [TvSeriesDetailState] with tv series data when data is gotten successfully',
       build: () {
         when(mockGetDetailTvSeries.execute(tId))
-            .thenAnswer((_) async => Right(testTvSeriesDetail));
+            .thenAnswer((_) async => const Right(testTvSeriesDetail));
         return cubit;
       },
       act: (cubit) => cubit.fetchTvSeriesDetail(tId),

@@ -7,10 +7,10 @@ import 'dart:async' as _i6;
 
 import 'package:flutter_bloc/flutter_bloc.dart' as _i7;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:movie_domain/movie_domain.dart' as _i2;
+import 'package:movie_core/movie_core.dart' as _i2;
 import 'package:search/src/bloc/search_movie_bloc.dart' as _i3;
 import 'package:search/src/bloc/search_tv_series_bloc.dart' as _i5;
-import 'package:tv_series_domain/tv_series_domain.dart' as _i4;
+import 'package:tv_series_core/tv_series_core.dart' as _i4;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values

@@ -14,10 +14,10 @@ dependencies:
     path: ../../packages/common
   component_library:
     path: ../../packages/component_library
-  movie_domain:
-    path: ../../core/movie_domain
-  tv_series_domain:
-    path: ../../core/tv_series_domain
+  movie_core:
+    path: ../../packages/movie_core
+  tv_series_core:
+    path: ../../packages/tv_series_core
 
 dev_dependencies:
   flutter_test:

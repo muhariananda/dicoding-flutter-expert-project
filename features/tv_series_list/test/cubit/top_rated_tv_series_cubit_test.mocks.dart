@@ -8,10 +8,10 @@ import 'dart:async' as _i5;
 import 'package:common/common.dart' as _i6;
 import 'package:dartz/dartz.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:tv_series_domain/src/entities/entittes.dart' as _i7;
-import 'package:tv_series_domain/src/repositories/tv_series_repository.dart'
+import 'package:tv_series_core/src/domain/entities/entittes.dart' as _i7;
+import 'package:tv_series_core/src/domain/repositories/tv_series_repository.dart'
     as _i2;
-import 'package:tv_series_domain/src/usecase/get_top_rated_tv_series.dart'
+import 'package:tv_series_core/src/domain/usecase/get_top_rated_tv_series.dart'
     as _i4;
 
 // ignore_for_file: type=lint
