@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:movie_core/movie_core.dart';
 import 'package:movie_detail/movie_detail.dart';
-import 'package:movie_domain/movie_domain.dart';
 
 import '../component_library.dart';
 

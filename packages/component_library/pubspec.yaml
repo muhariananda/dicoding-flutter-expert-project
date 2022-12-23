@@ -12,14 +12,14 @@ dependencies:
   google_fonts: ^3.0.1
   common:
     path: ../common
+  movie_core:
+    path: ../movie_core
   movie_detail:
     path: ../../features/movie_detail
-  movie_domain:
-    path: ../../core/movie_domain
+  tv_series_core:
+    path: ../tv_series_core
   tv_series_detail:
     path: ../../features/tv_series_detail
-  tv_series_domain:
-    path: ../../core/tv_series_domain
 
 dev_dependencies:
   flutter_test:
