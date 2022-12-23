@@ -1,15 +1,15 @@
 import 'package:db_sqflite/db_sqflite.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http_ssl_pinning/http_ssl_pinning.dart';
+import 'package:movie_core/movie_core.dart';
 import 'package:movie_detail/movie_detail.dart';
-import 'package:movie_domain/movie_domain.dart';
 import 'package:movie_list/movie_list.dart';
-import 'package:movie_repository/movie_repository.dart';
 import 'package:search/search.dart';
+import 'package:tv_series_core/tv_series_core.dart';
 import 'package:tv_series_detail/tv_series_detail.dart';
-import 'package:tv_series_domain/tv_series_domain.dart';
+
 import 'package:tv_series_list/tv_series_list.dart';
-import 'package:tv_series_repository/tv_series_repository.dart';
+
 import 'package:watchlist/watchlist.dart';
 
 final locator = GetIt.instance;
