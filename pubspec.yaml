@@ -25,6 +25,8 @@ dependencies:
     sdk: flutter
   about:
     path: features/about
+  common:
+    path: packages/common
   component_library:
     path: packages/component_library
   db_sqflite:

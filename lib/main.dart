@@ -1,6 +1,6 @@
+import 'package:common/common.dart';
 import 'package:component_library/component_library.dart';
 import 'package:ditonton/routes.dart';
-import 'package:ditonton/screen_view_observer.dart';
 import 'package:ditonton/tab_container_page.dart';
 import 'package:ditonton/injection.dart' as di;
 import 'package:flutter/material.dart';
@@ -83,9 +83,7 @@ class MyApp extends StatelessWidget {
         ),
         home: TabContainerPage(),
         navigatorObservers: [
-          ScreenViewObserver(
-            analyticsSerivce: AnalyticsSerivce(),
-          ),
+          routeObserver,
         ],
         onGenerateRoute: Routes.routes(),
       ),
