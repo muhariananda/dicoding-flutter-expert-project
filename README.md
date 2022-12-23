@@ -27,14 +27,6 @@ Repository ini merupakan starter project submission kelas Flutter Expert Dicodin
 
 ### Struktur modular project
 ``` bash
-    ├── core
-    │   ├── db_sqflite
-    │   ├── http_ssl_pinning
-    │   ├── movie_domain
-    │   ├── movie_repository
-    │   ├── tv_series_domain
-    │   └── tv_series_repository
-    │
     ├── lib
     │
     ├── features
@@ -49,10 +41,13 @@ Repository ini merupakan starter project submission kelas Flutter Expert Dicodin
     └── packages
         ├── common
         ├── component_library
-        └── monitoring
+        ├── db_sqflite
+        ├── http_ssl_pinning
+        ├── monitoring
+        ├── movie_core
+        └── tv_series_core
 ```
 Keterangan :
- - **core** : Folder untuk data dan domain layer
  - **features** : Folder untuk presentation layer
  - **packages** : Folder untuk packages yang dibutukan
- - **monitoring** : Untuk konfigurasi Firebase Analytic
+
